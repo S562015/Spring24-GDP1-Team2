@@ -1,3 +1,6 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "@reduxjs/toolkit";
+import homeReducer from "../pages/home/homeReducer";
 
-export default combineReducers({});
+export default combineReducers({
+    homeReducer
+});
