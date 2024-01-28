@@ -8,6 +8,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./redux/rootReducer"; // Create this file
 import { thunk } from "redux-thunk";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "@mui/system";
+import { globalTheme } from "./themes";
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
@@ -15,9 +17,12 @@ const store = configureStore({
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ThemeProvider theme={globalTheme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
   </Provider>,
+
   document.getElementById("root"),
 );
