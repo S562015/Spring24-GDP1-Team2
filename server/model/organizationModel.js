@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const organizationSchema = new Schema({
-  organization: {
-    type: String,
-    required: true,
-  },
-  name: {
+  organizationName: {
     type: String,
     required: true,
   },
@@ -14,6 +10,9 @@ const organizationSchema = new Schema({
     type: String,
     required: true,
   },
+  description:{
+    type: String,
+  }
 });
 
 const OrganizationModel = mongoose.model("organization", organizationSchema);
