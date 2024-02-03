@@ -28,6 +28,7 @@ const SignUp = () => {
         sm={4}
         md={7}
         sx={{
+
           backgroundImage: `url(${background})`,
           backgroundRepeat: "no-repeat",
           backgroundColor: "5319AC",
@@ -117,5 +118,6 @@ const SignUp = () => {
     </Grid>
   );
 };
+
 
 export default SignUp;
