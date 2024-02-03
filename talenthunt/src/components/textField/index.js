@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
- 
+
+
 export const InputField = ({
   id = "outlined-basic",
   type = "text",
@@ -8,8 +9,9 @@ export const InputField = ({
   ...rest
 }) => {
   return (
-<>
-<TextField
+
+    <>
+      <TextField
         id={id}
         label={label}
         variant={variant}
