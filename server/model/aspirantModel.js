@@ -19,8 +19,24 @@ const aspirantSchema = new Schema({
     required: true,
   },
   address:{
-    type: String,
-    required: true,
+    line1:{
+      type: String,
+      required: true,
+    },
+    line2:{
+      type: String,
+    },
+    city:{
+      type: String,
+      required: true,
+    },
+    state:{
+      type: String,
+      Required: true,
+    },
+    zip:{
+      type: String,
+    }
   }
 });
 
