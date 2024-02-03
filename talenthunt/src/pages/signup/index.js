@@ -7,6 +7,7 @@ import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import * as React from "react";
+import background from "../../assets/login.png";
 
 const SignUp = () => {
   const handleSubmit = (event) => {
@@ -27,13 +28,11 @@ const SignUp = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+
+          backgroundImage: `url(${background})`,
           backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
+          backgroundColor: "5319AC",
+          backgroundSize: "50%",
           backgroundPosition: "center",
         }}
       />
@@ -119,5 +118,6 @@ const SignUp = () => {
     </Grid>
   );
 };
+
 
 export default SignUp;

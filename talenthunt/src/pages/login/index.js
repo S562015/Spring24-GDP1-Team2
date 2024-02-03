@@ -8,6 +8,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 
+import background from "../../assets/login.png";
+
+
 const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,13 +30,10 @@ const Login = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+          backgroundImage: `url(${background})`,
           backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
+          backgroundColor: "5319AC",
+          backgroundSize: "50%",
           backgroundPosition: "center",
         }}
       />
