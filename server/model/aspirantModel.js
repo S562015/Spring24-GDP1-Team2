@@ -10,86 +10,86 @@ const aspirantSchema = new Schema({
     type: String,
     required: true,
   },
-  dateOfBirth:{
+  dateOfBirth: {
     type: Date,
     required: true,
   },
-  qualification:{
+  qualification: {
     type: Date,
     required: true,
   },
-  address:{
-    line1:{
+  address: {
+    line1: {
       type: String,
       required: true,
     },
-    line2:{
+    line2: {
       type: String,
     },
-    city:{
+    city: {
       type: String,
       required: true,
     },
-    state:{
+    state: {
       type: String,
       Required: true,
     },
-    zip:{
+    zip: {
       type: String,
-    }
+    },
   },
-  education:[
+  education: [
     {
-      schoolName:{ 
-        type: String 
-      },
-      degree:{ 
-        type: String 
-      },
-      major:{ 
-        type: String 
-      },
-      grade:{ 
-        type: Number 
-      },
-      from:{ 
-        type: Date, 
-        format: 'MMM-yyyy' 
-      },
-      to:{ 
-        type: Date, 
-        format: 'MMM-yyyy' 
-      }
-    }
-  ],
-  skills:[
-    {
-      skill:{
-        type: String
-      },
-      level:{ 
+      schoolName: {
         type: String,
-        enum: ['Expert','Moderate','Basic']
-      }
-    }
+      },
+      degree: {
+        type: String,
+      },
+      major: {
+        type: String,
+      },
+      grade: {
+        type: Number,
+      },
+      from: {
+        type: Date,
+        format: "MMM-yyyy",
+      },
+      to: {
+        type: Date,
+        format: "MMM-yyyy",
+      },
+    },
   ],
-  email:{
-    type: String
+  skills: [
+    {
+      skill: {
+        type: String,
+      },
+      level: {
+        type: String,
+        enum: ["Expert", "Moderate", "Basic"],
+      },
+    },
+  ],
+  email: {
+    type: String,
   },
   phone: {
     type: String,
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /\d{3}-\d{3}-\d{4}/.test(v);
       },
-      message: props => `${props.value} is not a valid phone number!`
+      message: (props) => `${props.value} is not a valid phone number!`,
     },
-    required: [true, 'User phone number required']
+    required: [true, "User phone number required"],
   },
-  applicationDate:{
+  applicationDate: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 const AspirantModel = mongoose.model("aspirant", aspirantSchema);
