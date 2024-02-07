@@ -8,7 +8,6 @@ export const getApplication = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-
 export const createApplication = async (req, res) => {
   const log = new ApplicationModel({
     aspirantId: req.body.aspirantId,
