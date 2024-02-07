@@ -10,13 +10,13 @@ const applicationSchema = new Schema({
     type: String,
     required: true,
   },
-  applicationDate:{
+  applicationDate: {
     type: Date,
     required: true,
   },
-  status:{
+  status: {
     type: String,
-  }
+  },
 });
 
 const ApplicationModel = mongoose.model("application", applicationSchema);

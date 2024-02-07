@@ -6,7 +6,7 @@ const employerSchema = new Schema({
     type: String,
     required: true,
   },
-  firstName : {
+  firstName: {
     type: String,
     required: true,
   },
@@ -26,11 +26,10 @@ const employerSchema = new Schema({
     type: String,
     required: true,
   },
-  role:{
+  role: {
     type: String,
     required: true,
-  }
-
+  },
 });
 
 const EmployerModel = mongoose.model("employer", employerSchema);

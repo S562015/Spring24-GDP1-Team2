@@ -1,2 +1,5 @@
 .idea
-server/.env
+*.env
+*/bin
+*.vscode
+.git
