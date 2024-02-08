@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-
+import "bootstrap/dist/css/bootstrap.min.css"; //added now
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./redux/rootReducer"; // Create this file
 import { thunk } from "redux-thunk";
@@ -17,10 +17,11 @@ const store = configureStore({
 
 ReactDOM.render(
   <Provider store={store}>
-   <ThemeProvider theme={globalTheme}>
+    <ThemeProvider theme={globalTheme}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ThemeProvider>  </Provider>,
-  document.getElementById("root"),
+    </ThemeProvider>{" "}
+  </Provider>,
+  document.getElementById("root")
 );
