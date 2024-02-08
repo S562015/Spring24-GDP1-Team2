@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
@@ -8,8 +9,17 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import background from "../../assets/login.png";
+import { Tab, Tabs } from "@mui/material";
+import { a11yProps } from "../../utils";
+import { TabPanel } from "../../components/tabPanel/TabPanel";
 
 const Login = () => {
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -17,6 +27,46 @@ const Login = () => {
       email: data.get("email"),
       password: data.get("password"),
     });
+  };
+
+  const renderInputFields = () => {
+    return (
+      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoFocus
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+        />
+        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+          Sign In
+        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              Create an account ? Sign Up
+            </Link>
+          </Grid>
+        </Grid>
+      </Box>
+    );
   };
 
   return (
@@ -49,46 +99,21 @@ const Login = () => {
             Login
           </Typography>
           <Typography>Start & track your Scheduling Process</Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+          <Tabs
+            value={tabIndex}
+            onChange={handleTabChange}
+            textColor="primary"
+            indicatorColor="secondary"
           >
-            <InputField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoFocus
-            />
-            <InputField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-            />
-            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Create an account ? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
+            <Tab label="Aspriant" {...a11yProps(0)} />
+            <Tab label="Employeer" {...a11yProps(2)} />
+          </Tabs>
+          <TabPanel value={tabIndex} index={0}>
+            {renderInputFields()}
+          </TabPanel>
+          <TabPanel value={tabIndex} index={1}>
+            {renderInputFields()}
+          </TabPanel>
         </Box>
       </Grid>
     </Grid>
