@@ -10,8 +10,10 @@ import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
-import { a11yProps } from "../../utils";
+import { a11yProps } from "../../util";
 import { TabPanel } from "../../components/tabPanel/TabPanel";
+import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
+import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 
 const Login = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -105,8 +107,18 @@ const Login = () => {
             textColor="primary"
             indicatorColor="secondary"
           >
-            <Tab label="Aspriant" {...a11yProps(0)} />
-            <Tab label="Employeer" {...a11yProps(2)} />
+            <Tab
+              icon={<AssignmentIndOutlinedIcon />}
+              iconPosition="start"
+              label="Aspriant"
+              {...a11yProps(0)}
+            />
+            <Tab
+              icon={<BusinessOutlinedIcon />}
+              iconPosition="start"
+              label="Employeer"
+              {...a11yProps(2)}
+            />
           </Tabs>
           <TabPanel value={tabIndex} index={0}>
             {renderInputFields()}
