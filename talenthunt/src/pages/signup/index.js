@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import * as React from "react";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
@@ -16,6 +16,7 @@ import { TabPanel } from "../../components/tabPanel/TabPanel";
 import { useState } from "react";
 import { Container } from "@mui/system";
 import BasicDatePicker from "../../components/DatePicker/DatePicker";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -112,9 +113,7 @@ const SignUp = () => {
       </Button>
       <Grid container>
         <Grid item xs>
-          <Link href="#" variant="body2">
-            Already have an account? SignIn
-          </Link>
+          <Link to="/login">Already have an account? SignIn</Link>
         </Grid>
       </Grid>
     </Box>
@@ -192,9 +191,7 @@ const SignUp = () => {
       </Button>
       <Grid container>
         <Grid item xs>
-          <Link href="#" variant="body2">
-            Already have an account? SignIn
-          </Link>
+          <Link to="/login">Already have an account? SignIn</Link>
         </Grid>
       </Grid>
     </Box>
