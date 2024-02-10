@@ -107,6 +107,15 @@ const SignUp = () => {
           name="ZipCode"
           type={"number"}
         />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="phone"
+          label="Phone Number"
+          name="Phone"
+          type={"phone"}
+        />
       </Grid>
       <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
         Register
