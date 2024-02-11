@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import * as React from "react";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
@@ -16,6 +16,7 @@ import { TabPanel } from "../../components/tabPanel/TabPanel";
 import { useState } from "react";
 import { Container } from "@mui/system";
 import BasicDatePicker from "../../components/DatePicker/DatePicker";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -23,7 +24,6 @@ const SignUp = () => {
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -107,15 +107,22 @@ const SignUp = () => {
           name="ZipCode"
           type={"number"}
         />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="phone"
+          label="Phone Number"
+          name="Phone"
+          type={"phone"}
+        />
       </Grid>
       <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
         Register
       </Button>
       <Grid container>
         <Grid item xs>
-          <Link href="#" variant="body2">
-            Already have an account? SignIn
-          </Link>
+          <Link to="/login">Already have an account? SignIn</Link>
         </Grid>
       </Grid>
     </Box>
@@ -193,13 +200,12 @@ const SignUp = () => {
       </Button>
       <Grid container>
         <Grid item xs>
-          <Link href="#" variant="body2">
-            Already have an account? SignIn
-          </Link>
+          <Link to="/login">Already have an account? SignIn</Link>
         </Grid>
       </Grid>
     </Box>
   );
+
   return (
     <Container component={"main"} maxWidth={"md"}>
       <CssBaseline />
