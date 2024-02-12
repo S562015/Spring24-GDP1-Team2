@@ -2,7 +2,6 @@ import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -14,7 +13,7 @@ import { a11yProps } from "../../util";
 import { TabPanel } from "../../components/tabPanel/TabPanel";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
-
+import { Link } from "react-router-dom";
 const Login = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -27,7 +26,7 @@ const Login = () => {
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
-      password: data.get("password")
+      password: data.get("password"),
     });
   };
 
@@ -57,14 +56,10 @@ const Login = () => {
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
+            <Link to="/forgetpassword">Forgot password?</Link>
           </Grid>
           <Grid item xs>
-            <Link href="#" variant="body2">
-              Create an account ? Sign Up
-            </Link>
+            <Link to="/signup">Create an account ? Sign Up</Link>
           </Grid>
         </Grid>
       </Box>
@@ -84,7 +79,7 @@ const Login = () => {
           backgroundRepeat: "no-repeat",
           backgroundColor: "5319AC",
           backgroundSize: "50%",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -94,7 +89,7 @@ const Login = () => {
             mx: 4,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h5">
