@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
-import { a11yProps } from "../../utils";
+import { a11yProps } from "../../util";
 import { TabPanel } from "../../components/tabPanel/TabPanel";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
