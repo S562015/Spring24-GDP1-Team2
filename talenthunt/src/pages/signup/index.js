@@ -17,20 +17,42 @@ import { useState } from "react";
 import { Container } from "@mui/system";
 import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [employerInfo, setEmployerInfo] = useState({});
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    let empInfo = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+      confirmPassword: data.get("confirmPassword"),
+    };
+    setEmployerInfo(empInfo);
+    await signupWithUsernameAndPassword(empInfo);
+  };
+
+  const signupWithUsernameAndPassword = async (empInfo) => {
+    // e.preventDefault();
+    const { password, confirmPassword, email } = empInfo;
+    console.log({ password, confirmPassword, email });
+    if (password === confirmPassword) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("complete");
+      } catch {
+        alert("Sorry, something went wrong. Please try again.");
+      }
+    } else {
+      alert("Passwords don't match. Please try again.");
+    }
   };
 
   const renderAspirantForm = () => (
