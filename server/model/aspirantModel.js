@@ -89,7 +89,20 @@ const aspirantSchema = new Schema({
   applicationDate: {
     type: Date,
     default: Date.now
-  }
+  },
+  expectedSalary: {
+    minimum: {
+      type: Number
+    },
+    maximum: {
+      typr: Number
+    }
+  },
+  preferedOrganizations: [
+    {
+      type: String
+    }
+  ]
 });
 
 const AspirantModel = mongoose.model("aspirant", aspirantSchema);
