@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
-import { a11yProps } from "../../util";
+import { a11yProps } from "../../utils";
 import { TabPanel } from "../../components/tabPanel/TabPanel";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
@@ -26,7 +26,7 @@ const Login = () => {
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
-      password: data.get("password"),
+      password: data.get("password")
     });
   };
 
@@ -79,7 +79,7 @@ const Login = () => {
           backgroundRepeat: "no-repeat",
           backgroundColor: "5319AC",
           backgroundSize: "50%",
-          backgroundPosition: "center",
+          backgroundPosition: "center"
         }}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -89,7 +89,7 @@ const Login = () => {
             mx: 4,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <Typography component="h1" variant="h5">
