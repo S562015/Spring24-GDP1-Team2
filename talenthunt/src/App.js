@@ -5,6 +5,7 @@ import Navbar from "./components/navbar";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import JobPost from "./pages/jobpost";
+import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/jobpost" element={<JobPost />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       {/*<Home />*/}
     </div>
