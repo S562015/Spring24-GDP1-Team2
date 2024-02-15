@@ -19,6 +19,7 @@ import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import EmployerFrom from "./EmployerFrom";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -150,84 +151,6 @@ const SignUp = () => {
     </Box>
   );
 
-  const renderEmployerForm = () => (
-    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <InputField
-            margin="normal"
-            required
-            fullWidth
-            id="first"
-            label="First Name"
-            name="First Name"
-            autoFocus
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <InputField
-            margin="normal"
-            required
-            fullWidth
-            id="last-name"
-            label="Last Name"
-            name="Last Name"
-          />
-        </Grid>
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="orgisation-name"
-          label="Orgisation Name"
-          name="Orgisation Name"
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="userName"
-          label="User Name"
-          name="userName"
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email"
-          name="email"
-          type={"email"}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="password"
-          label="Password"
-          name="email"
-          type={"password"}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="role"
-          label="Role"
-          name="role"
-        />
-      </Grid>
-      <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
-        Register
-      </Button>
-      <Grid container>
-        <Grid item xs>
-          <Link to="/login">Already have an account? SignIn</Link>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-
   return (
     <Container component={"main"} maxWidth={"md"}>
       <CssBaseline />
@@ -267,7 +190,11 @@ const SignUp = () => {
           {renderAspirantForm()}
         </TabPanel>
         <TabPanel value={tabIndex} index={1}>
-          {renderEmployerForm()}
+          {
+            <EmployerFrom
+              signupWithUsernameAndPassword={signupWithUsernameAndPassword}
+            />
+          }
         </TabPanel>
       </Box>
     </Container>
