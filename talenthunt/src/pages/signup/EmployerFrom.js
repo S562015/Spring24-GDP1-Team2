@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-import CssBaseline from "@mui/material/CssBaseline";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { createFromObj } from "../../utils";
 
 const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
@@ -14,21 +12,10 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.keys());
-    // console.log("gg", data.forEach("em));
-    // data.forEach((val) => console.log(val));
-    let empInfo = {
-      email: data.get("email"),
-      password: data.get("password"),
-      confirmPassword: data.get("confirmPassword")
-    };
+    const empInfo = createFromObj([...data.entries()]);
     setEmployerInfo(empInfo);
     // await signupWithUsernameAndPassword(empInfo);
   };
-
-  //   const isDisabled = () => {
-  //     const
-  //   }
 
   return (
     <>
@@ -43,6 +30,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
               label="First Name"
               name="First Name"
               autoFocus
+              on
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -107,7 +95,12 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             name="role"
           />
         </Grid>
-        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          disabled={Object.keys(employerInfo).length !== 8}
+        >
           Register
         </Button>
         <Grid container>
