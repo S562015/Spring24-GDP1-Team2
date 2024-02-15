@@ -7,6 +7,7 @@ import SignUp from "./pages/signup";
 import JobPost from "./pages/jobpost";
 import Profile from "./pages/profile";
 import Search from "./pages/search";
+import Application from "./pages/application";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/jobpost" element={<JobPost />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/application" element={<Application />} />
       </Routes>
       {/*<Home />*/}
     </div>
