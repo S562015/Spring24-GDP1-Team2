@@ -3,9 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { InputField } from "../../components/textField";
-import Button from "@mui/material/Button";
-// import Link from "@mui/material/Link";
 import * as React from "react";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
@@ -20,6 +17,7 @@ import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import EmployerFrom from "./EmployerFrom";
+import AspirantFrom from "./AspirantFrom";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -35,7 +33,7 @@ const SignUp = () => {
     let empInfo = {
       email: data.get("email"),
       password: data.get("password"),
-      confirmPassword: data.get("confirmPassword")
+      confirmPassword: data.get("confirmPassword"),
     };
     setEmployerInfo(empInfo);
     await signupWithUsernameAndPassword(empInfo);
@@ -49,116 +47,16 @@ const SignUp = () => {
         const user = await createUserWithEmailAndPassword(
           auth,
           email,
-          password
+          password,
         );
-        // alert("complete");
         console.log(user);
       } catch (error) {
-        // alert("Sorry, something went wrong. Please try again.");c
         console.log(error);
       }
     } else {
       alert("Passwords don't match. Please try again.");
     }
   };
-
-  const renderAspirantForm = () => (
-    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <InputField
-            margin="normal"
-            required
-            fullWidth
-            id="first"
-            label="First Name"
-            name="First Name"
-            autoFocus
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <InputField
-            margin="normal"
-            required
-            fullWidth
-            id="last-name"
-            label="Last Name"
-            name="Last Name"
-          />
-        </Grid>
-        <BasicDatePicker label="Date of Birth" />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="qualification"
-          label="qualification"
-          name="qualification"
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="orgisation-name"
-          label="Orgisation Name"
-          name="Orgisation Name"
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="address-line1"
-          label="Address line 1"
-          name="Address line 1"
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="address-line1"
-          label="Address line 2"
-          name="Address line 2"
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="city"
-          label="City"
-          name="City"
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="zipCode"
-          label="zipCode"
-          name="ZipCode"
-          type={"number"}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="phone"
-          label="Phone Number"
-          name="Phone"
-          type={"phone"}
-        />
-      </Grid>
-      <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} disabled>
-        Register
-      </Button>
-      <Grid container>
-        <Grid item xs>
-          <Link to="/login">Already have an account? SignIn</Link>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-
-  // const renderEmployerForm = () => (
-  //    );
 
   return (
     <Container component={"main"} maxWidth={"md"}>
@@ -169,7 +67,7 @@ const SignUp = () => {
           mx: 4,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Typography component="h1" variant="h5">
@@ -196,7 +94,7 @@ const SignUp = () => {
           />
         </Tabs>
         <TabPanel value={tabIndex} index={0}>
-          {renderAspirantForm()}
+          {<AspirantFrom />}
         </TabPanel>
         <TabPanel value={tabIndex} index={1}>
           {
