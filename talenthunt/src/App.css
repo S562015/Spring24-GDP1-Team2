@@ -27,13 +27,13 @@
 .App-link {
   color: #61dafb;
 }
-/* MUI styles override */
-.MuiAppBar-colorPrimary{
-  background-color: #d9ebff !important;
-  color: black !important;
-  box-shadow: none !important;
+/*!* MUI styles override *!*/
+/*.MuiAppBar-colorPrimary{*/
+/*  background-color: #d9ebff !important;*/
+/*  color: black !important;*/
+/*  box-shadow: none !important;*/
 
-}
+/*}*/
 .color-secondary{
   color: #2270d5;
 }
