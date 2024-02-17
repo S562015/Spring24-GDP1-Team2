@@ -1,14 +1,14 @@
 import "./App.css";
+import "./Utilities.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/home";
 import Navbar from "./components/navbar";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
-import JobPost from "./pages/jobpost";
-import Profile from "./pages/profile";
-import Search from "./pages/search";
-import Application from "./pages/application";
-
+import JobPost from "./pages/jobpost/jobpost";
+import Search from "./pages/search/search";
+import Profile from "./pages/profile/profile";
+import Application from "./pages/application/application";
 function App() {
   return (
     <div className="App">
