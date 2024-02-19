@@ -1,8 +1,8 @@
 import React from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import homeBanner from "../../assets/home.png";
 import Button from "@mui/material/Button";
+import homeBanner from "../../assets/home.png";
 import deloitte from "../../assets/deloitte.png";
 import amazon from "../../assets/amazon.png";
 
@@ -16,7 +16,7 @@ const Home = () => {
       location: "New York, USA",
       jobType: "Full-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
     },
     {
       companyImage: amazon,
@@ -26,7 +26,7 @@ const Home = () => {
       location: "San Francisco",
       jobType: "Part-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
     },
     {
       companyImage: deloitte,
@@ -36,7 +36,7 @@ const Home = () => {
       location: "New York, USA",
       jobType: "Full-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
     },
     {
       companyImage: deloitte,
@@ -46,7 +46,7 @@ const Home = () => {
       location: "New York, USA",
       jobType: "Full-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
     },
     {
       companyImage: amazon,
@@ -56,7 +56,7 @@ const Home = () => {
       location: "San Francisco",
       jobType: "Part-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
     },
     {
       companyImage: deloitte,
@@ -66,7 +66,7 @@ const Home = () => {
       location: "New York, USA",
       jobType: "Full-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
     },
     {
       companyImage: amazon,
@@ -76,7 +76,7 @@ const Home = () => {
       location: "San Francisco",
       jobType: "Part-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
     },
     {
       companyImage: deloitte,
@@ -86,8 +86,8 @@ const Home = () => {
       location: "New York, USA",
       jobType: "Full-time",
       jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
+        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge."
+    }
   ];
 
   return (

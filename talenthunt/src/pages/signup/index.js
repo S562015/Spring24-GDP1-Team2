@@ -3,9 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { InputField } from "../../components/textField";
-import Button from "@mui/material/Button";
-// import Link from "@mui/material/Link";
 import * as React from "react";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
@@ -20,6 +17,7 @@ import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import EmployerFrom from "./EmployerFrom";
+import AspirantFrom from "./AspirantFrom";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -35,7 +33,7 @@ const SignUp = () => {
     let empInfo = {
       email: data.get("email"),
       password: data.get("password"),
-      confirmPassword: data.get("confirmPassword")
+      confirmPassword: data.get("confirmPassword"),
     };
     setEmployerInfo(empInfo);
     await signupWithUsernameAndPassword(empInfo);
@@ -49,12 +47,10 @@ const SignUp = () => {
         const user = await createUserWithEmailAndPassword(
           auth,
           email,
-          password
+          password,
         );
-        // alert("complete");
         console.log(user);
       } catch (error) {
-        // alert("Sorry, something went wrong. Please try again.");c
         console.log(error);
       }
     } else {
@@ -62,6 +58,7 @@ const SignUp = () => {
     }
   };
 
+<<<<<<< HEAD
   const renderAspirantForm = () => (
     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
       <Grid container spacing={2}>
@@ -157,6 +154,8 @@ const SignUp = () => {
     </Box>
   );
 
+=======
+>>>>>>> 98805d2573897e5ed584ef6c0d9f5beb576bbb89
   return (
     <Container component={"main"} maxWidth={"md"}>
       <CssBaseline />
@@ -166,7 +165,7 @@ const SignUp = () => {
           mx: 4,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Typography component="h1" variant="h5">
@@ -193,7 +192,7 @@ const SignUp = () => {
           />
         </Tabs>
         <TabPanel value={tabIndex} index={0}>
-          {renderAspirantForm()}
+          {<AspirantFrom />}
         </TabPanel>
         <TabPanel value={tabIndex} index={1}>
           {
