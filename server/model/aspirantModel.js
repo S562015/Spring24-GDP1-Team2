@@ -95,10 +95,10 @@ const aspirantSchema = new Schema({
       type: Number
     },
     maximum: {
-      typr: Number
+      type: Number
     }
   },
-  preferedOrganizations: [
+  preferredOrganizations: [
     {
       type: String
     }

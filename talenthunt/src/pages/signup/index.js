@@ -157,9 +157,6 @@ const SignUp = () => {
     </Box>
   );
 
-  // const renderEmployerForm = () => (
-  //    );
-
   return (
     <Container component={"main"} maxWidth={"md"}>
       <CssBaseline />

@@ -1,10 +1,10 @@
 import React from "react";
 
-const Home = () => {
+const Application = () => {
   return (
     <>
-      <h1> HomePage </h1>
+      <h1> ApplicationPage </h1>
     </>
   );
 };
-export default Home;
+export default Application;
