@@ -9,12 +9,15 @@ import { createFromObj } from "../../utils";
 const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const empInfo = createFromObj([...data.entries()]);
-    setEmployerInfo(empInfo);
-    // await signupWithUsernameAndPassword(empInfo);
+  const handleChange = (key, value) => {
+    let newValue = cloneObject(employerInfo);
+    newValue[key] = value;
+    setEmployerInfo(newValue);
+  };
+
+  const handleSubmit = async () => {
+    const res = await handlePost("employer/create", employerInfo);
+    console.log(res);
   };
 
   return (
