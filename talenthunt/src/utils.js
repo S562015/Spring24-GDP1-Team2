@@ -13,3 +13,15 @@ export const createFromObj = (array) => {
   });
   return obj;
 };
+
+export const cloneObject = (obj) => JSON.parse(JSON.stringify(obj));
+const BASE_URL = "http://localhost:8000";
+export const handleGet = async (url) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/${url}`);
+    return res;
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
+};
