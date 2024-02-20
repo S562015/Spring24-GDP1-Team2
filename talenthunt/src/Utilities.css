@@ -1,5 +1,4 @@
 .ml-0 {
-<<<<<<< HEAD
 	margin-left: 0px !important;
 }
 .mr-0 {
@@ -8618,7 +8617,6 @@
 }
 .fs-28 {
 	font-size: 28px !important;
-=======
     margin-left: 0px !important;
 }
 .mr-0 {
@@ -17237,7 +17235,6 @@
 }
 .fs-28 {
     font-size: 28px !important;
->>>>>>> 98805d2573897e5ed584ef6c0d9f5beb576bbb89
 }
 .fw-100{
     font-weight: 100;
@@ -17261,7 +17258,6 @@
     display: flex !important;
 }
 .w-50{
-<<<<<<< HEAD
 	width: 50%;
 }
 .w-30{
@@ -17272,7 +17268,6 @@
 }
 .w-20{
 	width: 20%;
-=======
     width: 50%;
 }
 .w-30{
@@ -17283,13 +17278,11 @@
 }
 .w-20{
     width: 20%;
->>>>>>> 98805d2573897e5ed584ef6c0d9f5beb576bbb89
 }
 .mat-elevation-z8, .mat-mdc-elevation-specific.mat-elevation-z8 {
     box-shadow: none;
 }
 .aling-item-center{
-<<<<<<< HEAD
 	align-items: center;
 }
 .pos-absolute{
@@ -17303,7 +17296,6 @@
 }
 .w-20{
 	width: 20%;
-=======
     align-items: center;
 }
 .pos-absolute{
@@ -17317,7 +17309,6 @@
 }
 .w-20{
     width: 20%;
->>>>>>> 98805d2573897e5ed584ef6c0d9f5beb576bbb89
 }
 @media (min-width: 1700px){
     .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {

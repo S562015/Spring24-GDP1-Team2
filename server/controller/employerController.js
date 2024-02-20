@@ -10,17 +10,18 @@ export const getEmployers = async (req, res) => {
 };
 
 export const createEmployer = async (req, res) => {
-  const log = new employerModel({
+  const log = new EmployerModel({
     organizationId: req.body.organizationId,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     userName: req.body.userName,
     password: req.body.password,
-    role: req.body.lastName
+    role: req.body.role,
   });
   try {
     const savedLog = await log.save();
+    console.log(savedLog);
     res.json(savedLog);
   } catch (err) {
     res.json({ message: err });
