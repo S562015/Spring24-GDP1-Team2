@@ -19,7 +19,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
 
   return (
     <>
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
+      <Box component="form" sx={{ mt: 2 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <InputField
@@ -28,9 +28,9 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
               fullWidth
               id="first"
               label="First Name"
-              name="First Name"
+              name="firstName"
               autoFocus
-              on
+              onChange={(e) => handleChange(e.target.name, e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -40,7 +40,8 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
               fullWidth
               id="last-name"
               label="Last Name"
-              name="Last Name"
+              name="lastName"
+              onChange={(e) => handleChange(e.target.name, e.target.value)}
             />
           </Grid>
           <InputField
@@ -49,7 +50,8 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             fullWidth
             id="orgisation-name"
             label="Orgisation Name"
-            name="Orgisation Name"
+            name="organizationId"
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
           <InputField
             margin="normal"
@@ -58,6 +60,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             id="userName"
             label="User Name"
             name="userName"
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
           <InputField
             margin="normal"
@@ -67,6 +70,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             label="Email"
             name="email"
             type={"email"}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
           <InputField
             margin="normal"
@@ -76,6 +80,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             label="Password"
             name="password"
             type={"password"}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
           <InputField
             margin="normal"
@@ -93,13 +98,14 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             id="role"
             label="Role"
             name="role"
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
         </Grid>
         <Button
-          type="submit"
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
-          disabled={Object.keys(employerInfo).length !== 8}
+          disabled={Object.keys(employerInfo).length !== 7}
+          onClick={handleSubmit}
         >
           Register
         </Button>
