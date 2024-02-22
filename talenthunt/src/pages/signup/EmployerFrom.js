@@ -5,6 +5,7 @@ import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { cloneObject, handlePost } from "../../utils";
+import { createEmployer } from "./signupActions";
 
 const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
@@ -15,9 +16,11 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
     setEmployerInfo(newValue);
   };
 
-  const handleSubmit = async () => {
-    const res = await handlePost("employer/create", employerInfo);
-    console.log(res);
+  const handleSubmit = () => {
+    createEmployer(employerInfo);
+    console.log(res
+      );
+      signupWithUsernameAndPassword()
   };
 
   return (
