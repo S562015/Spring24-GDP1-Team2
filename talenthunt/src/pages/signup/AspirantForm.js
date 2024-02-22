@@ -34,6 +34,7 @@ const AspirantFrom = () => {
             label="First Name"
             name="First Name"
             autoFocus
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -44,6 +45,7 @@ const AspirantFrom = () => {
             id="last-name"
             label="Last Name"
             name="Last Name"
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
         </Grid>
         <BasicDatePicker label="Date of Birth" />
@@ -54,6 +56,7 @@ const AspirantFrom = () => {
           id="qualification"
           label="qualification"
           name="qualification"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
@@ -62,6 +65,7 @@ const AspirantFrom = () => {
           id="orgisation-name"
           label="Orgisation Name"
           name="Orgisation Name"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
@@ -70,6 +74,7 @@ const AspirantFrom = () => {
           id="address-line1"
           label="Address line 1"
           name="Address line 1"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
@@ -78,6 +83,7 @@ const AspirantFrom = () => {
           id="address-line1"
           label="Address line 2"
           name="Address line 2"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
@@ -86,6 +92,7 @@ const AspirantFrom = () => {
           id="city"
           label="City"
           name="City"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
@@ -95,6 +102,7 @@ const AspirantFrom = () => {
           label="zipCode"
           name="ZipCode"
           type={"number"}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
@@ -104,6 +112,7 @@ const AspirantFrom = () => {
           label="Phone Number"
           name="Phone"
           type={"phone"}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
       </Grid>
       <Button
