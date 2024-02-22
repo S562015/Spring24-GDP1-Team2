@@ -12,3 +12,16 @@ export const createEmployer = (employerInfo) => {
     }
   };
 };
+
+export const createAspirant = (aspirantInfo) => {
+  return async (dispatch) => {
+    try {
+      const res = await handlePost("aspirant/create", aspirantInfo);
+      if (res.status === 200) {
+        return res;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
