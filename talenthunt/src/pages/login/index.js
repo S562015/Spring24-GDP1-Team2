@@ -9,16 +9,22 @@ import Typography from "@mui/material/Typography";
 import { InputField } from "../../components/textField";
 import background from "../../assets/login.png";
 import { Tab, Tabs } from "@mui/material";
-import { a11yProps } from "../../utils";
+import { a11yProps, cloneObject, handlePost } from "../../utils";
 import { TabPanel } from "../../components/tabPanel/TabPanel";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import { Link } from "react-router-dom";
 const Login = () => {
   const [tabIndex, setTabIndex] = useState(0);
-
+  const [userInfo, setUserInfo] = useState({});
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
+  };
+
+  const handleChange = (key, value) => {
+    let newValue = cloneObject(userInfo);
+    newValue[key] = value;
+    setUserInfo(newValue);
   };
 
   const handleSubmit = (event) => {
@@ -32,7 +38,7 @@ const Login = () => {
 
   const renderInputFields = () => {
     return (
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+      <Box component="form" noValidate sx={{ mt: 1 }}>
         <InputField
           margin="normal"
           required
@@ -41,6 +47,7 @@ const Login = () => {
           label="Email Address"
           name="email"
           autoFocus
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
@@ -50,6 +57,7 @@ const Login = () => {
           label="Password"
           type="password"
           id="password"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
           Sign In
