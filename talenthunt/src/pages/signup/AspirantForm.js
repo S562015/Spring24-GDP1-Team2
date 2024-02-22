@@ -5,10 +5,25 @@ import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import * as React from "react";
+import { useState } from "react";
+import { cloneObject, handlePost } from "../../utils";
 
-const AspirantFrom = ({ handleSubmit }) => {
+const AspirantFrom = () => {
+  const [aspirantInfo, setAspirantInfo] = useState({});
+
+  const handleChange = (key, value) => {
+    let newValue = cloneObject(aspirantInfo);
+    newValue[key] = value;
+    setAspirantInfo(newValue);
+  };
+
+  const handleSubmit = async () => {
+    const res = await handlePost("aspirant/create", aspirantInfo);
+    console.log(res);
+  };
+
   return (
-    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
+    <Box component="form" noValidate sx={{ mt: 2 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <InputField
@@ -91,7 +106,12 @@ const AspirantFrom = ({ handleSubmit }) => {
           type={"phone"}
         />
       </Grid>
-      <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} disabled>
+      <Button
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={handleSubmit}
+        disabled
+      >
         Register
       </Button>
       <Grid container>
