@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import * as React from "react";
 import { useState } from "react";
 import { cloneObject, handlePost } from "../../utils";
+import { createAspirant } from " ./signupActions";
 
-const AspirantFrom = () => {
+const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
   const [aspirantInfo, setAspirantInfo] = useState({});
 
   const handleChange = (key, value) => {
@@ -18,7 +19,8 @@ const AspirantFrom = () => {
   };
 
   const handleSubmit = async () => {
-    const res = await handlePost("aspirant/create", aspirantInfo);
+    const res = await createAspirant();
+    signupWithUsernameAndPassword();
     console.log(res);
   };
 
