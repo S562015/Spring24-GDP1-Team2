@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { createFromObj } from "../../utils";
+import { cloneObject, handlePost } from "../../utils";
 
 const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
