@@ -34,7 +34,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
             fullWidth
             id="first"
             label="First Name"
-            name="First Name"
+            name="firstName"
             autoFocus
             onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
@@ -46,7 +46,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
             fullWidth
             id="last-name"
             label="Last Name"
-            name="Last Name"
+            name="lastName"
             onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
         </Grid>
@@ -75,7 +75,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           fullWidth
           id="address-line1"
           label="Address line 1"
-          name="Address line 1"
+          name="line1"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
@@ -84,7 +84,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           fullWidth
           id="address-line1"
           label="Address line 2"
-          name="Address line 2"
+          name="line2"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
@@ -93,7 +93,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           fullWidth
           id="city"
           label="City"
-          name="City"
+          name="city"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
@@ -102,7 +102,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           fullWidth
           id="zipCode"
           label="zipCode"
-          name="ZipCode"
+          name="zip"
           type={"number"}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
