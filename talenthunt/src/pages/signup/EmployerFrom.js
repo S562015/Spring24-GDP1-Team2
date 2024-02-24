@@ -18,11 +18,10 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
 
   const handleSubmit = () => {
     createEmployer(employerInfo);
-    console.log(res
-      );
-      signupWithUsernameAndPassword()
+    signupWithUsernameAndPassword(employerInfo);
   };
 
+  console.log(Object.keys(employerInfo).length);
   return (
     <>
       <Box component="form" sx={{ mt: 2 }}>
@@ -96,6 +95,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             label="Confrim Password"
             name="confirmPassword"
             type={"password"}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
           <InputField
             margin="normal"
@@ -110,7 +110,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
         <Button
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
-          disabled={Object.keys(employerInfo).length !== 7}
+          disabled={Object.keys(employerInfo).length !== 8}
           onClick={handleSubmit}
         >
           Register
