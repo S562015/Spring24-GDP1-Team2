@@ -26,3 +26,16 @@ export const createEmployer = (employerInfo) => {
     }
   };
 };
+
+export const getOrganization = () => {
+  return async (dispatch) => {
+    try {
+      const res = await handleGet("/application");
+      if (res.status === 200) {
+        return res;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
