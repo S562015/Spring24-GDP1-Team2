@@ -153,6 +153,24 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           name="degree"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="major"
+          label="Major"
+          name="major"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="grade"
+          label="Grade"
+          name="grade"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
       </Grid>
       <Button
         variant="contained"
