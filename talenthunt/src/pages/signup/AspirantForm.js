@@ -82,7 +82,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           margin="normal"
           required
           fullWidth
-          id="address-line1"
+          id="address-line2"
           label="Address line 2"
           name="line2"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
@@ -100,6 +100,15 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           margin="normal"
           required
           fullWidth
+          id="state"
+          label="State"
+          name="state"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
           id="zipCode"
           label="zipCode"
           name="zip"
@@ -110,9 +119,19 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           margin="normal"
           required
           fullWidth
+          id="email"
+          label="e-Mail"
+          name="email"
+          type={"email"}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
           id="phone"
           label="Phone Number"
-          name="Phone"
+          name="phone"
           type={"phone"}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
