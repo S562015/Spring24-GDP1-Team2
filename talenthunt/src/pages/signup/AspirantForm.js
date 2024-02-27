@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import * as React from "react";
 import { useState } from "react";
 import { cloneObject, handlePost } from "../../utils";
-import { createAspirant } from " ./signupActions";
+import { createAspirant } from "./signupActions";
 
 const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
   const [aspirantInfo, setAspirantInfo] = useState({});
@@ -50,7 +50,10 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
             onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
         </Grid>
-        <BasicDatePicker label="Date of Birth" />
+        <BasicDatePicker
+          label="Date of Birth"
+          onChange={(e) => handleChange("dateOfBirth", e.target.value)}
+        />
         <InputField
           margin="normal"
           required
@@ -190,6 +193,16 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           label="Grade"
           name="grade"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <BasicDatePicker
+          label="From"
+          format="MMM-YYYY"
+          onChange={(e) => handleChange("from", e.target.value)}
+        />
+        <BasicDatePicker
+          label="To"
+          format="MMM-YYYY"
+          onChange={(e) => handleChange("to", e.target.value)}
         />
         <InputField
           margin="normal"
