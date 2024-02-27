@@ -171,6 +171,51 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           name="grade"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="skill"
+          label="Skill"
+          name="skill"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="skill-level"
+          label="Skill Level"
+          name="level"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="expectedSalary-minimum"
+          label="Expected Minimum Salary"
+          name="minimum"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="expectedSalary-maximum"
+          label="Expected Maximum Salary"
+          name="maximum"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="preferredOrganizations"
+          label="Preferred Organizations"
+          name="preferredOrganizations"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
       </Grid>
       <Button
         variant="contained"
