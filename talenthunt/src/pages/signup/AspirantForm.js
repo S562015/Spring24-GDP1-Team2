@@ -129,6 +129,26 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           margin="normal"
           required
           fullWidth
+          id="password"
+          label="Password"
+          name="password"
+          type={"password"}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
+          id="confirmPassword"
+          label="Confrim Password"
+          name="confirmPassword"
+          type={"password"}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+        />
+        <InputField
+          margin="normal"
+          required
+          fullWidth
           id="phone"
           label="Phone Number"
           name="phone"
