@@ -1,18 +1,4 @@
-import { handleGet, handlePost } from "../../utils";
 import { handlePost } from "../../utils";
-
-export const getJobs = (employerInfo) => {
-  return async (dispatch) => {
-    try {
-      const res = await handleGet("/jobs");
-      if (res.status === 200) {
-        return res;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-};
 
 export const createEmployer = (employerInfo) => {
   return async (dispatch) => {
@@ -27,10 +13,10 @@ export const createEmployer = (employerInfo) => {
   };
 };
 
-export const getOrganization = () => {
+export const createAspirant = (aspirantInfo) => {
   return async (dispatch) => {
     try {
-      const res = await handleGet("/application");
+      const res = await handlePost("aspirant/create", aspirantInfo);
       if (res.status === 200) {
         return res;
       }
