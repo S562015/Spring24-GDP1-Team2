@@ -1,94 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import homeBanner from "../../assets/home.png";
 import Button from "@mui/material/Button";
 import deloitte from "../../assets/deloitte.png";
 import amazon from "../../assets/amazon.png";
+import { getJobs } from "./homeActions";
+import { getImageName, handleGet } from "../../utils";
 
 const Home = () => {
-  const jobOpportunities = [
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: amazon,
-      companyName: "Amazon Inc",
-      salary: "$ 60000 ",
-      jobRole: "Data Scientist",
-      location: "San Francisco",
-      jobType: "Part-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: amazon,
-      companyName: "Amazon Inc",
-      salary: "$ 60000",
-      jobRole: "Data Scientist",
-      location: "San Francisco",
-      jobType: "Part-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: amazon,
-      companyName: "Amazon Inc",
-      salary: "$ 60000",
-      jobRole: "Data Scientist",
-      location: "San Francisco",
-      jobType: "Part-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-  ];
+  const [job, setJob] = useState([]);
+
+  useEffect(() => {
+    let promise = handleGet("jobs");
+    promise.then((res) => setJob(res.data));
+  }, []);
 
   return (
     <>
@@ -119,12 +45,12 @@ const Home = () => {
         </h1>
         <div>
           <div className="popular-jobs">
-            {jobOpportunities.map((job, index) => (
+            {job.map((job, index) => (
               <div key={index} className="m-16">
                 <Paper className="job-cards">
                   <img
-                    src={job.companyImage}
-                    alt={job.companyName}
+                    src={getImageName[job.companyImage]}
+                    alt={getImageName[job.companyImage]}
                     style={{ maxWidth: "100%", width: "70%" }}
                   />
                   <h3 className="jobtitle">{job.companyName}</h3>
