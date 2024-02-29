@@ -1,4 +1,7 @@
 import axios from "axios";
+import deloitte from "../src/assets/deloitte.png";
+import amazon from "../src/assets/amazon.png";
+
 export const a11yProps = (index) => {
   return {
     id: `simple-tab-${index}`,
@@ -34,4 +37,8 @@ export const handlePost = async (url, body) => {
     console.error(e);
     return e;
   }
+};
+export const getImageName = {
+  amazon,
+  deloitte,
 };
