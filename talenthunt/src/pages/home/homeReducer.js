@@ -1,19 +1,16 @@
+import { GET_ALL_JOBS } from "../../redux/actionType";
 const initialState = {};
 
 const homeReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_JOBS:
+      return {
+        ...state,
+        jobList: action.data,
+      };
     default:
       return state;
   }
 };
 
-export const getJobs = () => {
-  let data;
-  try {
-    handleGet("jobs").then((val) => (data = val));
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
-};
 export default homeReducer;
