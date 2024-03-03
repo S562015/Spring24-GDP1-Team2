@@ -5,6 +5,7 @@ import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { cloneObject, handlePost } from "../../utils";
+import { createEmployer } from "./signupActions";
 
 const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
@@ -20,6 +21,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
     console.log(res);
   };
 
+  console.log(Object.keys(employerInfo).length);
   return (
     <>
       <Box component="form" sx={{ mt: 2 }}>
@@ -93,6 +95,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
             label="Confrim Password"
             name="confirmPassword"
             type={"password"}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
           />
           <InputField
             margin="normal"
@@ -108,6 +111,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           disabled={Object.keys(employerInfo).length !== 7}
+          disabled={Object.keys(employerInfo).length !== 8}
           onClick={handleSubmit}
         >
           Register
