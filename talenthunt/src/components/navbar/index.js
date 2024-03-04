@@ -8,11 +8,14 @@ import {
   List,
   ListItem,
   ListItemText,
+  MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { styled } from "@mui/system";
 import CommonButton from "../CommonButton";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
+import MenuSimple from "../Menu/menu";
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -24,40 +27,49 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
   width: 500,
 }));
 
-const navBarItems = [
-  {
-    id: 1,
-    label: "Job",
-    route: "job",
-    color: "inherit",
-    sx: { display: { md: "inline-flex", xs: "none" } },
-  },
-  {
-    id: 2,
-    label: "Companies",
-    route: "Companies",
-    color: "inherit",
-    sx: { display: { md: "inline-flex", xs: "none" } },
-  },
-  {
-    id: 3,
-    label: "Login",
-    route: "login",
-    color: "inherit",
-    sx: { display: { md: "inline-flex", xs: "none" } },
-  },
-  {
-    id: 4,
-    label: "SignUp",
-    route: "signup",
-    color: "inherit",
-    sx: { display: { md: "inline-flex", xs: "none" } },
-  },
-];
+const navBarItems = (loggedIn) => {
+  let items = [
+    {
+      id: 1,
+      label: "Job",
+      route: "job",
+      color: "inherit",
+      sx: { display: { md: "inline-flex", xs: "none" } },
+    },
+    {
+      id: 2,
+      label: "Companies",
+      route: "Companies",
+      color: "inherit",
+      sx: { display: { md: "inline-flex", xs: "none" } },
+    },
+  ];
+
+  return !loggedIn
+    ? [
+        ...items,
+        {
+          id: 3,
+          label: "Login",
+          route: "login",
+          color: "inherit",
+          sx: { display: { md: "inline-flex", xs: "none" } },
+        },
+        {
+          id: 4,
+          label: "SignUp",
+          route: "signup",
+          color: "inherit",
+          sx: { display: { md: "inline-flex", xs: "none" } },
+        },
+      ]
+    : items;
+};
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
+  const isLoggedIn = auth.currentUser;
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -68,7 +80,7 @@ const Navbar = () => {
   };
 
   const renderNavBarItems = () =>
-    navBarItems.map((item) => (
+    navBarItems(isLoggedIn).map((item) => (
       <CommonButton
         key={item.id}
         onClick={() => navigate(item.route)}
@@ -87,7 +99,7 @@ const Navbar = () => {
       ModalProps={{ keepMounted: true }}
     >
       <List>
-        {navBarItems.map((item) => (
+        {navBarItems(isLoggedIn).map((item) => (
           <ListItem
             key={item.id}
             onClick={() => {
@@ -101,6 +113,7 @@ const Navbar = () => {
       </List>
     </StyledDrawer>
   );
+
   return (
     <div>
       <AppBar position="static" color={"primary"}>
@@ -115,7 +128,13 @@ const Navbar = () => {
           </StyledIconButton>
 
           <Typography variant="h6" component="div">
-            <CommonButton color={"inherit"} onClick={() => navigate("/")}>
+            <CommonButton
+              color={"inherit"}
+              onClick={() => {
+                let url = auth.currentUser ? "/home" : "/";
+                navigate(url);
+              }}
+            >
               Talent Hunt
             </CommonButton>
           </Typography>
@@ -127,6 +146,7 @@ const Navbar = () => {
             }}
           >
             {renderNavBarItems()}
+            {isLoggedIn ? <MenuSimple /> : ""}
           </div>
         </Toolbar>
       </AppBar>
@@ -134,6 +154,5 @@ const Navbar = () => {
     </div>
   );
 };
-
 
 export default Navbar;

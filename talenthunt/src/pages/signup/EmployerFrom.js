@@ -3,12 +3,17 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { InputField } from "../../components/textField";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cloneObject, handlePost } from "../../utils";
 import { createEmployer } from "./signupActions";
+import { useDispatch } from "react-redux";
+import userSignUp from "../../auth/userSignUp";
 
 const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error, signUp } = userSignUp();
 
   const handleChange = (key, value) => {
     let newValue = cloneObject(employerInfo);
@@ -17,11 +22,15 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   };
 
   const handleSubmit = async () => {
-    const res = await handlePost("employer/create", employerInfo);
-    console.log(res);
+    const { email, password, username } = employerInfo;
+    await signUp(email, password, username);
+    console.log({ error });
+    if (!error) {
+      dispatch(createEmployer);
+      navigate("/home", { replace: true });
+    }
   };
 
-  console.log(Object.keys(employerInfo).length);
   return (
     <>
       <Box component="form" sx={{ mt: 2 }}>

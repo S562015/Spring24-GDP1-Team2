@@ -13,27 +13,36 @@ import { a11yProps, cloneObject, handlePost } from "../../utils";
 import { TabPanel } from "../../components/tabPanel/TabPanel";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import userLogin from "../../auth/userLogin";
 const Login = () => {
   const [tabIndex, setTabIndex] = useState(0);
-  const [userInfo, setUserInfo] = useState({});
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const { error, login } = userLogin();
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
 
-  const handleChange = (key, value) => {
-    let newValue = cloneObject(userInfo);
-    newValue[key] = value;
-    setUserInfo(newValue);
-  };
+  // const handleChange = (key, value) => {
+  //   let newValue = cloneObject(userInfo);
+  //   newValue[key] = value;
+  //   setUserInfo(newValue);
+  // };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password")
-    });
+    await login(email, password);
+    if (!error) {
+      navigate("/home", { replace: true });
+    }
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
   };
 
   const renderInputFields = () => {
@@ -47,7 +56,7 @@ const Login = () => {
           label="Email Address"
           name="email"
           autoFocus
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <InputField
           margin="normal"
@@ -57,9 +66,14 @@ const Login = () => {
           label="Password"
           type="password"
           id="password"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={handleSubmit}
+        >
           Sign In
         </Button>
         <Grid container>
@@ -87,7 +101,7 @@ const Login = () => {
           backgroundRepeat: "no-repeat",
           backgroundColor: "5319AC",
           backgroundSize: "50%",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -97,7 +111,7 @@ const Login = () => {
             mx: 4,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h5">

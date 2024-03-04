@@ -2,7 +2,7 @@ import { handleGet, handlePost } from "../../utils";
 import {
   GET_ALL_JOBS,
   GET_ORGANIZATION,
-  POST_EMPLOYER,
+  CREATE_EMPLOYER,
 } from "../../redux/actionType";
 
 export const getJobs = () => {
