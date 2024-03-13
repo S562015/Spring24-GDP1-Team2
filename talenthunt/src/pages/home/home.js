@@ -1,94 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import homeBanner from "../../assets/home.png";
-import Button from "@mui/material/Button";
-import deloitte from "../../assets/deloitte.png";
-import amazon from "../../assets/amazon.png";
+import { getJobs } from "./homeActions";
+import { useDispatch, useSelector } from "react-redux";
+import JobCard from "../../components/Card/JobCard";
 
 const Home = () => {
-  const jobOpportunities = [
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: amazon,
-      companyName: "Amazon Inc",
-      salary: "$ 60000 ",
-      jobRole: "Data Scientist",
-      location: "San Francisco",
-      jobType: "Part-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: amazon,
-      companyName: "Amazon Inc",
-      salary: "$ 60000",
-      jobRole: "Data Scientist",
-      location: "San Francisco",
-      jobType: "Part-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: amazon,
-      companyName: "Amazon Inc",
-      salary: "$ 60000",
-      jobRole: "Data Scientist",
-      location: "San Francisco",
-      jobType: "Part-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-    {
-      companyImage: deloitte,
-      companyName: "Deloitte Touche Tohmatsu Limited",
-      salary: "$ 475,673",
-      jobRole: "Senior Investment Advisor",
-      location: "New York, USA",
-      jobType: "Full-time",
-      jobDescription:
-        "A declaration in a resume states that the information on your resume is correct to the best of your knowledge.",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { jobList } = useSelector((state) => state.homeReducer);
+
+  console.log(jobList);
+  useEffect(() => {
+    dispatch(getJobs());
+  }, []);
+
+  const renderJobList = () => {
+    return jobList?.map((job, index) => <JobCard job={job} index={index} />);
+  };
 
   return (
     <>
@@ -118,31 +47,7 @@ const Home = () => {
           Popular <span className="color-secondary">Jobs</span>{" "}
         </h1>
         <div>
-          <div className="popular-jobs">
-            {jobOpportunities.map((job, index) => (
-              <div key={index} className="m-16">
-                <Paper className="job-cards">
-                  <img
-                    src={job.companyImage}
-                    alt={job.companyName}
-                    style={{ maxWidth: "100%", width: "70%" }}
-                  />
-                  <h3 className="jobtitle">{job.companyName}</h3>
-                  <p className="jobsalary my-3">{job.salary}</p>
-                  <p className="fs-16 fw-600"> {job.jobRole}</p>
-                  <p className="fs-14 c-gray fw-600">{job.location}</p>
-                  <p className="fs-14 c-gray fw-600">{job.jobType}</p>
-                  <p className="fs-14">{job.jobDescription}</p>
-
-                  <div className="text-center App">
-                    <Button variant="contained" className="button-apply">
-                      Apply
-                    </Button>
-                  </div>
-                </Paper>
-              </div>
-            ))}
-          </div>
+          <div className="popular-jobs">{renderJobList()}</div>
         </div>
       </div>
     </>
