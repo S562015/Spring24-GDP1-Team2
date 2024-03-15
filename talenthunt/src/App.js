@@ -9,6 +9,8 @@ import JobPost from "./pages/jobpost/jobpost";
 import Search from "./pages/search/search";
 import Profile from "./pages/profile/profile";
 import Application from "./pages/application/application";
+import JobApplication from "./pages/jobpost/JobApplication";
+import JobDescription from "./pages/jobpost/JobDescription";
 function App() {
   return (
     <div className="App">
@@ -21,6 +23,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<Search />} />
         <Route path="/application" element={<Application />} />
+        <Route path="/jobappliction" element={<JobApplication />} />
+        <Route path="/jobdescription" element={<JobDescription />} />
       </Routes>
       {/*<Home />*/}
     </div>
