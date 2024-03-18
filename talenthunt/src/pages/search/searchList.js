@@ -1,11 +1,11 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import appStore from "./appStore";
-import Search from "./search";
+import Beer from "./Beer";
 
 // this is re-rendered whenever the relevant parts of the used data stores change
-const SearchList = () => (
-  <div className="searchlist">
+const BeerList = () => (
+  <div className="beerlist">
     {!appStore.beers.length ? (
       <h3>No matching jobs found!</h3>
     ) : (
@@ -14,4 +14,4 @@ const SearchList = () => (
   </div>
 );
 
-export default view(SearchList);
+export default view(BeerList);
