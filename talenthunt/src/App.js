@@ -9,24 +9,29 @@ import JobPost from "./pages/jobpost/jobpost";
 import Search from "./pages/search/search";
 import Profile from "./pages/profile/profile";
 import Application from "./pages/application/application";
-import JobApplication from "./pages/jobpost/JobApplication";
-import JobDescription from "./pages/jobpost/JobDescription";
+import PrivateRoutesLayout from "./PrivateRoutesLayout";
+import Error from "./pages/Error/Error";
+import { auth } from "./firebase";
+import LandingPage from "./pages/home/LandingPage";
 function App() {
+  console.log(auth.currentUser);
   return (
     <div className="App">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/jobpost" element={<JobPost />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/application" element={<Application />} />
-        <Route path="/jobappliction" element={<JobApplication />} />
-        <Route path="/jobdescription" element={<JobDescription />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="*" element={<Error />} />
+
+        <Route element={<PrivateRoutesLayout auth={auth} />}>
+          <Route path="/jobpost" element={<JobPost />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/home" element={<LandingPage />} />
+          <Route path="/application" element={<Application />} />
+        </Route>
       </Routes>
-      {/*<Home />*/}
     </div>
   );
 }
