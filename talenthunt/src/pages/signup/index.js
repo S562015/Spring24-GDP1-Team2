@@ -12,7 +12,7 @@ import { Container } from "@mui/system";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import EmployerFrom from "./EmployerFrom";
-import AspirantFrom from "./AspirantForm";
+import AspirantFrom from "./AspirantFrom";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -21,27 +21,27 @@ const SignUp = () => {
     setTabIndex(newValue);
   };
 
-  const signupWithUsernameAndPassword = async (empInfo) => {
-    // e.preventDefault();
-    console.log(empInfo);
-    const { password, confirmPassword, email } = empInfo;
-    console.log({ password, confirmPassword, email });
-    if (password === confirmPassword) {
-      try {
-        const user = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        console.log(user);
-        alert("complete");
-      } catch {
-        alert("Sorry, something went wrong. Please try again.");
-      }
-    } else {
-      alert("Passwords don't match. Please try again.");
-    }
-  };
+  // const signupWithUsernameAndPassword = async (empInfo) => {
+  //   // e.preventDefault();
+  //   console.log(empInfo);
+  //   const { password, confirmPassword, email } = empInfo;
+  //   console.log({ password, confirmPassword, email });
+  //   if (password === confirmPassword) {
+  //     try {
+  //       // const user = await createUserWithEmailAndPassword(
+  //       //   auth,
+  //       //   email,
+  //       //   password,
+  //       // );
+  //       // console.log(user);
+  //       // alert("complete");
+  //     } catch {
+  //       alert("Sorry, something went wrong. Please try again.");
+  //     }
+  //   } else {
+  //     alert("Passwords don't match. Please try again.");
+  //   }
+  // };
 
   return (
     <Container component={"main"} maxWidth={"md"}>
@@ -82,11 +82,7 @@ const SignUp = () => {
           <AspirantFrom />
         </TabPanel>
         <TabPanel value={tabIndex} index={1}>
-          {
-            <EmployerFrom
-              signupWithUsernameAndPassword={signupWithUsernameAndPassword}
-            />
-          }
+          {<EmployerFrom />}
         </TabPanel>
       </Box>
     </Container>
