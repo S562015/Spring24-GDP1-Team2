@@ -1,3 +1,3 @@
 export const GET_ALL_JOBS = "GET_ALL_JOBS";
-export const POST_EMPLOYER = "POST_EMPLOYER";
+export const CREATE_EMPLOYER = "CREATE_EMPLOYER";
 export const GET_ORGANIZATION = "GET_ORGANIZATION";
