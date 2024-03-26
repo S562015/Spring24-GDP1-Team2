@@ -24,6 +24,39 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
     console.log(res);
   };
 
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    validatePassword(newPassword);
+  };
+
+  const validatePassword = (password) => {
+    // Regular expressions for validation
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()-_=+{};:,<.>?~]/.test(password);
+
+    // Check if password meets all criteria
+    const isValidPassword =
+      password.length >= minLength &&
+      hasUpperCase &&
+      hasLowerCase &&
+      hasNumber &&
+      hasSpecialChar;
+
+    setIsValid(isValidPassword);
+
+    if (!isValidPassword) {
+      setErrorMessage(
+        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters."
+      );
+    } else {
+      setErrorMessage("");
+    }
+  };
+
   return (
     <Box component="form" noValidate sx={{ mt: 2 }}>
       <Grid container spacing={2}>
