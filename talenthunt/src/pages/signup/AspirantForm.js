@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { LinearProgress, Typography } from "@mui/material";
 import { InputField } from "../../components/textField";
 import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import Button from "@mui/material/Button";
@@ -8,12 +9,32 @@ import * as React from "react";
 import { useState } from "react";
 import { cloneObject, handlePost } from "../../utils";
 import { createAspirant } from "./signupActions";
+import {
+  SentimentVeryDissatisfied,
+  SentimentDissatisfied,
+  SentimentSatisfied,
+  SentimentSatisfiedAlt,
+  SentimentVerySatisfied,
+} from "@mui/icons-material";
 
 const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
   const [aspirantInfo, setAspirantInfo] = useState({});
+  const [isValid, setIsValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [strength, setStrength] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const calculateStrength = (password) => {
+    const strength = Math.min(password.length / 10, 1) * 100;
+    setStrength(strength);
+  };
 
   const handleChange = (key, value) => {
     let newValue = cloneObject(aspirantInfo);
+    if (key === "password") {
+      validatePassword(value);
+      calculateStrength(value);
+      setIsTyping(true);
+    }
     newValue[key] = value;
     setAspirantInfo(newValue);
   };
@@ -23,22 +44,16 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
     signupWithUsernameAndPassword();
     console.log(res);
   };
-
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    validatePassword(newPassword);
+  const handleBlur = () => {
+    setIsTyping(false);
   };
-
   const validatePassword = (password) => {
-    // Regular expressions for validation
     const minLength = 8;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumber = /\d/.test(password);
     const hasSpecialChar = /[!@#$%^&*()-_=+{};:,<.>?~]/.test(password);
 
-    // Check if password meets all criteria
     const isValidPassword =
       password.length >= minLength &&
       hasUpperCase &&
@@ -54,6 +69,40 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
       );
     } else {
       setErrorMessage("");
+    }
+  };
+
+  const renderStrengthLabel = () => {
+    if (strength < 20) {
+      return (
+        <Typography variant="body2" color="error">
+          <SentimentVeryDissatisfied fontSize="small" /> Very Weak
+        </Typography>
+      );
+    } else if (strength < 40) {
+      return (
+        <Typography variant="body2" color="error">
+          <SentimentDissatisfied fontSize="small" /> Weak
+        </Typography>
+      );
+    } else if (strength < 60) {
+      return (
+        <Typography variant="body2" color="primary">
+          <SentimentSatisfied fontSize="small" /> Medium
+        </Typography>
+      );
+    } else if (strength < 80) {
+      return (
+        <Typography variant="body2" color="primary">
+          <SentimentSatisfiedAlt fontSize="small" /> Strong
+        </Typography>
+      );
+    } else {
+      return (
+        <Typography variant="body2" color="primary">
+          <SentimentVerySatisfied fontSize="small" /> Very Strong
+        </Typography>
+      );
     }
   };
 
@@ -169,8 +218,21 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
           label="Password"
           name="password"
           type={"password"}
+          error={!isValid && aspirantInfo?.password?.length > 0}
+          helperText={
+            !isValid && aspirantInfo?.password?.length > 0 && errorMessage
+          }
           onChange={(e) => handleChange(e.target.name, e.target.value)}
+          onBlur={handleBlur}
         />
+        {isTyping && (
+          <>
+            <Typography variant="caption" gutterBottom>
+              Password Strength:
+            </Typography>
+            {renderStrengthLabel()}
+          </>
+        )}
         <InputField
           margin="normal"
           required
