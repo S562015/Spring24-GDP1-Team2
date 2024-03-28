@@ -1,6 +1,18 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import homeReducer from "../pages/home/homeReducer";
+import { CURRENT_USER, SET_LOGIN_ERROR } from "./actionType";
 
-export default combineReducers({
-    homeReducer
-});
+export const setCurrentUser = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: CURRENT_USER,
+      data,
+    });
+  };
+};
+export const setError = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: SET_LOGIN_ERROR,
+      data,
+    });
+  };
+};
