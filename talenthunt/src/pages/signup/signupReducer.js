@@ -2,16 +2,15 @@ import { createEmployer } from "./signupActions";
 
 const initialState = {};
 
-const signupReducer = (state = initialState, action) => {
+function signupReducer(state = initialState, action) {
   switch (action.type) {
     case createEmployer:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         employer: action.data,
-      };
+      });
     default:
       return state;
   }
-};
+}
 
 export default signupReducer;
