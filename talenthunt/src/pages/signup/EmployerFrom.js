@@ -103,13 +103,13 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
       );
     } else if (strength < 80) {
       return (
-        <Typography variant="body2" color="primary">
+        <Typography variant="body2" color="#4caf50">
           <SentimentSatisfiedAlt fontSize="small" /> Strong
         </Typography>
       );
     } else {
       return (
-        <Typography variant="body2" color="primary">
+        <Typography variant="body2" color="#1b5e20">
           <SentimentVerySatisfied fontSize="small" /> Very Strong
         </Typography>
       );
