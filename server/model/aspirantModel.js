@@ -4,77 +4,77 @@ const { Schema } = mongoose;
 const aspirantSchema = new Schema({
   firstName: {
     type: String,
-    required: true,
+    required: true
   },
   lastName: {
     type: String,
-    required: true,
+    required: true
   },
   dateOfBirth: {
     type: Date,
-    required: true,
+    required: true
   },
   qualification: {
     type: Date,
-    required: true,
+    required: true
   },
   address: {
     line1: {
       type: String,
-      required: true,
+      required: true
     },
     line2: {
-      type: String,
+      type: String
     },
     city: {
       type: String,
-      required: true,
+      required: true
     },
     state: {
       type: String,
-      Required: true,
+      Required: true
     },
     zip: {
-      type: String,
-    },
+      type: String
+    }
   },
   education: [
     {
       schoolName: {
-        type: String,
+        type: String
       },
       degree: {
-        type: String,
+        type: String
       },
       major: {
-        type: String,
+        type: String
       },
       grade: {
-        type: Number,
+        type: Number
       },
       from: {
         type: Date,
-        format: "MMM-yyyy",
+        format: "MMM-yyyy"
       },
       to: {
         type: Date,
-        format: "MMM-yyyy",
-      },
-    },
+        format: "MMM-yyyy"
+      }
+    }
   ],
   skills: [
     {
       skill: {
-        type: String,
+        type: String
       },
       level: {
         type: String,
-        enum: ["Expert", "Moderate", "Basic"],
-      },
-    },
+        enum: ["Expert", "Moderate", "Basic"]
+      }
+    }
   ],
   email: {
-    type: String,
+    type: String
   },
   phone: {
     type: String,
@@ -82,27 +82,27 @@ const aspirantSchema = new Schema({
       validator: function (v) {
         return /\d{3}-\d{3}-\d{4}/.test(v);
       },
-      message: (props) => `${props.value} is not a valid phone number!`,
+      message: (props) => `${props.value} is not a valid phone number!`
     },
-    required: [true, "User phone number required"],
+    required: [true, "User phone number required"]
   },
   applicationDate: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   expectedSalary: {
     minimum: {
-      type: Number,
+      type: Number
     },
     maximum: {
-      type: Number,
-    },
+      type: Number
+    }
   },
   preferredOrganizations: [
     {
-      type: String,
-    },
-  ],
+      type: String
+    }
+  ]
 });
 
 const AspirantModel = mongoose.model("aspirant", aspirantSchema);

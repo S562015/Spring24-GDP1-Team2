@@ -13,7 +13,7 @@ export const createApplication = async (req, res) => {
     aspirantId: req.body.aspirantId,
     jobId: req.body.jobId,
     applicationDate: req.body.applicationDate,
-    status: req.body.status,
+    status: req.body.status
   });
   try {
     const savedLog = await log.save();

@@ -17,10 +17,12 @@ const store = configureStore({
 
 ReactDOM.render(
   <Provider store={store}>
-   <ThemeProvider theme={globalTheme}>
+    <ThemeProvider theme={globalTheme}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ThemeProvider>  </Provider>,
+    </ThemeProvider>
+  </Provider>,
+
   document.getElementById("root"),
 );

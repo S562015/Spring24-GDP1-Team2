@@ -21,7 +21,7 @@ export const createAspirants = async (req, res) => {
       skills,
       email,
       phone,
-      applicationDate,
+      applicationDate
     } = req.body;
 
     let aspirant = {
@@ -34,7 +34,7 @@ export const createAspirants = async (req, res) => {
       address,
       education,
       skills,
-      applicationDate,
+      applicationDate
     };
     const log = new AspirantModel(aspirant);
     const savedLog = await log.save();

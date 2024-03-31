@@ -14,11 +14,10 @@ const firebaseConfig = {
   storageBucket: "talenthunt-e4d23.appspot.com",
   messagingSenderId: "978558218454",
   appId: "1:978558218454:web:b6517622538e092e41d977",
-  measurementId: "G-D1D9F8QY32",
+  measurementId: "G-D1D9F8QY32"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 export { auth };
