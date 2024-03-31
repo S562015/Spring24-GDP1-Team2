@@ -9,7 +9,7 @@ export const createEmployer = (employerInfo) => {
         if (response.status === 200) {
           dispatch({
             type: CREATE_EMPLOYER,
-            data: response.data,
+            data: response.data
           });
         }
       })

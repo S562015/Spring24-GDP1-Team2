@@ -1,3 +1,5 @@
 export const GET_ALL_JOBS = "GET_ALL_JOBS";
 export const CREATE_EMPLOYER = "CREATE_EMPLOYER";
 export const GET_ORGANIZATION = "GET_ORGANIZATION";
+
+export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";

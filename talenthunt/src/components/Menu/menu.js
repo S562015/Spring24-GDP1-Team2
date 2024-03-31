@@ -77,7 +77,7 @@ const Listbox = styled("ul")(
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
  
   z-index: 1;
-  `,
+  `
 );
 
 const MenuItem = styled(BaseMenuItem)(
@@ -87,21 +87,18 @@ const MenuItem = styled(BaseMenuItem)(
   border-radius: 8px;
   cursor: default;
   user-select: none;
-
   &:last-of-type {
     border-bottom: none;
   }
-
   &:focus {
     outline: 3px solid ${theme.palette.mode === "dark" ? blue[600] : blue[200]};
     background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
   }
-
   &.${menuItemClasses.disabled} {
     color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
   }
-  `,
+  `
 );
 
 const MenuButton = styled(BaseMenuButton)(
@@ -116,19 +113,14 @@ const MenuButton = styled(BaseMenuButton)(
   transition: all 150ms ease;
   cursor: pointer;
   background: ${theme.palette.mode === "dark" ? grey[900] : "#5319AC"};
-
   color: ${theme.palette.mode === "dark" ? grey[200] : grey[50]};
-
-
   &:hover {
     background: ${theme.palette.mode === "dark" ? grey[800] : grey[50]};
     border-color: ${theme.palette.mode === "dark" ? grey[600] : grey[300]};
      color: ${theme.palette.mode === "dark" ? grey[200] : "#5319AC"};
   }
-
   &:active {
     background: ${theme.palette.mode === "dark" ? grey[700] : grey[100]};
   }
-
-  `,
+  `
 );
