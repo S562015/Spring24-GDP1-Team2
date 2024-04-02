@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    
   },
   title: {
     fontSize: 20,
@@ -57,6 +56,25 @@ const JobPortal = () => {
           description="Join our team of data scientists to work on cutting-edge projects..."
         />
         {/* Add more JobDescription components as needed */}
+      </Grid>
+    </div>
+  );
+};
+
+const JobPortal_adv = () => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <JobDescription
+          title="Data Engineer"
+          description="We are looking for an Experienced Data engineer with Experience in Spark and BigData to join our team..."
+        />
+        <JobDescription
+          title="Data Analyst"
+          description="Join our team of data Analysts to work on cutting-edge projects..."
+        />
       </Grid>
     </div>
   );
