@@ -1,7 +1,7 @@
 import express from "express";
 import {
   createAspirants,
-  getAspirants,
+  getAspirants
 } from "../controller/aspirantController.js";
 
 const router = express.Router();

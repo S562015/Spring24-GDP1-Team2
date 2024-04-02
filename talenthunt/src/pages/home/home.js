@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import homeBanner from "../../assets/home.png";
 import { getJobs } from "./homeActions";
 import { useDispatch, useSelector } from "react-redux";
 import JobCard from "../../components/Card/JobCard";
+import { auth } from "../../firebase";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { jobList } = useSelector((state) => state.homeReducer);
 
   console.log(jobList);
+  // console.log(auth.currentUser.email);
   useEffect(() => {
     dispatch(getJobs());
   }, []);

@@ -14,7 +14,7 @@ export const createJobPost = async (req, res) => {
     employerId: req.body.employerId,
     title: req.body.title,
     qualificationRequired: req.body.qualificationRequired,
-    jobDescription: req.body.jobDescription,
+    jobDescription: req.body.jobDescription
   });
   try {
     const savedLog = await log.save();

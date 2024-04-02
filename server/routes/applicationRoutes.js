@@ -1,7 +1,7 @@
 import express from "express";
 import {
   getApplication,
-  createApplication,
+  createApplication
 } from "../controller/applicationController.js";
 
 const router = express.Router();
