@@ -11,11 +11,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+<<<<<<< HEAD
     justifyContent: "space-between", // Change flex direction
     alignItems: "flex-start", // Align items to start
     padding: theme.spacing(2), // Add padding
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Add boxShadow
     borderRadius: 8, // Add borderRadius
+=======
+>>>>>>> 7f6a547b271c679b636fc3c8334a6008853528dd
   },
   title: {
     fontSize: 24, // Change font size
@@ -63,6 +66,26 @@ const JobPortal = () => {
         />
         {/* Add more JobDescription
          components as needed */}
+      </Grid>
+      
+    </div>
+  );
+};
+
+const JobPortal_adv = () => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <JobDescription
+          title="Data Engineer"
+          description="We are looking for an Experienced Data engineer with Experience in Spark and BigData to join our team..."
+        />
+        <JobDescription
+          title="Data Analyst"
+          description="Join our team of data Analysts to work on cutting-edge projects..."
+        />
       </Grid>
     </div>
   );

@@ -13,9 +13,7 @@ const JobCard = ({ job, index }) => {
         <CardMedia
           component="img"
           alt={getImageName[job.companyImage]}
-          height="140"
           image={getImageName[job.companyImage]}
-          style={{ maxWidth: "100%", width: "70%" }}
         />
         <CardContent>
           <Typography variant="h5" className="jobtitle">

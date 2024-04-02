@@ -1,39 +1,37 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
- 
+
 const employerSchema = new Schema({
   organizationId: {
     type: String,
-    required: true,
+    required: true
   },
-  firstName : {
+  firstName: {
     type: String,
-    required: true,
+    required: true
   },
   lastName: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
-    required: true,
+    required: true
   },
   userName: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
-  role:{
+  role: {
     type: String,
-    required: true,
+    required: true
   }
- 
 });
- 
+
 const EmployerModel = mongoose.model("employer", employerSchema);
- 
+
 export default EmployerModel;
- 

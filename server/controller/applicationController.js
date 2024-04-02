@@ -22,3 +22,15 @@ export const createApplication = async (req, res) => {
     res.json({ message: err });
   }
 };
+export const getApplicationById = async (req, res) => {
+  const { id } = req.params; // Assuming ID is passed as a route parameter
+  try {
+    const application = await ApplicationModel.findById(id);
+    if (!application) {
+      return res.status(404).json({ message: "Application not found" });
+    }
+    res.status(200).json(application);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
