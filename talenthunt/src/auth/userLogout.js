@@ -1,19 +1,20 @@
 import { auth } from "../firebase";
+import { useDispatch } from "react-redux";
+import { setError } from "../redux/actions";
 
-let error = null;
+const useLogout = () => {
+  const dispatch = useDispatch();
 
-const logout = async () => {
-  error = null;
+  const logout = async () => {
+    try {
+      await auth.signOut();
+      dispatch(setError(null));
+    } catch (err) {
+      dispatch(setError(err));
+    }
+  };
 
-  try {
-    await auth.signOut();
-  } catch (err) {
-    error = err.message;
-  }
+  return logout;
 };
 
-const userLogout = () => {
-  return { logout, error };
-};
-
-export default userLogout;
+export default useLogout;
