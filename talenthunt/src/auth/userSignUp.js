@@ -1,33 +1,28 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
+import { useDispatch } from "react-redux";
+import { setError } from "../redux/actions";
 
-let error = null;
+const useSignUp = () => {
+  const dispatch = useDispatch();
 
-const signUp = async (email, password, displayName) => {
-  error = null;
+  const signUp = async (email, password, displayName) => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      console.log({ res });
 
-  try {
-    // sign up with email and password
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-
-    if (!res) {
-      throw new Error("Something went wrong, try again!");
+      if (!res) {
+        throw new Error("Something went wrong, try again!");
+      }
+      dispatch(setError(null));
+      // include the display name in the user profile
+      await updateProfile(res.user, { displayName: displayName });
+    } catch (err) {
+      dispatch(setError(err));
     }
+  };
 
-    // include the display name in the user profile
-    await updateProfile(res, { displayName: displayName });
-
-    error = null;
-
-    console.log(res.user);
-  } catch (err) {
-    error = err.message;
-    console.log(error);
-  }
+  return signUp;
 };
 
-const userSignUp = () => {
-  return { signUp, error };
-};
-
-export default userSignUp;
+export default useSignUp;
