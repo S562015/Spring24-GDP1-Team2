@@ -21,12 +21,25 @@ const AspirantHome = () => {
     setSavedSearches([...savedSearches, searchCriteria]);
   };
 
+  // State for managing job alerts
+  const [jobAlerts, setJobAlerts] = useState([]);
+
+  // Function to manage job alerts
+  const manageJobAlerts = (action, alert) => {
+    if (action === "subscribe") {
+      setJobAlerts([...jobAlerts, alert]);
+    } else if (action === "unsubscribe") {
+      const updatedAlerts = jobAlerts.filter((item) => item.id !== alert.id);
+      setJobAlerts(updatedAlerts);
+    }
+  };
+
   return (
     <div className="aspirant-home">
       <header>
         <h1>Welcome to Your Aspirant Home Page</h1>
         <SearchBar onSaveSearch={saveSearch} />
-        <FilterPanel />
+        <FilterPanel onFilter={filterJobs} />
       </header>
       <main>
         {loading ? (
@@ -57,6 +70,15 @@ const AspirantHome = () => {
         <ul>
           {savedSearches.map((search, index) => (
             <li key={index}>{search}</li>
+          ))}
+        </ul>
+        <h2>Job Alerts</h2>
+        <ul>
+          {jobAlerts.map((alert, index) => (
+            <li key={index}>
+              {alert.criteria} -{" "}
+              <button onClick={() => manageJobAlerts("unsubscribe", alert)}>Unsubscribe</button>
+            </li>
           ))}
         </ul>
       </aside>
