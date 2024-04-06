@@ -1,24 +1,39 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { useDispatch } from "react-redux";
-import { setError } from "../redux/actions";
+import { setError, setUser } from "../redux/actions"; // Assuming there's a setUser action to set user data
 
 const useSignUp = () => {
   const dispatch = useDispatch();
 
   const signUp = async (email, password, displayName) => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log({ res });
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      if (!res) {
-        throw new Error("Something went wrong, try again!");
-      }
+      // Extract user from userCredential
+      const user = userCredential.user;
+
+      // Update user profile with display name
+      await updateProfile(user, { displayName: displayName });
+
+      // Dispatch user data to Redux store
+      dispatch(setUser({ email: user.email, displayName: user.displayName }));
+
+      // Reset error state
       dispatch(setError(null));
-      // include the display name in the user profile
-      await updateProfile(res.user, { displayName: displayName });
+
+      // Return user data
+      return { email: user.email, displayName: user.displayName };
     } catch (err) {
+      // Dispatch error to Redux store
       dispatch(setError(err));
+      // Return null if signup fails
+      return null;
     }
   };
 
