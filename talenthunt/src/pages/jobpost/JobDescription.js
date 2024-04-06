@@ -11,13 +11,19 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between", // Change flex direction
+    alignItems: "flex-start", // Align items to start
+    padding: theme.spacing(2), // Add padding
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Add boxShadow
+    borderRadius: 8, // Add borderRadius
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: theme.spacing(2),
+    fontSize: 24, // Change font size
+    fontWeight: "bold", // Change font weight
+    marginBottom: theme.spacing(1),
   },
   description: {
+    fontSize: 16, // Change font size
     flexGrow: 1,
   },
 }));
@@ -55,7 +61,8 @@ const JobPortal = () => {
           title="Data Scientist"
           description="Join our team of data scientists to work on cutting-edge projects..."
         />
-        {/* Add more JobDescription components as needed */}
+        {/* Add more JobDescription
+         components as needed */}
       </Grid>
     </div>
   );
@@ -74,6 +81,10 @@ const JobPortal_adv = () => {
         <JobDescription
           title="Data Analyst"
           description="Join our team of data Analysts to work on cutting-edge projects..."
+        />
+        <JobDescription
+          title="Data Scientist"
+          description="We are looking for an Experienced Data scientist for our development team"
         />
       </Grid>
     </div>

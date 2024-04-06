@@ -17,7 +17,7 @@ import {
   SentimentVerySatisfied,
 } from "@mui/icons-material";
 
-const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
+const AspirantForm = ({ signupWithUsernameAndPassword }) => {
   const [aspirantInfo, setAspirantInfo] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -65,7 +65,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
 
     if (!isValidPassword) {
       setErrorMessage(
-        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters."
+        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.",
       );
     } else {
       setErrorMessage("");
@@ -362,4 +362,4 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
   );
 };
 
-export default AspirantFrom;
+export default AspirantForm;

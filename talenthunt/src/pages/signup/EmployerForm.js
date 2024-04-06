@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { cloneObject, handlePost } from "../../utils";
 import { createEmployer } from "./signupActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userSignUp from "../../auth/userSignUp";
 import {
   SentimentVeryDissatisfied,
@@ -16,16 +16,18 @@ import {
   SentimentSatisfiedAlt,
   SentimentVerySatisfied,
 } from "@mui/icons-material";
+import useSignUp from "../../auth/userSignUp";
 
-const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
+const EmployerForm = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, signUp } = userSignUp();
+  const signUp = useSignUp();
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [strength, setStrength] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
+  const authError = useSelector((state) => state.helperReducer.authError);
 
   const calculateStrength = (password) => {
     const strength = Math.min(password.length / 10, 1) * 100;
@@ -46,8 +48,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   const handleSubmit = async () => {
     const { email, password, username } = employerInfo;
     await signUp(email, password, username);
-    console.log({ error });
-    if (!error) {
+    if (authError === null) {
       dispatch(createEmployer);
       navigate("/home", { replace: true });
     }
@@ -75,7 +76,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
 
     if (!isValidPassword) {
       setErrorMessage(
-        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters."
+        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.",
       );
     } else {
       setErrorMessage("");
@@ -217,8 +218,7 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
         <Button
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
-          disabled={Object.keys(employerInfo).length !== 7}
-          disabled1={Object.keys(employerInfo).length !== 8}
+          disabled={Object.keys(employerInfo).length !== 8}
           onClick={handleSubmit}
         >
           Register
@@ -233,4 +233,4 @@ const EmployerFrom = ({ signupWithUsernameAndPassword }) => {
   );
 };
 
-export default EmployerFrom;
+export default EmployerForm;

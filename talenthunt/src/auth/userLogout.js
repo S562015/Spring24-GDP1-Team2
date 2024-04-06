@@ -1,19 +1,29 @@
 import { auth } from "../firebase";
+import { useDispatch } from "react-redux";
+import { setError, setLoading, clearUser } from "../redux/actions";
+import { useHistory } from "react-router-dom";
 
-let error = null;
+const useLogout = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-const logout = async () => {
-  error = null;
+  const logout = async () => {
+    try {
+      dispatch(setLoading(true));
+      await auth.signOut();
+      dispatch(setError(null));
+      dispatch(clearUser());
+      dispatch(setLoading(false));
+      alert("Logged out successfully!");
+      history.push("/login");
+    } catch (err) {
+      dispatch(setError(err));
+      dispatch(setLoading(false));
+      alert("Logout failed. Please try again later.");
+    }
+  };
 
-  try {
-    await auth.signOut();
-  } catch (err) {
-    error = err.message;
-  }
+  return logout;
 };
 
-const userLogout = () => {
-  return { logout, error };
-};
-
-export default userLogout;
+export default useLogout;
