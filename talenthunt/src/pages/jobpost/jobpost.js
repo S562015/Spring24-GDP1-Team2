@@ -1,13 +1,40 @@
 import React, { useState } from "react";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { InputField } from "../../components/textField";
 
 const JobPostingPage = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [qualificationRequired, setQualificationRequired] = useState("");
+  const [error, setError] = useState("");
+
   const handleSubmit = () => {
+    // Form validation
+    if (!title || !description || !qualificationRequired) {
+      setError("All fields are required");
+      return;
+    }
+
     // TODO: Post the job to your backend
+    // Example using Fetch API:
+    fetch("your-backend-url", {
+      method: "POST",
+      body: JSON.stringify({ title, description, qualificationRequired }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to post job");
+        }
+        // Handle success
+        console.log("Job posted successfully!");
+      })
+      .catch((error) => {
+        setError("Failed to post job");
+        console.error("Error posting job:", error);
+      });
   };
 
   return (
@@ -25,7 +52,7 @@ const JobPostingPage = () => {
         margin="normal"
         required
         fullWidth
-        label="description"
+        label="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
@@ -33,10 +60,16 @@ const JobPostingPage = () => {
         margin="normal"
         required
         fullWidth
-        label={"qualificationRequired"}
+        label="Qualification Required"
         value={qualificationRequired}
         onChange={(e) => setQualificationRequired(e.target.value)}
       />
+
+      {error && (
+        <Typography variant="body2" color="error">
+          {error}
+        </Typography>
+      )}
 
       <Button variant="contained" color="primary" onClick={handleSubmit}>
         Post Job
