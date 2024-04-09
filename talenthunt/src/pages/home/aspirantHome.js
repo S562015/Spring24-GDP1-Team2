@@ -34,6 +34,23 @@ const AspirantHome = () => {
     }
   };
 
+  // State for saved jobs
+  const [savedJobs, setSavedJobs] = useState([]);
+
+  // Function to save a job
+  const saveJob = (job) => {
+    setSavedJobs([...savedJobs, job]);
+  };
+
+  // State for application tracker
+  const [applications, setApplications] = useState([]);
+
+  // Function to track job applications
+  const trackApplication = (job, status) => {
+    const updatedApplications = [...applications, { job, status }];
+    setApplications(updatedApplications);
+  };
+
   return (
     <div className="aspirant-home">
       <header>
@@ -51,7 +68,11 @@ const AspirantHome = () => {
             {jobList.length > 0 ? (
               jobList.map((job) => (
                 <div key={job.id} className="job-card-container">
-                  <JobCard job={job} />
+                  <JobCard
+                    job={job}
+                    onSave={() => saveJob(job)}
+                    onApply={(status) => trackApplication(job, status)}
+                  />
                   {/* Display company logo or name */}
                   <div className="company-info">
                     <img src={job.company.logo} alt={job.company.name} />
@@ -77,7 +98,23 @@ const AspirantHome = () => {
           {jobAlerts.map((alert, index) => (
             <li key={index}>
               {alert.criteria} -{" "}
-              <button onClick={() => manageJobAlerts("unsubscribe", alert)}>Unsubscribe</button>
+              <button onClick={() => manageJobAlerts("unsubscribe", alert)}>
+                Unsubscribe
+              </button>
+            </li>
+          ))}
+        </ul>
+        <h2>Saved Jobs</h2>
+        <ul>
+          {savedJobs.map((job, index) => (
+            <li key={index}>{job.title}</li>
+          ))}
+        </ul>
+        <h2>Application Tracker</h2>
+        <ul>
+          {applications.map((application, index) => (
+            <li key={index}>
+              {application.job.title} - {application.status}
             </li>
           ))}
         </ul>
