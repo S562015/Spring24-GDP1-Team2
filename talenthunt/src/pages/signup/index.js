@@ -11,7 +11,7 @@ import { useState } from "react";
 import { Container } from "@mui/system";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import EmployerFrom from "./EmployerFrom";
+import EmployerFrom from "./EmployerForm";
 import AspirantFrom from "./AspirantForm";
 
 const SignUp = () => {
@@ -30,7 +30,7 @@ const SignUp = () => {
           mx: 4,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Typography component="h1" variant="h5">

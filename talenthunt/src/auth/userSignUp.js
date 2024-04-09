@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { useDispatch } from "react-redux";
-import { setError, setUser } from "../redux/actions"; // Assuming there's a setUser action to set user data
+import { setError } from "../redux/actions"; // Assuming there's a setUser action to set user data
 
 const useSignUp = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const useSignUp = () => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       // Extract user from userCredential
@@ -21,10 +21,6 @@ const useSignUp = () => {
       // Update user profile with display name
       await updateProfile(user, { displayName: displayName });
 
-      // Dispatch user data to Redux store
-      dispatch(setUser({ email: user.email, displayName: user.displayName }));
-
-      // Reset error state
       dispatch(setError(null));
 
       // Return user data
