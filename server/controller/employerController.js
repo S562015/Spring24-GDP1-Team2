@@ -1,4 +1,5 @@
 import EmployerModel from "../model/employerModel.js";
+import JobModel from "../model/jobModel.js";
 
 export const getEmployers = async (req, res) => {
   try {
@@ -25,5 +26,18 @@ export const createEmployer = async (req, res) => {
     res.json(savedLog);
   } catch (err) {
     res.json({ message: err });
+  }
+};
+
+export const getCreateEmployer = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const application = await EmployerModel.findById(id);
+    if (!application) {
+      return res.status(404).json({ message: "Employer not found" });
+    }
+    res.status(200).json(application);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
