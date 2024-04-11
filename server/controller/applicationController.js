@@ -1,29 +1,52 @@
 import ApplicationModel from "../model/applicationModel.js";
 
-export const getApplication = async (req, res) => {
+// Get all applications
+export const getApplications = async (req, res) => {
   try {
-    const organizations = await ApplicationModel.find();
-    res.status(200).json(organizations);
+    const applications = await ApplicationModel.find();
+    res.status(200).json(applications);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to fetch applications", error: error.message });
   }
 };
+
+// Create a new application
 export const createApplication = async (req, res) => {
-  const log = new ApplicationModel({
-    aspirantId: req.body.aspirantId,
-    jobId: req.body.jobId,
-    applicationDate: req.body.applicationDate,
-    status: req.body.status,
-  });
+  // Validate request body
+  if (
+    !req.body.aspirantId ||
+    !req.body.jobId ||
+    !req.body.applicationDate ||
+    !req.body.status
+  ) {
+    return res.status(400).json({ message: "Incomplete application data" });
+  }
+
+  const { aspirantId, jobId, applicationDate, status } = req.body;
+
   try {
-    const savedLog = await log.save();
-    res.json(savedLog);
-  } catch (err) {
-    res.json({ message: err });
+    const newApplication = new ApplicationModel({
+      aspirantId,
+      jobId,
+      applicationDate,
+      status,
+    });
+
+    const savedApplication = await newApplication.save();
+    res.status(201).json(savedApplication);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to create application", error: error.message });
   }
 };
+
+// Get an application by ID
 export const getApplicationById = async (req, res) => {
-  const { id } = req.params; // Assuming ID is passed as a route parameter
+  const { id } = req.params;
+
   try {
     const application = await ApplicationModel.findById(id);
     if (!application) {
@@ -31,6 +54,8 @@ export const getApplicationById = async (req, res) => {
     }
     res.status(200).json(application);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to fetch application", error: error.message });
   }
 };
