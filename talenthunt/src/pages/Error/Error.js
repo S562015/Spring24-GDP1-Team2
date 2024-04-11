@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Container,
@@ -20,10 +20,36 @@ const useStyles = styled((theme) => ({
   button: {
     marginTop: theme.spacing(4),
   },
+  catImage: {
+    width: "100%",
+    maxWidth: 400,
+    height: "auto",
+    borderRadius: 8,
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const Error = () => {
   const classes = useStyles();
+  const [catImageUrl, setCatImageUrl] = useState(null);
+
+  useEffect(() => {
+    fetchCatMeme();
+  }, []);
+
+  const fetchCatMeme = async () => {
+    try {
+      const response = await fetch(
+        "https://api.thecatapi.com/v1/images/search"
+      );
+      const data = await response.json();
+      if (data && data.length > 0) {
+        setCatImageUrl(data[0].url);
+      }
+    } catch (error) {
+      console.error("Error fetching cat meme:", error);
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -38,7 +64,9 @@ const Error = () => {
         <Typography variant="h6" color="textSecondary" paragraph>
           In the meantime, enjoy this cat meme:
         </Typography>
-        <img src="https://placekitten.com/400/300" alt="Funny Cat" />
+        {catImageUrl && (
+          <img src={catImageUrl} alt="Funny Cat" className={classes.catImage} />
+        )}
         <Button
           component={Link}
           to="/"
