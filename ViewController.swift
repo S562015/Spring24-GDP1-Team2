@@ -1,73 +1,88 @@
 //
 //  ViewController.swift
-//  Bakkannagari_Exam01
+//  Bakkannagari_Exam02
 //
-//  Created by Bakkannagari,Shiva Kumar Reddy on 2/15/24.
+//  Created by Bakkannagari,Shiva Kumar Reddy on 4/11/24.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
     
+    var patinetId = ""
+    var systolic:Double = 0.0
+    var diastolic:Double = 0.0
+    var MBP:Double = 0.0
+    var result = ""
+    var healthTip = ""	
+    var img = ""
     
     
-    @IBOutlet weak var patientID: UITextField!
-    @IBOutlet weak var FBGOL: UITextField!
-    @IBOutlet weak var outputOL: UILabel!
-    @IBOutlet weak var imageOL: UIImageView!
+    @IBOutlet weak var patientIdOL: UITextField!
+    @IBOutlet weak var systolicOL: UITextField!
+    @IBOutlet weak var diastolicOL: UITextField!
     
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
-    func dispalyMsg(_ ID:String, _ FBG:Double, _ hb1a1c:Double, _ type:String, _ tip:String    )-> String{
-        return """
-          Patient ID :\(ID)
-          FBG Level  :\(FBG) (mg/dl)
-          HbA1c(%)   : \(hb1a1c) %
-          Result     : \(type)
-          Health     : \(tip)
-        """
 
-    }
-
-    @IBAction func calHbA1c(_ sender: Any) {
-        //HbA1c = 2.6 + 0.03 × FBG
-        guard let FBG = Double(FBGOL.text!)else {
-                    return
-                }
-        let HbA1c = 2.6 + (0.03  * FBG);
-
-        let ID = patientID.text!
-        if(HbA1c < 4.70){
-            imageOL.image = UIImage(named: "hypoglycemia");
-            outputOL.text = dispalyMsg(ID, FBG, HbA1c, "Hypoglycemia", "Eat food on time 🍎")
-        }
-        if(HbA1c >= 4.70 && HbA1c < 5.59){
-            imageOL.image = UIImage(named: "normal");
-            outputOL.text = dispalyMsg(ID, FBG, HbA1c, "Normal", "You are doing great 👍")
-        }
-        if(HbA1c >= 5.60 && HbA1c < 6.35){
-            imageOL.image = UIImage(named: "pre-diabetes");
-            outputOL.text = dispalyMsg(ID, FBG, HbA1c, "Pre-Diabetes", "You should work on your diet and maintain workout 🏋️")
-        }
-        if(HbA1c > 6.35){
-            imageOL.image = UIImage(named: "diabetes");
-            outputOL.text = dispalyMsg(ID, FBG, HbA1c, "Diabetes", "Consult doctor for medication 🩺")
-        }
+    @IBAction func handleCheck(_ sender: Any) {
+        patinetId = patientIdOL.text!
+        systolic = Double(systolicOL.text!)!
+        diastolic = Double(diastolicOL.text!)!
+        MBP = ( 0.667 * diastolic) + (0.334  * systolic)
         
         
+        if(MBP < 60){  // stroke
+            result = "Stroke or Internal Bleeding"
+            healthTip="Seek immediate medical Attention. 👨🏻‍⚕️"
+            img = "stroke"
+        }
+        
+        if(MBP > 60 && MBP < 69){  // hypotension
+            result = "Hypotension"
+            healthTip="Stay Hydrated 🥛"
+            img = "hypotension"
+        }
+        
+        if(MBP > 70 && MBP < 99){  // hypotension
+            result = "Healthy"
+            healthTip="You are doing great 👍"
+            img = "healthy"
+        }
+        
+        if(MBP > 100 && MBP < 106){  // Elevated
+            result = "Elevated"
+            healthTip="Make sure to maintain workout 🏋️"
+            img = "elevated"
+        }
+        if(MBP > 107 ){  // Elevated
+            result = "Hypertension"
+            healthTip="Consult doctor for medication tab 💊"
+            img = "hypertension"
+        }
+        
     }
-    
-    @IBAction func handleReset(_ sender: Any) {
-        patientID.text = ""
-        FBGOL.text = ""
-        outputOL.text = ""
-        imageOL.image =  nil;
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let transition = segue.identifier
+        // set the destination
+        if(transition == "resultSegue"){
+            let destination = segue.destination as! ResultViewController
+            // Assign the values to the destination variables.
+            destination.patinetId = patinetId
+            destination.diastolic = diastolic
+            destination.systolic = systolic
+            destination.MBP = MBP
+            destination.result = result
+            destination.healthTip = healthTip
+            destination.img = img
+        }
     }
     
     
 }
+
 
