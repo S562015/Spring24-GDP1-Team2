@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobs } from "./homeActions";
 import JobCard from "../../components/Card/JobCard";
@@ -51,12 +51,70 @@ const AspirantHome = () => {
     setApplications(updatedApplications);
   };
 
+  // State for sorting options
+  const [sortBy, setSortBy] = useState("relevance"); // Default sorting criteria
+
+  // Function to handle sorting
+  const handleSort = (criteria) => {
+    setSortBy(criteria);
+  };
+
+  // State for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 10; // Number of jobs to display per page
+
+  // Function to handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // State for filter criteria
+  const [filters, setFilters] = useState({
+    location: "",
+    jobType: "",
+    salaryRange: "",
+  });
+
+  // Function to handle filtering
+  const handleFilter = (criteria) => {
+    setFilters({ ...filters, ...criteria });
+  };
+
+  // Calculate indexes for displaying jobs on the current page
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+
+  // Apply filters to job listings
+  const filteredJobs = useMemo(() => {
+    // Implement filtering logic based on filter criteria
+    return jobList.filter((job) => {
+      // Custom filtering logic based on filter criteria
+    });
+  }, [jobList, filters]);
+
+  // Implement sorting logic based on the sortBy state
+  const sortedJobList = useMemo(() => {
+    // Implement sorting logic based on the sortBy state
+    return filteredJobs.sort((a, b) => {
+      // Custom sorting logic based on sortBy criteria
+    });
+  }, [filteredJobs, sortBy]);
+
+  // Update job list to display filtered and sorted jobs
+  const jobsToDisplay =
+    filters.location || filters.jobType || filters.salaryRange
+      ? sortedJobList
+      : jobList;
+
+  // Get current jobs for pagination
+  const currentJobs = jobsToDisplay.slice(indexOfFirstJob, indexOfLastJob);
+
   return (
     <div className="aspirant-home">
       <header>
         <h1>Welcome to Your Aspirant Home Page</h1>
         <SearchBar onSaveSearch={saveSearch} />
-        <FilterPanel onFilter={filterJobs} />
+        <FilterPanel onFilter={handleFilter} onSort={handleSort} />
       </header>
       <main>
         {loading ? (
@@ -65,8 +123,8 @@ const AspirantHome = () => {
           <p>Error: {error.message}</p>
         ) : (
           <div className="job-listings">
-            {jobList.length > 0 ? (
-              jobList.map((job) => (
+            {currentJobs.length > 0 ? (
+              currentJobs.map((job) => (
                 <div key={job.id} className="job-card-container">
                   <JobCard
                     job={job}
