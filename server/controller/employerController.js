@@ -1,42 +1,50 @@
 import EmployerModel from "../model/employerModel.js";
-import JobModel from "../model/jobModel.js";
 
 export const getEmployers = async (req, res) => {
   try {
     const employers = await EmployerModel.find();
     res.status(200).json(employers);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const createEmployer = async (req, res) => {
+  const {
+    organizationId,
+    firstName,
+    lastName,
+    email,
+    userName,
+    password,
+    role,
+  } = req.body;
   const log = new EmployerModel({
-    organizationId: req.body.organizationId,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    userName: req.body.userName,
-    password: req.body.password,
-    role: req.body.role,
+    organizationId,
+    firstName,
+    lastName,
+    email,
+    userName,
+    password,
+    role,
   });
   try {
     const savedLog = await log.save();
     console.log(savedLog);
-    res.json(savedLog);
+    res.status(201).json(savedLog);
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err.message });
   }
 };
 
-export const getCreateEmployer = async (req, res) => {
+export const getEmployerById = async (req, res) => {
   const { id } = req.params;
   try {
-    const application = await EmployerModel.findById(id);
-    if (!application) {
+    const employer = await EmployerModel.findById(id);
+    if (!employer) {
       return res.status(404).json({ message: "Employer not found" });
     }
-    res.status(200).json(application);
+    res.status(200).json(employer);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
