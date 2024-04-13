@@ -10,14 +10,23 @@ const jobSchema = new Schema({
     type: String,
     required: true,
   },
-  qualificationRequired:{
+  qualificationRequired: {
     type: String,
     required: true,
   },
-  jobDescription:{
+  jobDescription: {
     type: String,
     required: true,
-  }
+  },
+  salary: {
+    type: String,
+  },
+  jobType: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
 });
 
 const jobModel = mongoose.model("job", jobSchema);
