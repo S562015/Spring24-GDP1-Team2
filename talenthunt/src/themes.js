@@ -1,16 +1,13 @@
 import { createTheme } from "@mui/material/styles";
 
 export const globalTheme = createTheme({
-  typography: {
-    fontFamily: "Arial, sans-serif",
-  },
   palette: {
-    mode: "dark",
+    mode: "light",
     primary: {
-      main: "#1976D2",
+      main: "#5319AC",
     },
     secondary: {
-      main: "#FFC107",
+      main: "#f50057",
     },
   },
 });

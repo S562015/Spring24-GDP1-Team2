@@ -13,6 +13,7 @@ import PrivateRoutesLayout from "./PrivateRoutesLayout";
 import Error from "./pages/Error/Error";
 import { auth } from "./firebase";
 import LandingPage from "./pages/home/LandingPage";
+
 function App() {
   console.log(auth.currentUser);
   return (

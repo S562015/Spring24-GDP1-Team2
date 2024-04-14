@@ -15,13 +15,17 @@ import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import userLogin from "../../auth/userLogin";
+import {login} from "../../redux/actions";
+import error from "../Error/Error";
+import {useDispatch} from "react-redux";
 const Login = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
-  const { error, login } = userLogin();
+  const dispatch = useDispatch()
+  // const { error, login } = userLogin();
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
@@ -34,10 +38,10 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await login(email, password);
-    if (!error) {
-      navigate("/home", { replace: true });
-    }
+      dispatch(login(email, password, ()=>navigate("/home", { replace: true })));
+    // // if (!error) {
+    //
+    // }
     // const data = new FormData(event.currentTarget);
     // console.log({
     //   email: data.get("email"),

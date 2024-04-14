@@ -5,17 +5,22 @@ import { MenuButton as BaseMenuButton } from "@mui/base/MenuButton";
 import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import userLogout from "../../auth/userLogout";
+// import userLogout from "../../auth/userLogout";
+import {useDispatch} from "react-redux";
+import {logoutUser} from "../../redux/actions";
+import {auth} from "../../firebase";
 
 export default function MenuSimple() {
   const navigate = useNavigate();
-  const { error, logout } = userLogout();
+  // const { error, logout } = userLogout();
+  const dispatch = useDispatch()
   const handleLogout = async () => {};
   const createHandleMenuClick = async (menuItem) => {
     if (menuItem !== "logout") {
       navigate(menuItem);
-    } else if (!error) {
-      await logout();
+    } else  {
+     // dispatch(logoutUser)
+      await  auth.signOut()
       navigate("/");
     }
   };
@@ -26,6 +31,9 @@ export default function MenuSimple() {
       <Menu slots={{ listbox: Listbox }}>
         <MenuItem onClick={() => createHandleMenuClick("profile")}>
           Profile
+        </MenuItem>
+        <MenuItem onClick={() => createHandleMenuClick("search")}>
+          Search
         </MenuItem>
         <MenuItem onClick={() => createHandleMenuClick("logout")}>
           Log out
