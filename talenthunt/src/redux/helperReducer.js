@@ -1,4 +1,4 @@
-import { CURRENT_USER, SET_LOGIN_ERROR } from "./actionType";
+import {CURRENT_USER, LOGINTABIDX, SET_LOGIN_ERROR} from "./actionType";
 
 const initialState = {
   authError: null,
@@ -16,6 +16,11 @@ const helperReducer = (state = initialState, action) => {
         ...state,
         authError: action.data,
       };
+    case LOGINTABIDX:
+      return {
+      ...state,
+      tabIdx: action.data,
+    };
     default:
       return state;
   }

@@ -14,9 +14,15 @@ import Error from "./pages/Error/Error";
 import { auth } from "./firebase";
 import LandingPage from "./pages/home/LandingPage";
 import NavBar from "./pages/search/NavBar";
+import AspirantHome from "./pages/home/aspirantHome";
+import {useSelector} from "react-redux";
+import EmployerHomePage from "./pages/home/EmployeerHome";
 
 function App() {
-  console.log(auth.currentUser);
+  const { tabIdx } = useSelector((state) => state.helperReducer);
+
+  console.log(auth.currentUser, {tabIdx});
+
   return (
     <div className="App">
       <Navbar />
@@ -30,7 +36,7 @@ function App() {
         <Route element={<PrivateRoutesLayout auth={auth} />}>
           <Route path="/jobpost" element={<JobPost />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/home" element={<LandingPage />} />
+          <Route path="/home" element={tabIdx === 0 ? <LandingPage /> : <EmployerHomePage/>} />
           <Route path="/application" element={<Application />} />
         </Route>
       </Routes>

@@ -1,6 +1,6 @@
 import {
   CURRENT_USER,
-  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
+  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGINTABIDX,
   SET_LOGIN_ERROR,
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
@@ -104,3 +104,12 @@ export const logoutUser = (email, password) => async (dispatch) => {
     dispatch(loginFailure(err.message));
   }
 };
+
+export const handleLoginTabIndex=(val)=> {
+  return (dispatch) => {
+    dispatch({
+      type: LOGINTABIDX,
+      data:val,
+    });
+  };
+}

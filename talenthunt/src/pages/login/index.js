@@ -15,7 +15,7 @@ import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import userLogin from "../../auth/userLogin";
-import {login} from "../../redux/actions";
+import {handleLoginTabIndex, login} from "../../redux/actions";
 import error from "../Error/Error";
 import {useDispatch} from "react-redux";
 const Login = () => {
@@ -28,6 +28,7 @@ const Login = () => {
   // const { error, login } = userLogin();
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
+    dispatch(handleLoginTabIndex(newValue))
   };
 
   // const handleChange = (key, value) => {

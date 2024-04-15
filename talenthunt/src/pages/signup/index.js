@@ -13,12 +13,16 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import EmployerFrom from "./EmployerForm";
 import AspirantFrom from "./AspirantForm";
+import {handleLoginTabIndex} from "../../redux/actions";
+import {useDispatch} from "react-redux";
 
 const SignUp = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const dispatch = useDispatch()
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
+      dispatch(handleLoginTabIndex(newValue))
   };
 
   return (

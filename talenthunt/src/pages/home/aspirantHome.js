@@ -2,16 +2,18 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobs } from "./homeActions";
 import JobCard from "../../components/Card/JobCard";
-import SearchBar from "../../components/SearchBar";
-import FilterPanel from "../../components/FilterPanel";
+// import SearchBar from "../../components/SearchBar";
+// import FilterPanel from "../../components/FilterPanel";
 
 const AspirantHome = () => {
   const dispatch = useDispatch();
   const { jobList, loading, error } = useSelector((state) => state.homeReducer);
 
   useEffect(() => {
-    dispatch(getJobs());
-  }, [dispatch]);
+    // if(jobList) {
+      dispatch(getJobs());
+    // }
+  }, []);
 
   // State for saved searches
   const [savedSearches, setSavedSearches] = useState([]);
@@ -113,8 +115,8 @@ const AspirantHome = () => {
     <div className="aspirant-home">
       <header>
         <h1>Welcome to Your Aspirant Home Page</h1>
-        <SearchBar onSaveSearch={saveSearch} />
-        <FilterPanel onFilter={handleFilter} onSort={handleSort} />
+        {/*<SearchBar onSaveSearch={saveSearch} />*/}
+        {/*<FilterPanel onFilter={handleFilter} onSort={handleSort} />*/}
       </header>
       <main>
         {loading ? (
@@ -133,8 +135,8 @@ const AspirantHome = () => {
                   />
                   {/* Display company logo or name */}
                   <div className="company-info">
-                    <img src={job.company.logo} alt={job.company.name} />
-                    <span>{job.company.name}</span>
+                    <img src={job.company?.logo} alt={job.company?.name} />
+                    <span>{job.company?.name}</span>
                   </div>
                 </div>
               ))
