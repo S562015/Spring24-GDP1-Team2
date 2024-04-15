@@ -13,6 +13,7 @@ import PrivateRoutesLayout from "./PrivateRoutesLayout";
 import Error from "./pages/Error/Error";
 import { auth } from "./firebase";
 import LandingPage from "./pages/home/LandingPage";
+import NavBar from "./pages/search/NavBar";
 
 function App() {
   console.log(auth.currentUser);
@@ -22,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<NavBar />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<Error />} />
 

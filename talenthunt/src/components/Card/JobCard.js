@@ -20,6 +20,9 @@ const JobCard = ({ job, index }) => {
             {job.companyName}
           </Typography>
           <Typography variant="body1" className="jobsalary my-3">
+            {job.title}
+          </Typography>
+          <Typography variant="body1" className="jobsalary my-3">
             {job.salary}
           </Typography>
           <Typography variant="h6" className="fs-16 fw-600">

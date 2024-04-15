@@ -1,19 +1,51 @@
-import React from "react";
-import { view } from "@risingstack/react-easy-state";
-import SearchBar from "material-ui-search-bar";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import appStore from "./appStore";
+import React, {useEffect, useState} from "react";
+import TextField from '@mui/material/TextField';
+import SearchIcon from '@mui/icons-material/Search';
+import JobCard from "../../components/Card/JobCard";
+import {useDispatch, useSelector} from "react-redux";
+import {getJobs} from "../home/homeActions";
 
-// this is re-rendered whenever the relevant parts of the used data stores change
-const NavBar = () => (
-  <div className="searchbar">
-    <SearchBar
-      onRequestSearch={appStore.fetchBeers}
-      placeholder="SeArch JObs  ..."
-      autoFocus
-    />
-    {appStore.isLoading && <LinearProgress />}
-  </div>
-);
 
-export default view(NavBar);
+const NavBar = () => {
+    const { jobList } = useSelector((state) => state.homeReducer);
+    const [searchList, setSearchList] = useState([]);
+    const dispatch = useDispatch()
+
+    console.log({jobList})
+
+    useEffect(() =>{
+        setSearchList(jobList)
+    },[jobList])
+
+    useEffect(() => {
+        dispatch(getJobs());
+    }, []);
+    const handleChange = (event) => {
+        console.log(event.target.value);
+       let filterData = jobList.filter(val => val.title.toLowerCase().includes(event.target.value.toLowerCase()))
+        console.log({filterData})
+        setSearchList(filterData)
+    };
+    const renderJobList = () => {
+        return searchList?.map((job, index) => <JobCard job={job} index={index} />);
+    };
+
+
+
+    return (
+        <>
+        <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="Search..."
+            onChange={handleChange}
+            InputProps={{
+                startAdornment: <SearchIcon/>,
+            }}
+        />
+    <div className="popular-jobs">{renderJobList()}</div>
+        </>
+    )
+}
+
+export default NavBar
