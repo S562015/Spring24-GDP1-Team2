@@ -4,7 +4,7 @@ import { LinearProgress, Typography } from "@mui/material";
 import { InputField } from "../../components/textField";
 import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import * as React from "react";
 import { useState } from "react";
 import { cloneObject, handlePost } from "../../utils";
@@ -16,20 +16,25 @@ import {
   SentimentSatisfiedAlt,
   SentimentVerySatisfied,
 } from "@mui/icons-material";
+import {useDispatch} from "react-redux";
+import {signUp} from "../../redux/actions";
 
-const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
+const AspirantForm = ({ signupWithUsernameAndPassword }) => {
   const [aspirantInfo, setAspirantInfo] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [strength, setStrength] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch()
   const calculateStrength = (password) => {
     const strength = Math.min(password.length / 10, 1) * 100;
     setStrength(strength);
   };
 
   const handleChange = (key, value) => {
-    let newValue = cloneObject(aspirantInfo);
+    let newValue = aspirantInfo
     if (key === "password") {
       validatePassword(value);
       calculateStrength(value);
@@ -40,9 +45,12 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
   };
 
   const handleSubmit = async () => {
-    const res = await createAspirant();
-    signupWithUsernameAndPassword();
-    console.log(res);
+    // const res = await createAspirant();
+    const {email, password, username} = aspirantInfo
+    // signupWithUsernameAndPassword();
+    console.log({aspirantInfo})
+    // console.log(res);
+    dispatch(signUp(email, password, username, ()=>navigate("/home", { replace: true })))
   };
   const handleBlur = () => {
     setIsTyping(false);
@@ -65,7 +73,7 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
 
     if (!isValidPassword) {
       setErrorMessage(
-        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters."
+        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.",
       );
     } else {
       setErrorMessage("");
@@ -129,12 +137,12 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
             id="last-name"
             label="Last Name"
             name="lastName"
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            onChange={(e) => handleChange(e.target.name, e)}
           />
         </Grid>
         <BasicDatePicker
           label="Date of Birth"
-          onChange={(e) => handleChange("dateOfBirth", e.target.value)}
+          onChange={(e) => handleChange("dateOfBirth", "14/19")}
         />
         <InputField
           margin="normal"
@@ -292,12 +300,12 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
         <BasicDatePicker
           label="From"
           format="MMM-YYYY"
-          onChange={(e) => handleChange("from", e.target.value)}
+          onChange={(e) => handleChange("from",e)}
         />
         <BasicDatePicker
           label="To"
           format="MMM-YYYY"
-          onChange={(e) => handleChange("to", e.target.value)}
+          onChange={(e) => handleChange("to", e)}
         />
         <InputField
           margin="normal"
@@ -349,7 +357,6 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
         onClick={handleSubmit}
-        disabled
       >
         Register
       </Button>
@@ -362,4 +369,4 @@ const AspirantFrom = ({ signupWithUsernameAndPassword }) => {
   );
 };
 
-export default AspirantFrom;
+export default AspirantForm;

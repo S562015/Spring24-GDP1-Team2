@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "65bda1c6f4b79cd11f5465c3"
+  },
+  "organizationName": "test",
+  "location": "unknow",
+  "description": "this is an test site",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b1"
+  },
+  "organizationName": "Acme Corporation",
+  "location": "New York",
+  "description": "Provider of various products and services."
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b2"
+  },
+  "organizationName": "Charity for Hope",
+  "location": "Los Angeles",
+  "description": "Dedicated to supporting underprivileged communities."
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b3"
+  },
+  "organizationName": "Maplewood University",
+  "location": "Maplewood",
+  "description": "A prestigious university offering various academic programs."
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b4"
+  },
+  "organizationName": "HealthFirst Hospital",
+  "location": "Chicago",
+  "description": "A leading healthcare provider offering comprehensive medical services."
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b5"
+  },
+  "organizationName": "GreenGrocery",
+  "location": "Seattle",
+  "description": "A chain of organic grocery stores offering fresh produce and natural products."
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b6"
+  },
+  "organizationName": "Summit Bank",
+  "location": "San Francisco",
+  "description": "A full-service bank providing banking solutions for individuals and businesses."
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b7"
+  },
+  "organizationName": "TechSolutions Inc.",
+  "location": "Austin",
+  "description": "A software development company specializing in custom solutions for businesses."
+},
+{
+  "_id": {
+    "$oid": "6619eb6b9d7e140521d9e4b8"
+  },
+  "organizationName": "Sunshine Resorts",
+  "location": "Miami",
+  "description": "A chain of luxury resorts and hotels offering premium accommodation and services."
+}]

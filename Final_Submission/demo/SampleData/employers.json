@@ -1,0 +1,108 @@
+[{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4bc"
+  },
+  "organizationName": "test",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "userName": "johnDoe",
+  "password": "password123",
+  "role": "Manager"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4bd"
+  },
+  "organizationName": "Acme Corporation",
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "email": "alice.smith@example.com",
+  "userName": "aliceSmith",
+  "password": "securePass123",
+  "role": "Engineer"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4be"
+  },
+  "organizationName": "Charity for Hope",
+  "firstName": "Emily",
+  "lastName": "Johnson",
+  "email": "emily.johnson@example.com",
+  "userName": "emilyJohnson",
+  "password": "p@ssw0rd",
+  "role": "Volunteer Coordinator"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4bf"
+  },
+  "organizationName": "Maplewood University",
+  "firstName": "Michael",
+  "lastName": "Brown",
+  "email": "michael.brown@example.com",
+  "userName": "michaelBrown",
+  "password": "maplewood123",
+  "role": "Professor"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4c0"
+  },
+  "organizationName": "HealthFirst Hospital",
+  "firstName": "Sarah",
+  "lastName": "Wilson",
+  "email": "sarah.wilson@example.com",
+  "userName": "sarahWilson",
+  "password": "healthFirst456",
+  "role": "Nurse"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4c1"
+  },
+  "organizationName": "GreenGrocery",
+  "firstName": "David",
+  "lastName": "Taylor",
+  "email": "david.taylor@example.com",
+  "userName": "davidTaylor",
+  "password": "greenGrocery789",
+  "role": "Store Manager"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4c2"
+  },
+  "organizationName": "Summit Bank",
+  "firstName": "Jessica",
+  "lastName": "Anderson",
+  "email": "jessica.anderson@example.com",
+  "userName": "jessicaAnderson",
+  "password": "summitBank@123",
+  "role": "Financial Advisor"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4c3"
+  },
+  "organizationName": "TechSolutions Inc.",
+  "firstName": "Kevin",
+  "lastName": "Martinez",
+  "email": "kevin.martinez@example.com",
+  "userName": "kevinMartinez",
+  "password": "techSolutions2023",
+  "role": "Software Developer"
+},
+{
+  "_id": {
+    "$oid": "6619f0019d7e140521d9e4c4"
+  },
+  "organizationName": "Sunshine Resorts",
+  "firstName": "Hannah",
+  "lastName": "Garcia",
+  "email": "hannah.garcia@example.com",
+  "userName": "hannahGarcia",
+  "password": "resorts@123",
+  "role": "Hospitality Manager"
+}]

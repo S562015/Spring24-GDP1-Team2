@@ -1,0 +1,130 @@
+[{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4c7"
+  },
+  "companyName": "test",
+  "employerName": "John Doe",
+  "salary": "$60,000 - $80,000",
+  "qualificationRequired": "Bachelor's Degree",
+  "title": "Software Engineer",
+  "location": "Unknown",
+  "jobType": "Full-time",
+  "jobDescription": "Seeking a talented Software Engineer to join our dynamic team and contribute to the development of innovative software solutions."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4c8"
+  },
+  "companyName": "test",
+  "employerName": "Alice Smith",
+  "salary": "$50,000 - $70,000",
+  "qualificationRequired": "Bachelor's Degree",
+  "title": "Quality Assurance Analyst",
+  "location": "Unknown",
+  "jobType": "Full-time",
+  "jobDescription": "We're hiring a Quality Assurance Analyst to ensure the quality of our software products through thorough testing and analysis."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4c9"
+  },
+  "companyName": "Acme Corporation",
+  "employerName": "Bob Johnson",
+  "salary": "$90,000 - $110,000",
+  "qualificationRequired": "Bachelor's Degree",
+  "title": "Product Manager",
+  "location": "New York",
+  "jobType": "Full-time",
+  "jobDescription": "Join our team as a Product Manager and lead the development and launch of innovative products to meet market demands."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4ca"
+  },
+  "companyName": "Charity for Hope",
+  "employerName": "Emily Johnson",
+  "salary": "Volunteer",
+  "qualificationRequired": "None",
+  "title": "Community Outreach Coordinator",
+  "location": "Los Angeles",
+  "jobType": "Part-time",
+  "jobDescription": "Seeking a passionate individual to coordinate community outreach initiatives and engage with stakeholders to support our cause."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4cb"
+  },
+  "companyName": "Maplewood University",
+  "employerName": "Michael Brown",
+  "salary": "$70,000 - $90,000",
+  "qualificationRequired": "Master's Degree",
+  "title": "Assistant Professor",
+  "location": "Maplewood",
+  "jobType": "Full-time",
+  "jobDescription": "We're hiring an Assistant Professor to teach and conduct research in the field of [specific subject area]."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4cc"
+  },
+  "companyName": "HealthFirst Hospital",
+  "employerName": "Sarah Wilson",
+  "salary": "$60,000 - $80,000",
+  "qualificationRequired": "Bachelor's Degree",
+  "title": "Registered Nurse",
+  "location": "Chicago",
+  "jobType": "Full-time",
+  "jobDescription": "Join our team as a Registered Nurse and provide compassionate care to patients in a fast-paced hospital environment."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4cd"
+  },
+  "companyName": "GreenGrocery",
+  "employerName": "David Taylor",
+  "salary": "$40,000 - $50,000",
+  "qualificationRequired": "High School Diploma",
+  "title": "Cashier",
+  "location": "Seattle",
+  "jobType": "Part-time",
+  "jobDescription": "We're seeking a friendly and customer-focused individual to join our team as a Cashier at our organic grocery store."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4ce"
+  },
+  "companyName": "Summit Bank",
+  "employerName": "Jessica Anderson",
+  "salary": "$80,000 - $100,000",
+  "qualificationRequired": "Bachelor's Degree",
+  "title": "Financial Analyst",
+  "location": "San Francisco",
+  "jobType": "Full-time",
+  "jobDescription": "We're looking for a skilled Financial Analyst to analyze financial data and provide insights to support decision-making."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4cf"
+  },
+  "companyName": "TechSolutions Inc.",
+  "employerName": "Kevin Martinez",
+  "salary": "$80,000 - $100,000",
+  "qualificationRequired": "Bachelor's Degree",
+  "title": "Software Developer",
+  "location": "Austin",
+  "jobType": "Full-time",
+  "jobDescription": "Join our team as a Software Developer and contribute to the development of cutting-edge software solutions for our clients."
+},
+{
+  "_id": {
+    "$oid": "6619f29b9d7e140521d9e4d0"
+  },
+  "companyName": "Sunshine Resorts",
+  "employerName": "Hannah Garcia",
+  "salary": "$50,000 - $70,000",
+  "qualificationRequired": "Bachelor's Degree",
+  "title": "Guest Services Manager",
+  "location": "Miami",
+  "jobType": "Full-time",
+  "jobDescription": "Seeking a dynamic and customer-oriented individual to oversee guest services operations at our luxury resorts."
+}]
