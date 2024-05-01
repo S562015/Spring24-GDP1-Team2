@@ -1,34 +1,49 @@
 import React, { useState } from "react";
-import { Button, Typography } from "@mui/material";
-import { InputField } from "../../components/textField";
+import {
+  Button,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  TextareaAutosize,
+  Box,
+} from "@mui/material";
 
 const JobPostingPage = () => {
+  const [employerId, setEmployerId] = useState("");
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [qualificationRequired, setQualificationRequired] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [salary, setSalary] = useState("");
+  const [jobType, setJobType] = useState("");
+  const [location, setLocation] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = () => {
-    // Form validation
-    if (!title || !description || !qualificationRequired) {
+    if (!employerId || !title || !qualificationRequired || !jobDescription) {
       setError("All fields are required");
       return;
     }
 
-    // TODO: Post the job to your backend
-    // Example using Fetch API:
-    fetch("your-backend-url", {
+    fetch("/submit_job", {
       method: "POST",
-      body: JSON.stringify({ title, description, qualificationRequired }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: JSON.stringify({
+        employerId,
+        title,
+        qualificationRequired,
+        jobDescription,
+        salary,
+        jobType,
+        location,
+      }),
+      headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to post job");
         }
-        // Handle success
         console.log("Job posted successfully!");
       })
       .catch((error) => {
@@ -38,43 +53,91 @@ const JobPostingPage = () => {
   };
 
   return (
-    <div>
-      <Typography variant="h4">Post a Job</Typography>
-      <InputField
-        margin="normal"
-        required
+    <Box sx={{ width: 500, maxWidth: "100%", mx: "auto" }}>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        Post a Job
+      </Typography>
+
+      <TextField
         fullWidth
-        label="Title"
+        label="Employer ID"
+        variant="outlined"
+        value={employerId}
+        onChange={(e) => setEmployerId(e.target.value)}
+        margin="normal"
+      />
+
+      <TextField
+        fullWidth
+        label="Job Title"
+        variant="outlined"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-      />
-      <InputField
         margin="normal"
-        required
-        fullWidth
-        label="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
       />
-      <InputField
-        margin="normal"
-        required
+
+      <TextField
         fullWidth
         label="Qualification Required"
+        variant="outlined"
         value={qualificationRequired}
         onChange={(e) => setQualificationRequired(e.target.value)}
+        margin="normal"
       />
 
-      {error && (
-        <Typography variant="body2" color="error">
-          {error}
-        </Typography>
-      )}
+      <TextField
+        fullWidth
+        label="Job Description"
+        variant="outlined"
+        value={jobDescription}
+        onChange={(e) => setJobDescription(e.target.value)}
+        multiline
+        rows={4}
+        margin="normal"
+      />
 
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
+      <TextField
+        fullWidth
+        label="Salary"
+        variant="outlined"
+        value={salary}
+        onChange={(e) => setSalary(e.target.value)}
+        margin="normal"
+      />
+
+      <FormControl fullWidth margin="normal">
+        <InputLabel>Job Type</InputLabel>
+        <Select
+          value={jobType}
+          label="Job Type"
+          onChange={(e) => setJobType(e.target.value)}
+        >
+          <MenuItem value="full-time">Full-time</MenuItem>
+          <MenuItem value="part-time">Part-time</MenuItem>
+          <MenuItem value="contract">Contract</MenuItem>
+        </Select>
+      </FormControl>
+
+      <TextField
+        fullWidth
+        label="Location"
+        variant="outlined"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+        margin="normal"
+      />
+
+      {error && <Typography color="error">{error}</Typography>}
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+        sx={{ mt: 2 }}
+      >
         Post Job
       </Button>
-    </div>
+    </Box>
   );
 };
 
