@@ -3,6 +3,7 @@ import { Outlet, useLocation, Navigate } from "react-router-dom";
 
 const PrivateRoutesLayout = ({ auth }) => {
   const location = useLocation();
+
   console.log(auth.currentUser);
 
   return auth.currentUser ? (
