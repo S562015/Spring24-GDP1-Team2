@@ -24,7 +24,7 @@ export const getJobs = () => {
 };
 export const getOrganization = () => {
   return async (dispatch) => {
-    return handleGet("jobs")
+    return handleGet("organization")
       .then((response) => {
         console.log(response);
         if (response.status === 200) {

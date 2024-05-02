@@ -150,8 +150,8 @@ const EmployerForm = ({ signupWithUsernameAndPassword }) => {
             margin="normal"
             required
             fullWidth
-            id="orgisation-name"
-            label="Orgisation Name"
+            id="organization-name"
+            label="organization Name"
             name="organizationId"
             onChange={(e) => handleChange(e.target.name, e.target.value)}
           />

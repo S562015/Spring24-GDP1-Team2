@@ -2,6 +2,7 @@ import {CURRENT_USER, LOGINTABIDX, SET_LOGIN_ERROR} from "./actionType";
 
 const initialState = {
   authError: null,
+  tabIdx: 0,
 };
 
 const helperReducer = (state = initialState, action) => {
