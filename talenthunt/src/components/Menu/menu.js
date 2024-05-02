@@ -7,7 +7,7 @@ import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 // import userLogout from "../../auth/userLogout";
 import {useDispatch} from "react-redux";
-import {logoutUser} from "../../redux/actions";
+import {handleLoginTabIndex, logoutUser} from "../../redux/actions";
 import {auth} from "../../firebase";
 
 export default function MenuSimple() {
@@ -19,7 +19,7 @@ export default function MenuSimple() {
     if (menuItem !== "logout") {
       navigate(menuItem);
     } else  {
-     // dispatch(logoutUser)
+     dispatch(handleLoginTabIndex(0))
       await  auth.signOut()
       navigate("/");
     }
