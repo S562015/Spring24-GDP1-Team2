@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 
 const CommonButton = ({ id, color, size, onClick, children, variant, sx }) => {
-  console.log({ sx });
   return (
     <>
       <Button

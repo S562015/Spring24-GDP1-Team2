@@ -8,7 +8,8 @@ import {
   CardContent,
 } from "@mui/material";
 import { styled } from "@mui/system";
-
+import { useSelector } from "react-redux";
+import signupReducer from "../signup/signupReducer";
 
 const useStyles = styled((theme) => ({
   root: {
@@ -27,10 +28,11 @@ const useStyles = styled((theme) => ({
   },
 }));
 
-const LandingPage = () => {
+const AspirantHome = () => {
   const classes = useStyles();
+  const { aspirantInfo } = useSelector((state) => state.signupReducer);
 
-  // Mock data for recently applied jobs and recommended jobs
+  console.log({ aspirantInfo });
   const recentlyAppliedJobs = [
     {
       id: 1,
@@ -142,4 +144,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default AspirantHome;

@@ -1,8 +1,13 @@
-import {CURRENT_USER, LOGINTABIDX, SET_LOGIN_ERROR} from "./actionType";
+import {
+  ASPIRANT,
+  CURRENT_USER,
+  LOGINTABIDX,
+  SET_LOGIN_ERROR,
+} from "./actionType";
 
 const initialState = {
   authError: null,
-  tabIdx: 0,
+  UserType: ASPIRANT,
 };
 
 const helperReducer = (state = initialState, action) => {
@@ -19,9 +24,9 @@ const helperReducer = (state = initialState, action) => {
       };
     case LOGINTABIDX:
       return {
-      ...state,
-      tabIdx: action.data,
-    };
+        ...state,
+        UserType: action.data,
+      };
     default:
       return state;
   }

@@ -1,34 +1,24 @@
 import { handlePost } from "../../utils";
-import { CREATE_EMPLOYER } from "../../redux/actionType";
+import {
+  CREATE_ASPIRANT,
+  CREATE_EMPLOYER,
+  GET_ALL_JOBS,
+} from "../../redux/actionType";
 
-export const createEmployer = async (employerInfo, dispatch) => {
+export const createEmployer = (employerInfo) => async (dispatch) => {
   try {
-    const response = await handlePost("employer/create", employerInfo);
-    if (response.status === 200) {
-      dispatch({
-        type: CREATE_EMPLOYER,
-        data: response.data,
-      });
-      return response.data;
-    } else {
-      throw new Error("Failed to create employer");
-    }
+    const res = await handlePost("employer/create", employerInfo);
+    dispatch({ type: CREATE_EMPLOYER, data: res.data });
   } catch (error) {
-    console.error("Error creating employer:", error);
-    throw error; // Re-throw error to propagate it to the caller
+    dispatch({ type: CREATE_ASPIRANT, data: null });
   }
 };
 
-export const createAspirant = async (aspirantInfo) => {
+export const createAspirant = (data) => async (dispatch) => {
   try {
-    const response = await handlePost("aspirant/create", aspirantInfo);
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      throw new Error("Failed to create aspirant");
-    }
+    const res = await handlePost("aspirant/create", data);
+    dispatch({ type: CREATE_ASPIRANT, data: res.data });
   } catch (error) {
-    console.error("Error creating aspirant:", error);
-    throw error; // Re-throw error to propagate it to the caller
+    dispatch({ type: CREATE_ASPIRANT, data: null });
   }
 };

@@ -1,13 +1,21 @@
-import { createEmployer } from "./signupActions";
+import { CREATE_ASPIRANT, CREATE_EMPLOYER } from "../../redux/actionType";
 
-const initialState = {};
+const initialState = {
+  employerInfo: null,
+  aspirantInfo: null,
+};
 
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
-    case createEmployer:
+    case CREATE_EMPLOYER:
       return {
         ...state,
-        employer: action.data,
+        employerInfo: action.data,
+      };
+    case CREATE_ASPIRANT:
+      return {
+        ...state,
+        aspirantInfo: action.data,
       };
     default:
       return state;

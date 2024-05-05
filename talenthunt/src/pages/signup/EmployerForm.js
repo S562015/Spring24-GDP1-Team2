@@ -17,7 +17,7 @@ import {
   SentimentVerySatisfied,
 } from "@mui/icons-material";
 import useSignUp from "../../auth/userSignUp";
-import {signUp} from "../../redux/actions";
+import { signUp } from "../../redux/actions";
 
 const EmployerForm = ({ signupWithUsernameAndPassword }) => {
   const [employerInfo, setEmployerInfo] = useState({});
@@ -48,12 +48,12 @@ const EmployerForm = ({ signupWithUsernameAndPassword }) => {
 
   const handleSubmit = async () => {
     const { email, password, username } = employerInfo;
-    // await signUp(email, password, username);
-    dispatch(signUp(email, password, username, ()=>navigate("/home", { replace: true })))
-    // if (authError === null) {
-    //   dispatch(createEmployer);
-    //   navigate("/home", { replace: true });
-    // }
+    dispatch(createEmployer(employerInfo));
+    dispatch(
+      signUp(email, password, username, () =>
+        navigate("/home", { replace: true }),
+      ),
+    );
   };
   const handleBlur = () => {
     setIsTyping(false);

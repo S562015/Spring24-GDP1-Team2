@@ -31,10 +31,8 @@ export const handleGet = async (url) => {
 };
 export const handlePost = async (url, body) => {
   try {
-    const res = await axios.post(`${BASE_URL}/${url}`, body);
-    return res;
+    return await axios.post(`${BASE_URL}/${url}`, body);
   } catch (e) {
-    console.error(e);
     return e;
   }
 };

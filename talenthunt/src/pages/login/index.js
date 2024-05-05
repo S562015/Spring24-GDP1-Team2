@@ -15,20 +15,22 @@ import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import userLogin from "../../auth/userLogin";
-import {handleLoginTabIndex, login} from "../../redux/actions";
+import { handleLoginTabIndex, login } from "../../redux/actions";
 import error from "../Error/Error";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
+import { ASPIRANT, EMPLOYER } from "../../redux/actionType";
 const Login = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // const { error, login } = userLogin();
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
-    dispatch(handleLoginTabIndex(newValue))
+    let user = newValue === 0 ? ASPIRANT : EMPLOYER;
+    dispatch(handleLoginTabIndex(user));
   };
 
   // const handleChange = (key, value) => {
@@ -39,7 +41,9 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-      dispatch(login(email, password, ()=>navigate("/home", { replace: true })));
+    dispatch(
+      login(email, password, () => navigate("/home", { replace: true })),
+    );
     // // if (!error) {
     //
     // }

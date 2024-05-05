@@ -1,5 +1,7 @@
 export const GET_ALL_JOBS = "GET_ALL_JOBS";
 export const CREATE_EMPLOYER = "CREATE_EMPLOYER";
+
+export const CREATE_ASPIRANT = "CREATE_ASPIRANT";
 export const GET_ORGANIZATION = "GET_ORGANIZATION";
 
 export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";
@@ -12,3 +14,5 @@ export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
 export const LOGINTABIDX = "LOGINTABIDX";
+export const ASPIRANT = "ASPIRANT";
+export const EMPLOYER = "EMPLOYER";

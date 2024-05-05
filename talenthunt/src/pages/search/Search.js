@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getJobs} from "../home/homeActions";
 
 
-const NavBar = () => {
+const Search = () => {
     const { jobList } = useSelector((state) => state.homeReducer);
     const [searchList, setSearchList] = useState([]);
     const dispatch = useDispatch()
@@ -48,4 +48,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default Search

@@ -24,7 +24,7 @@ export const createAspirants = async (req, res) => {
       phone,
       applicationDate,
     } = req.body;
-
+    console.log(req.body);
     let aspirant = {
       firstName,
       lastName,
