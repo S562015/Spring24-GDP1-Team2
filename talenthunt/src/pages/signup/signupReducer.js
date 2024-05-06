@@ -8,6 +8,7 @@ const initialState = {
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_EMPLOYER:
+      console.log(action);
       return {
         ...state,
         employerInfo: action.data,

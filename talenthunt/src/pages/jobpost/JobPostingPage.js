@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Typography,
@@ -10,9 +10,13 @@ import {
   TextareaAutosize,
   Box,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { createJob } from "../home/homeActions";
+import { auth } from "../../firebase";
+import signupReducer from "../signup/signupReducer";
+import { getEmployer } from "../signup/signupActions";
 
 const JobPostingPage = () => {
-  const [employerId, setEmployerId] = useState("");
   const [title, setTitle] = useState("");
   const [qualificationRequired, setQualificationRequired] = useState("");
   const [jobDescription, setJobDescription] = useState("");
@@ -20,36 +24,33 @@ const JobPostingPage = () => {
   const [jobType, setJobType] = useState("");
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const { employerInfo } = useSelector((state) => state.signupReducer);
+
+  console.log(employerInfo[0].lastName);
+  useEffect(() => {
+    if (!employerInfo) {
+      dispatch(getEmployer(auth.currentUser.email));
+    }
+  }, [employerInfo]);
 
   const handleSubmit = () => {
-    if (!employerId || !title || !qualificationRequired || !jobDescription) {
+    if (!title || !qualificationRequired || !jobDescription) {
       setError("All fields are required");
       return;
     }
-
-    fetch("/submit_job", {
-      method: "POST",
-      body: JSON.stringify({
-        employerId,
-        title,
-        qualificationRequired,
-        jobDescription,
-        salary,
-        jobType,
-        location,
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to post job");
-        }
-        console.log("Job posted successfully!");
-      })
-      .catch((error) => {
-        setError("Failed to post job");
-        console.error("Error posting job:", error);
-      });
+    console.log(employerInfo["lastName"]);
+    let jobPostPayload = {
+      employerId: employerInfo[0]["_id"],
+      title,
+      qualificationRequired,
+      jobDescription,
+      salary,
+      jobType,
+      location,
+    };
+    console.log({ jobPostPayload });
+    dispatch(createJob(jobPostPayload));
   };
 
   return (
@@ -57,15 +58,6 @@ const JobPostingPage = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>
         Post a Job
       </Typography>
-
-      <TextField
-        fullWidth
-        label="Employer ID"
-        variant="outlined"
-        value={employerId}
-        onChange={(e) => setEmployerId(e.target.value)}
-        margin="normal"
-      />
 
       <TextField
         fullWidth

@@ -5,7 +5,7 @@ import Home from "./pages/home/home";
 import Navbar from "./components/navbar";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
-import JobPost from "./pages/jobpost/jobpost";
+import JobPostingPage from "./pages/jobpost/JobPostingPage";
 import Search from "./pages/search/Search";
 import Profile from "./pages/profile/profile";
 import Application from "./pages/application/application";
@@ -31,7 +31,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<Error />} />
         <Route element={<PrivateRoutesLayout auth={auth} />}>
-          <Route path="/jobpost" element={<JobPost />} />
+          <Route path="/jobpost" element={<JobPostingPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/search" element={<Search />} />
           <Route

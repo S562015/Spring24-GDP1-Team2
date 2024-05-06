@@ -1,13 +1,11 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { LinearProgress, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { InputField } from "../../components/textField";
-import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import * as React from "react";
 import { useState } from "react";
-import { cloneObject, handlePost } from "../../utils";
 import { createAspirant } from "./signupActions";
 import {
   SentimentVeryDissatisfied,

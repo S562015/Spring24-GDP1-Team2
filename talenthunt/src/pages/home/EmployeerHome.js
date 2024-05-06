@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -16,9 +16,45 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function EmployerHomePage() {
+  const [jobsPosted, setJobsPosted] = useState([]);
   const navigate = useNavigate();
+  const { employerInfo } = useSelector((state) => state.signupReducer);
+  const { jobList } = useSelector((state) => state.homeReducer);
+
+  useEffect(() => {
+    if (jobList && employerInfo) {
+      let jobs = jobList.filter(
+        (val) => val["employerId"] === employerInfo[0]["_id"],
+      );
+      setJobsPosted(jobs);
+    }
+  }, [jobList]);
+
+  const renderJobPosted = () => {
+    return jobsPosted?.map((val) => (
+      <Grid item xs={12} sm={6} md={4}>
+        <Card>
+          <CardContent>
+            <Typography variant="h6" component="div">
+              {val.title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              {val.jobDescription}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="medium" startIcon={<HowToRegIcon />}>
+              open
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+    ));
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -27,7 +63,7 @@ function EmployerHomePage() {
       >
         <Container maxWidth="md">
           <Typography variant="h3" align="center" gutterBottom>
-            Welcome to TalentHunt
+            {`Welcome ${employerInfo[0].firstName} to TalentHunt`}
           </Typography>
           <Typography variant="h5" align="center" gutterBottom>
             Find the perfect candidates for your company
@@ -38,30 +74,10 @@ function EmployerHomePage() {
       {/* Featured Listings Section */}
       <Container sx={{ py: 6 }}>
         <Typography variant="h4" align="center" gutterBottom>
-          Featured Job Listings
+          Your Job Listings
         </Typography>
         <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" component="div">
-                  Frontend Developer
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  ABC Technologies
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" startIcon={<HowToRegIcon />}>
-                  Apply Now
-                </Button>
-                <IconButton size="small" aria-label="save">
-                  <FavoriteIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
-          {/* Add more featured job listings here */}
+          {renderJobPosted()}
         </Grid>
       </Container>
 
@@ -78,7 +94,7 @@ function EmployerHomePage() {
               variant="contained"
               color="secondary"
               size="large"
-              onClick={() => navigate("/jobpost")}
+              onClick={() => navigate("/jobpost", { replace: true })}
             >
               Get Started
             </Button>

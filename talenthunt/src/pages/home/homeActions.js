@@ -3,7 +3,9 @@ import {
   GET_ALL_JOBS,
   GET_ORGANIZATION,
   CREATE_EMPLOYER,
+  CREATE_ASPIRANT,
 } from "../../redux/actionType";
+import { toast } from "react-toastify";
 
 export const getJobs = () => {
   return async (dispatch) => {
@@ -22,6 +24,19 @@ export const getJobs = () => {
       });
   };
 };
+
+export const createJob = (data, callback) => async (dispatch) => {
+  try {
+    const res = await handlePost("jobs/create", data);
+    if ((res.status = 201)) {
+      toast.success("Job Posted");
+      callback();
+    }
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
 export const getOrganization = () => {
   return async (dispatch) => {
     return handleGet("organization")

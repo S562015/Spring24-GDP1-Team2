@@ -22,7 +22,7 @@ export const createJobPost = async (req, res) => {
   });
   try {
     const savedLog = await log.save();
-    res.json(savedLog);
+    res.status(201).json(savedLog);
   } catch (err) {
     res.json({ message: err });
   }

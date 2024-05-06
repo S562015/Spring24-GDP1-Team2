@@ -17,8 +17,9 @@ import { Link, useNavigate } from "react-router-dom";
 import userLogin from "../../auth/userLogin";
 import { handleLoginTabIndex, login } from "../../redux/actions";
 import error from "../Error/Error";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ASPIRANT, EMPLOYER } from "../../redux/actionType";
+import { getAspirant, getEmployer } from "../signup/signupActions";
 const Login = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [email, setEmail] = useState("");
@@ -26,32 +27,26 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { error, login } = userLogin();
+  const { UserType } = useSelector((state) => state.helperReducer);
+
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
     let user = newValue === 0 ? ASPIRANT : EMPLOYER;
     dispatch(handleLoginTabIndex(user));
   };
 
-  // const handleChange = (key, value) => {
-  //   let newValue = cloneObject(userInfo);
-  //   newValue[key] = value;
-  //   setUserInfo(newValue);
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(
-      login(email, password, () => navigate("/home", { replace: true })),
+      login(email, password, () => {
+        if (UserType === ASPIRANT) {
+          dispatch(getAspirant(email));
+        } else {
+          dispatch(getEmployer(email));
+        }
+        navigate("/home", { replace: true });
+      }),
     );
-    // // if (!error) {
-    //
-    // }
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
   };
 
   const renderInputFields = () => {

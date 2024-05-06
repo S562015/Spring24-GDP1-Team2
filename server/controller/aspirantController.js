@@ -45,11 +45,11 @@ export const createAspirants = async (req, res) => {
   }
 };
 
-export const getAspirantbyId = async (req, res) => {
+export const getAspirantById = async (req, res) => {
   const { id } = req.params;
-
+  console.log(req.params);
   try {
-    const application = await AspirantModel.findById(id);
+    const application = await AspirantModel.find({ email: id });
     if (!application) {
       return res.status(404).json({ message: "Aspirant not found" });
     }

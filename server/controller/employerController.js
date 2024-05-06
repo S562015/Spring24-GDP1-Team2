@@ -39,8 +39,9 @@ export const createEmployer = async (req, res) => {
 
 export const getEmployerById = async (req, res) => {
   const { id } = req.params;
+  console.log("getEmployerById", { req });
   try {
-    const employer = await EmployerModel.findById(id);
+    const employer = await EmployerModel.find({ email: id });
     if (!employer) {
       return res.status(404).json({ message: "Employer not found" });
     }
