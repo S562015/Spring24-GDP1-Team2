@@ -37,6 +37,19 @@ export const createJob = (data, callback) => async (dispatch) => {
   }
 };
 
+export const createApplication = (data, callback) => async (dispatch) => {
+  try {
+    const res = await handlePost("application/create", data);
+    console.log({ res });
+    if ((res.status = 201)) {
+      toast.success("Job applied ");
+      if (callback) callback();
+    }
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
 export const getOrganization = () => {
   return async (dispatch) => {
     return handleGet("organization")

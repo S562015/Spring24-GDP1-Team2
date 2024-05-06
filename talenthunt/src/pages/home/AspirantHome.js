@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   Container,
@@ -8,8 +8,10 @@ import {
   CardContent,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../firebase";
 import signupReducer from "../signup/signupReducer";
+import { getAspirant } from "../signup/signupActions";
 
 const useStyles = styled((theme) => ({
   root: {
@@ -31,6 +33,13 @@ const useStyles = styled((theme) => ({
 const AspirantHome = () => {
   const classes = useStyles();
   const { aspirantInfo } = useSelector((state) => state.signupReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!aspirantInfo) {
+      dispatch(getAspirant(auth.currentUser.email));
+    }
+  }, []);
 
   console.log({ aspirantInfo });
   const recentlyAppliedJobs = [

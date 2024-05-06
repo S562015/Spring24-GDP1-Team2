@@ -7,6 +7,7 @@ import organizationRoutes from "./routes/organizationRoutes.js";
 import aspirantRoutes from "./routes/aspirantRoutes.js";
 import employerRoutes from "./routes/employerRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -20,15 +21,16 @@ app.use("/organization", organizationRoutes);
 app.use("/aspirant", aspirantRoutes);
 app.use("/employer", employerRoutes);
 app.use("/jobs", jobRoutes);
+app.use("/application", applicationRoutes);
 
 const PORT = process.env.PORT || 5000;
 // ADD PORT IS LOCAL
 mongoose
   .connect(process.env.CONNECTION_URL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() =>
-    app.listen(PORT, () => console.log(`Server running on port :${PORT}`))
+    app.listen(PORT, () => console.log(`Server running on port :${PORT}`)),
   )
   .catch((error) => console.log(error));
