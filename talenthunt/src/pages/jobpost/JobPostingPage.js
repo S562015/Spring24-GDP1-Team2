@@ -27,9 +27,9 @@ const JobPostingPage = () => {
   const dispatch = useDispatch();
   const { employerInfo } = useSelector((state) => state.signupReducer);
 
-  console.log(employerInfo[0].lastName);
+  console.log(employerInfo[0]?.lastName);
   useEffect(() => {
-    if (!employerInfo) {
+    if (employerInfo?.length === 0) {
       dispatch(getEmployer(auth.currentUser.email));
     }
   }, [employerInfo]);

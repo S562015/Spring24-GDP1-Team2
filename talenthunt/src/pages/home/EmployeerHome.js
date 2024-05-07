@@ -16,13 +16,23 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getEmployer } from "../signup/signupActions";
+import { auth } from "../../firebase";
 
 function EmployerHomePage() {
   const [jobsPosted, setJobsPosted] = useState([]);
   const navigate = useNavigate();
   const { employerInfo } = useSelector((state) => state.signupReducer);
   const { jobList } = useSelector((state) => state.homeReducer);
+  const dispatch = useDispatch();
+
+  console.log(employerInfo);
+  useEffect(() => {
+    if (employerInfo?.length === 0) {
+      dispatch(getEmployer(auth.currentUser.email));
+    }
+  }, [employerInfo]);
 
   useEffect(() => {
     if (jobList && employerInfo) {
@@ -46,7 +56,11 @@ function EmployerHomePage() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="medium" startIcon={<HowToRegIcon />}>
+            <Button
+              size="medium"
+              startIcon={<HowToRegIcon />}
+              onClick={() => navigate("/joblist", { replace: true })}
+            >
               open
             </Button>
           </CardActions>
@@ -63,7 +77,9 @@ function EmployerHomePage() {
       >
         <Container maxWidth="md">
           <Typography variant="h3" align="center" gutterBottom>
-            {`Welcome ${employerInfo[0].firstName} to TalentHunt`}
+            {employerInfo?.length
+              ? `Welcome ${employerInfo[0].firstName} to TalentHunt`
+              : `Welcome  to TalentHunt`}
           </Typography>
           <Typography variant="h5" align="center" gutterBottom>
             Find the perfect candidates for your company

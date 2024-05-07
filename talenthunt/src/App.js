@@ -16,6 +16,7 @@ import AspirantHome from "./pages/home/AspirantHome";
 import { useSelector } from "react-redux";
 import EmployerHomePage from "./pages/home/EmployeerHome";
 import { ASPIRANT } from "./redux/actionType";
+import AspirantApplied from "./pages/jobpost/AspirantApplied";
 
 function App() {
   const { UserType } = useSelector((state) => state.helperReducer);
@@ -41,6 +42,7 @@ function App() {
             }
           />
           <Route path="/application" element={<Application />} />
+          <Route path="/joblist" element={<AspirantApplied />} />
         </Route>
       </Routes>
     </div>
