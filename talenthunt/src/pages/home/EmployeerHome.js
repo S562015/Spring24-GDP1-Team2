@@ -27,7 +27,7 @@ function EmployerHomePage() {
   const { jobList } = useSelector((state) => state.homeReducer);
   const dispatch = useDispatch();
 
-  console.log(employerInfo);
+  console.log(employerInfo[0]["_id"], jobList);
   useEffect(() => {
     if (employerInfo?.length === 0) {
       dispatch(getEmployer(auth.currentUser.email));
@@ -35,10 +35,11 @@ function EmployerHomePage() {
   }, [employerInfo]);
 
   useEffect(() => {
-    if (jobList && employerInfo) {
+    if (jobList?.length && employerInfo) {
       let jobs = jobList.filter(
         (val) => val["employerId"] === employerInfo[0]["_id"],
       );
+      console.log("useEffect", jobs);
       setJobsPosted(jobs);
     }
   }, [jobList]);

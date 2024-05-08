@@ -30,7 +30,8 @@ export const createJob = (data, callback) => async (dispatch) => {
     const res = await handlePost("jobs/create", data);
     if ((res.status = 201)) {
       toast.success("Job Posted");
-      callback();
+      dispatch(getJobs());
+      if (callback) callback();
     }
   } catch (error) {
     toast.error(error.message);
