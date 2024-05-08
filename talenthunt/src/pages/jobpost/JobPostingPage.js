@@ -29,12 +29,12 @@ const JobPostingPage = () => {
   const navigate = useNavigate();
   const { employerInfo } = useSelector((state) => state.signupReducer);
 
-  console.log(employerInfo[0]?.lastName);
+  console.log(auth.currentUser.email, employerInfo);
   useEffect(() => {
     if (employerInfo?.length === 0) {
       dispatch(getEmployer(auth.currentUser.email));
     }
-  }, [employerInfo]);
+  }, []);
 
   const handleSubmit = () => {
     if (!title || !qualificationRequired || !jobDescription) {
