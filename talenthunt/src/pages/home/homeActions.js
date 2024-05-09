@@ -81,7 +81,7 @@ export const createJob = (data, callback) => async (dispatch) => {
 
 export const createApplication = (data, callback) => async (dispatch) => {
   try {
-    const res = await handlePost("application/create", data);
+    const res = await handlePost("applications/create", data);
     console.log({ res });
     if ((res.status = 201)) {
       toast.success("Job applied ");
