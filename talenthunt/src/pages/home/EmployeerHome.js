@@ -43,7 +43,7 @@ function EmployerHomePage() {
       console.log("useEffect", jobs);
       setJobsPosted(jobs);
     }
-  }, [employerInfo]);
+  }, [employerInfo, jobList]);
 
   const renderJobPosted = () => {
     return jobsPosted?.map((val) => (
