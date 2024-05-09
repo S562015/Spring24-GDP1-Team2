@@ -11,14 +11,12 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmployer } from "../signup/signupActions";
 import { auth } from "../../firebase";
+import { selectedJobID } from "../../redux/actions";
 
 function EmployerHomePage() {
   const [jobsPosted, setJobsPosted] = useState([]);
@@ -35,7 +33,6 @@ function EmployerHomePage() {
   }, [employerInfo]);
 
   useEffect(() => {
-    console.log("ssdssf");
     if (jobList?.length && employerInfo) {
       let jobs = jobList.filter(
         (val) => val["employerId"] === employerInfo[0]["_id"],
@@ -61,7 +58,10 @@ function EmployerHomePage() {
             <Button
               size="medium"
               startIcon={<HowToRegIcon />}
-              onClick={() => navigate("/joblist", { replace: true })}
+              onClick={() => {
+                dispatch(selectedJobID(val["_id"]));
+                navigate("/joblist", { replace: true });
+              }}
             >
               open
             </Button>

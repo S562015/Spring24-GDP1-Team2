@@ -4,6 +4,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGINTABIDX,
+  SELECT_JOB_ID,
   SET_LOGIN_ERROR,
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
@@ -114,6 +115,15 @@ export const handleLoginTabIndex = (val) => {
   return (dispatch) => {
     dispatch({
       type: LOGINTABIDX,
+      data: val,
+    });
+  };
+};
+
+export const selectedJobID = (val) => {
+  return (dispatch) => {
+    dispatch({
+      type: SELECT_JOB_ID,
       data: val,
     });
   };

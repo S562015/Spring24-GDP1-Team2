@@ -21,7 +21,7 @@ app.use("/organization", organizationRoutes);
 app.use("/aspirant", aspirantRoutes);
 app.use("/employer", employerRoutes);
 app.use("/jobs", jobRoutes);
-app.use("/application", applicationRoutes);
+app.use("/applications", applicationRoutes);
 
 const PORT = process.env.PORT || 5000;
 // ADD PORT IS LOCAL

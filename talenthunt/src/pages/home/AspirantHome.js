@@ -36,7 +36,7 @@ const AspirantHome = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (aspirantInfo.length === 0) {
+    if (aspirantInfo?.length === 0) {
       dispatch(getAspirant(auth.currentUser.email));
     }
   }, []);

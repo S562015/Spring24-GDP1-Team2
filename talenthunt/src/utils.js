@@ -36,6 +36,23 @@ export const handlePost = async (url, body) => {
     return e;
   }
 };
+export const handleGetBody = async (url, body) => {
+  try {
+    console.log({ body });
+    const queryString = body.map((id) => `emails=${id}`).join("&");
+
+    // Append the query string to the URL
+    const fullUrl = `${BASE_URL}/${url}?${queryString}`;
+
+    // Make the GET request with the constructed URL
+    const res = await axios.get(fullUrl);
+    return res;
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
+};
+
 export const getImageName = {
   amazon,
   deloitte,
