@@ -97,6 +97,7 @@ const aspirantSchema = new Schema({
       type: String,
     },
   ],
+  pdf: String,
 });
 
 const AspirantModel = mongoose.model("aspirant", aspirantSchema);

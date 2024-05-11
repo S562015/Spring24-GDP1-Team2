@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { auth } from "../../firebase";
 import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import { InputField } from "../../components/textField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Profile = () => {
   console.log(auth.currentUser);
+  const [file, setFile] = useState("");
+  const submitImage = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+    console.log(file);
+    const result = await axios.post(
+      "http://localhost:5000/upload-files",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    console.log(result);
+  };
   const handleChange = async () => {};
   return (
     <>
@@ -183,6 +201,20 @@ const Profile = () => {
               name="preferredOrganizations"
               onChange={(e) => handleChange(e.target.name, e.target.value)}
             />
+            <input
+              placeholder="Insert a file"
+              clearIconButtonProps={{
+                children: <CloseIcon fontSize="small" />,
+              }}
+              InputProps={{
+                startAdornment: <AttachFileIcon />,
+              }}
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+
+            <button onClick={submitImage}>submit</button>
           </Grid>
         </Grid>
       </Box>
