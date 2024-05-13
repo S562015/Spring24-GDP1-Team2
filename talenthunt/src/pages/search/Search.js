@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
+import { Grid } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import JobCard from "../../components/Card/JobCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,9 +47,15 @@ const Search = () => {
           job.jobType.toLowerCase().includes(typeFilter.toLowerCase()))
       );
     });
-    return filteredList.map((job, index) => (
-      <JobCard job={job} index={index} />
-    ));
+    return (
+      <Grid container spacing={2}>
+        {filteredList.map((job, index) => (
+          <Grid item key={index} xs={12} sm={6} md={4} lg={3} xl={2}>
+            <JobCard job={job} />
+          </Grid>
+        ))}
+      </Grid>
+    );
   };
 
   return (

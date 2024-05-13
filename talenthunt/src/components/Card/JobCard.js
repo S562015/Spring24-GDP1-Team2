@@ -1,16 +1,35 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { getImageName } from "../../utils";
+import React, { useEffect, useState } from "react";
+import { Card, CardContent, Typography, Button, Box } from "@mui/material";
+import { styled } from "@mui/system";
+
 import { useDispatch, useSelector } from "react-redux";
 import { createApplication } from "../../pages/home/homeActions";
 
 const JobCard = ({ job, index }) => {
+  const [cardHeight, setCardHeight] = useState("auto");
   const dispatch = useDispatch();
   const { aspirantInfo } = useSelector((state) => state.signupReducer);
+  useEffect(() => {
+    // Dynamically calculate the height of the card based on the content
+    const contentHeight = document.getElementById(
+      `card-content-${index}`,
+    )?.offsetHeight;
+    const cardHeight = Math.max(contentHeight, 100); // Minimum height
+    setCardHeight(cardHeight + "px");
+  }, [job, index]);
+
+  const StyledCard = styled(Card)(({ theme }) => ({
+    borderRadius: theme.spacing(1),
+    boxShadow: theme.shadows[2],
+    transition: "box-shadow 0.3s ease-in-out",
+    "&:hover": {
+      boxShadow: theme.shadows[6],
+    },
+    width: "300px", // Fixed width
+    height: cardHeight, // Dynamic height
+    overflow: "hidden", // Hide overflow content
+    marginBottom: theme.spacing(2), // Add space between cards
+  }));
 
   console.log({ job, aspirantInfo });
 
@@ -26,48 +45,36 @@ const JobCard = ({ job, index }) => {
   };
 
   return (
-    <div key={index} className="m-16">
-      <Card className="job-cards">
-        <CardMedia
-          component="img"
-          alt={getImageName[job.companyImage]}
-          image={getImageName[job.companyImage]}
-        />
-        <CardContent>
-          <Typography variant="h5" className="jobtitle">
-            {job.companyName}
-          </Typography>
-          <Typography variant="body1" className="jobsalary my-3">
-            {job.title}
-          </Typography>
-          <Typography variant="body1" className="jobsalary my-3">
-            {job.salary}
-          </Typography>
-          <Typography variant="h6" className="fs-16 fw-600">
-            {job.jobRole}
-          </Typography>
-          <Typography variant="subtitle1" className="fs-14 c-gray fw-600">
-            {job.location}
-          </Typography>
-          <Typography variant="subtitle1" className="fs-14 c-gray fw-600">
-            {job.jobType}
-          </Typography>
-          <Typography variant="body2" className="fs-14">
-            {job.jobDescription}
-          </Typography>
-
-          <div className="text-center App">
-            <Button
-              variant="contained"
-              className="button-apply"
-              onClick={handleJobApplication}
-            >
-              Apply
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+    <StyledCard>
+      <CardContent id={`card-content-${index}`}>
+        <Typography variant="h6" gutterBottom>
+          {job.companyName}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          {job.title}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Salary: {job.salary}
+        </Typography>
+        <Typography variant="subtitle1" className="fw-600">
+          Role: {job.jobRole}
+        </Typography>
+        <Typography variant="subtitle1" className="fw-600">
+          Location: {job.location}
+        </Typography>
+        <Typography variant="subtitle1" className="fw-600">
+          Type: {job.jobType}
+        </Typography>
+        <Box sx={{ maxHeight: "100px", overflowY: "auto" }}>
+          <Typography variant="body2">{job.jobDescription}</Typography>
+        </Box>
+        <div className="text-center">
+          <Button variant="contained" color="primary">
+            Apply
+          </Button>
+        </div>
+      </CardContent>
+    </StyledCard>
   );
 };
 

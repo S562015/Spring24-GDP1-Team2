@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../firebase";
 import signupReducer from "../signup/signupReducer";
 import { getAspirant } from "../signup/signupActions";
+import CardStepFunction from "./CardStepFunction";
 
 const useStyles = styled((theme) => ({
   root: {
@@ -54,6 +55,7 @@ const AspirantHome = () => {
       title: "UX Designer",
       company: "Design Studio",
       location: "New York",
+      status: "shortlisted",
     },
   ];
 
@@ -104,47 +106,7 @@ const AspirantHome = () => {
           </Typography>
           <Grid container spacing={2} justifyContent="center">
             {recentlyAppliedJobs.map((job) => (
-              <Grid item key={job.id} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Typography variant="h6" component="div">
-                      {job.title}
-                    </Typography>
-                    <Typography color="textSecondary">{job.company}</Typography>
-                    <Typography color="textSecondary">
-                      {job.location}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-
-          {/* Recommended Jobs */}
-          <Typography
-            variant="h4"
-            align="center"
-            color="textPrimary"
-            gutterBottom
-            className={classes.card}
-          >
-            Recommended Jobs
-          </Typography>
-          <Grid container spacing={2} justifyContent="center">
-            {recommendedJobs.map((job) => (
-              <Grid item key={job.id} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Typography variant="h6" component="div">
-                      {job.title}
-                    </Typography>
-                    <Typography color="textSecondary">{job.company}</Typography>
-                    <Typography color="textSecondary">
-                      {job.location}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
+              <CardStepFunction job={job} />
             ))}
           </Grid>
         </Container>
