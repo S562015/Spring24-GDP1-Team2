@@ -8,6 +8,7 @@ import organizationRoutes from "./routes/organizationRoutes.js";
 import aspirantRoutes from "./routes/aspirantRoutes.js";
 import employerRoutes from "./routes/employerRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 import AspirantModel from "./model/aspirantModel.js";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/organization", organizationRoutes);
 app.use("/aspirant", aspirantRoutes);
 app.use("/employer", employerRoutes);
 app.use("/jobs", jobRoutes);
+app.use("/applications", applicationRoutes);
 
 const PORT = process.env.PORT || 5000;
 // ADD PORT IS LOCAL

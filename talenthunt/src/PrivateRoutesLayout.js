@@ -4,9 +4,9 @@ import { Outlet, useLocation, Navigate } from "react-router-dom";
 const PrivateRoutesLayout = ({ auth }) => {
   const location = useLocation();
 
-  console.log(auth.currentUser);
+  console.log(auth.email);
 
-  return auth.currentUser ? (
+  return auth.email ? (
     <Outlet />
   ) : (
     // keep the previous navigation stack

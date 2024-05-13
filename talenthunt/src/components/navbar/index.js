@@ -29,15 +29,7 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 const navBarItems = (loggedIn) => {
-  let items = [
-    {
-      id: 1,
-      label: "Search",
-      route: "search",
-      color: "inherit",
-      sx: { display: { md: "inline-flex", xs: "none" } },
-    },
-  ];
+  let items = [];
 
   return !loggedIn
     ? [

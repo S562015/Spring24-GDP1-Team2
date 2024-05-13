@@ -38,7 +38,7 @@ const AspirantForm = ({ signupWithUsernameAndPassword }) => {
       calculateStrength(value);
       setIsTyping(true);
     }
-    newValue[key] = value;
+    newValue[key] = key === "email" ? value.toLowerCase() : value;
     setAspirantInfo(newValue);
   };
 

@@ -15,6 +15,7 @@ import { createJob } from "../home/homeActions";
 import { auth } from "../../firebase";
 import signupReducer from "../signup/signupReducer";
 import { getEmployer } from "../signup/signupActions";
+import { useNavigate } from "react-router-dom";
 
 const JobPostingPage = () => {
   const [title, setTitle] = useState("");
@@ -25,14 +26,15 @@ const JobPostingPage = () => {
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { employerInfo } = useSelector((state) => state.signupReducer);
 
-  console.log(employerInfo[0].lastName);
+  console.log(auth.currentUser.email, employerInfo);
   useEffect(() => {
-    if (!employerInfo) {
+    if (employerInfo?.length === 0) {
       dispatch(getEmployer(auth.currentUser.email));
     }
-  }, [employerInfo]);
+  }, []);
 
   const handleSubmit = () => {
     if (!title || !qualificationRequired || !jobDescription) {
@@ -48,9 +50,13 @@ const JobPostingPage = () => {
       salary,
       jobType,
       location,
+      companyName: employerInfo[0].organizationId,
+      employerName: `${employerInfo[0].firstName} ${employerInfo[0].lastName}`,
     };
     console.log({ jobPostPayload });
-    dispatch(createJob(jobPostPayload));
+    dispatch(
+      createJob(jobPostPayload, () => navigate("/home", { replace: true })),
+    );
   };
 
   return (

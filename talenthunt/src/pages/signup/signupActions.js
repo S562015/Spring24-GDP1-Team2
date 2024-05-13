@@ -8,7 +8,7 @@ import {
 export const createEmployer = (employerInfo) => async (dispatch) => {
   try {
     const res = await handlePost("employer/create", employerInfo);
-    dispatch({ type: CREATE_EMPLOYER, data: res.data });
+    dispatch({ type: CREATE_EMPLOYER, data: [res.data] });
   } catch (error) {
     dispatch({ type: CREATE_EMPLOYER, data: null });
   }
@@ -17,7 +17,7 @@ export const createEmployer = (employerInfo) => async (dispatch) => {
 export const createAspirant = (data) => async (dispatch) => {
   try {
     const res = await handlePost("aspirant/create", data);
-    dispatch({ type: CREATE_ASPIRANT, data: res.data });
+    dispatch({ type: CREATE_ASPIRANT, data: [res.data] });
   } catch (error) {
     dispatch({ type: CREATE_ASPIRANT, data: null });
   }

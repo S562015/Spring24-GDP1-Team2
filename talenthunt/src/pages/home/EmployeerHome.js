@@ -11,27 +11,36 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getEmployer } from "../signup/signupActions";
+import { auth } from "../../firebase";
+import { selectedJobID } from "../../redux/actions";
 
 function EmployerHomePage() {
   const [jobsPosted, setJobsPosted] = useState([]);
   const navigate = useNavigate();
   const { employerInfo } = useSelector((state) => state.signupReducer);
   const { jobList } = useSelector((state) => state.homeReducer);
+  const dispatch = useDispatch();
+
+  console.log(employerInfo, jobList);
+  useEffect(() => {
+    if (employerInfo?.length === 0) {
+      dispatch(getEmployer(auth.currentUser.email));
+    }
+  }, [employerInfo]);
 
   useEffect(() => {
-    if (jobList && employerInfo) {
+    if (jobList?.length && employerInfo) {
       let jobs = jobList.filter(
         (val) => val["employerId"] === employerInfo[0]["_id"],
       );
+      console.log("useEffect", jobs);
       setJobsPosted(jobs);
     }
-  }, [jobList]);
+  }, [employerInfo, jobList]);
 
   const renderJobPosted = () => {
     return jobsPosted?.map((val) => (
@@ -46,7 +55,14 @@ function EmployerHomePage() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="medium" startIcon={<HowToRegIcon />}>
+            <Button
+              size="medium"
+              startIcon={<HowToRegIcon />}
+              onClick={() => {
+                dispatch(selectedJobID(val["_id"]));
+                navigate("/joblist", { replace: true });
+              }}
+            >
               open
             </Button>
           </CardActions>
@@ -63,7 +79,9 @@ function EmployerHomePage() {
       >
         <Container maxWidth="md">
           <Typography variant="h3" align="center" gutterBottom>
-            {`Welcome ${employerInfo[0].firstName} to TalentHunt`}
+            {employerInfo?.length
+              ? `Welcome ${employerInfo[0].firstName} to TalentHunt`
+              : `Welcome  to TalentHunt`}
           </Typography>
           <Typography variant="h5" align="center" gutterBottom>
             Find the perfect candidates for your company
