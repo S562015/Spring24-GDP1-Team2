@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -7,8 +7,19 @@ import {
   MenuItem,
   Select,
   Grid,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import {
+  IN_PROGRESS,
+  SCHEDULED_FOR_INTERVIEW,
+  SELECTED,
+  SHORTLISTED,
+  TO_BE_REVIEWED,
+} from "../../utils";
+import { useDispatch } from "react-redux";
+import { updateApplication } from "../home/homeActions";
 
 const StyledCard = styled(Card)({
   maxWidth: 400,
@@ -20,15 +31,33 @@ const StyledButton = styled(Button)({
   marginTop: (theme) => theme.spacing(2),
 });
 
-const AspirantCard = ({ aspirant }) => {
+const AspirantCard = ({ aspirant, applicationList, selectedJobID }) => {
+  const [applicationData, setApplicationData] = useState({});
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (applicationList) {
+      let application = applicationList.filter(
+        (val) =>
+          val.aspirantId === aspirant["_id"] && val.jobId === selectedJobID,
+      );
+      setApplicationData(application[0]);
+    }
+  }, []);
+
   const handleDownloadResume = () => {
+    //TODO :
     // Implement logic to download the resume
     console.log("Downloading resume...");
   };
 
   const handleChangeStatus = (event) => {
-    // Implement logic to handle status change
     console.log("Status changed to:", event.target.value);
+    setApplicationData({ ...applicationData, status: event.target.value });
+  };
+
+  const handleUpdate = () => {
+    dispatch(updateApplication(applicationData, (res) => console.log(res)));
   };
 
   return (
@@ -67,20 +96,37 @@ const AspirantCard = ({ aspirant }) => {
             </StyledButton>
           </Grid>
           <Grid item xs={12}>
-            <Select
-              fullWidth
-              label="Status"
-              value={aspirant.status || ""}
-              onChange={handleChangeStatus}
-            >
-              <MenuItem value="ToBeReviewed">To Be Reviewed</MenuItem>
-              <MenuItem value="InProgress">In Progress</MenuItem>
-              <MenuItem value="Shortlisted">Shortlisted</MenuItem>
-              <MenuItem value="Selected">Selected</MenuItem>
-              <MenuItem value="ScheduledForInterview">
-                Scheduled for Interview
-              </MenuItem>
-            </Select>
+            <FormControl>
+              <InputLabel id="demo-multiple-name-label">Status</InputLabel>
+              <Select
+                labelId="demo-multiple-name-label"
+                id="demo-multiple-name"
+                label="Status"
+                value={applicationData.status || ""}
+                onChange={handleChangeStatus}
+                sx={{ width: "300px" }}
+              >
+                <MenuItem value={TO_BE_REVIEWED}>To Be Reviewed</MenuItem>
+                <MenuItem value={IN_PROGRESS}>In Progress</MenuItem>
+                <MenuItem value={SHORTLISTED}>Shortlisted</MenuItem>
+                <MenuItem value={SELECTED}>Selected</MenuItem>
+                <MenuItem value={SCHEDULED_FOR_INTERVIEW}>
+                  Scheduled for Interview
+                </MenuItem>
+              </Select>
+
+              <Button
+                sx={{
+                  marginTop: "10px",
+                  width: "100px",
+                  marginLeft: "100px",
+                }}
+                variant="contained"
+                onClick={handleUpdate}
+              >
+                Update
+              </Button>
+            </FormControl>
           </Grid>
         </Grid>
       </CardContent>

@@ -20,7 +20,7 @@
     - Application UI **MUST** have all the required filters for filtering the jobs by Aspirant. and Application **MUST** be able to capture personalized user preferences such as Salary preferences, Organization preferences etc. 
     - Aspirant **MUST** be able to upload cover letter and Resume.
 7. Application Tracking
-    - Aspirant **MUST** be able to track the status for all applied jobs.
+    - Aspirant **MUST** be able to track the applicationData for all applied jobs.
     - Employer **SHOULD** be able to filter all applications related to a post and shortlist the candidates.
 
 

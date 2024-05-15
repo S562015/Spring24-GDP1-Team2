@@ -53,6 +53,28 @@ export const handleGetBody = async (url, body) => {
   }
 };
 
+// const updateApplicationStatus = async (id, status) => {
+//   try {
+//     const response = await axios.post(
+//       `${BASE_URL}/applications/${id}/update-status`,
+//       { status },
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error updating application status:", error);
+//     throw error;
+//   }
+// };
+
+export const TO_BE_REVIEWED = "TO_BE_REVIEWED";
+export const IN_PROGRESS = "IN_PROGRESS";
+
+export const SHORTLISTED = "SHORTLISTED";
+
+export const SELECTED = "SELECTED";
+
+export const SCHEDULED_FOR_INTERVIEW = "SCHEDULED_FOR_INTERVIEW";
+
 export const getImageName = {
   amazon,
   deloitte,

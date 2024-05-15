@@ -290,7 +290,7 @@ This collection records the information of the Job applications applied by the A
     type: Date,
     required: true,
   },
-  status:{
+  applicationData:{
     type: String,
   }
 }

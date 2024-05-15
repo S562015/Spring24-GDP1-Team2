@@ -79,6 +79,24 @@ export const createJob = (data, callback) => async (dispatch) => {
   }
 };
 
+///applications/${id}/update-status
+
+export const updateApplication = (data, callback) => async (dispatch) => {
+  try {
+    const res = await handlePost(
+      `applications/${data["_id"]}/update-status`,
+      data,
+    );
+    if ((res.status = 201)) {
+      toast.success("application updated ");
+      dispatch(getJobs());
+      if (callback) callback();
+    }
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
 export const createApplication = (data, callback) => async (dispatch) => {
   try {
     const res = await handlePost("applications/create", data);

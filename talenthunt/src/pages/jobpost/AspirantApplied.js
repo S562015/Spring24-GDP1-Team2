@@ -17,7 +17,6 @@ const AspirantsList = () => {
   const { applicationList } = useSelector((state) => state.homeReducer);
   const { appliedData } = useSelector((state) => state.homeReducer);
   const { selectedJobID } = useSelector((state) => state.helperReducer);
-  console.log({ applicationList, selectedJobID });
 
   useEffect(() => {
     dispatch(getApplications());
@@ -43,9 +42,11 @@ const AspirantsList = () => {
       <Grid container spacing={2}>
         {aspirantDataList?.map((aspirant, index) => (
           <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-            {" "}
-            {/* Adjust grid breakpoints as needed */}
-            <AspirantCard aspirant={aspirant} />
+            <AspirantCard
+              aspirant={aspirant}
+              applicationList={applicationList}
+              selectedJobID={selectedJobID}
+            />
           </Grid>
         ))}
       </Grid>

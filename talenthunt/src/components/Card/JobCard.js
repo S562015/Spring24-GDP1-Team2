@@ -4,6 +4,7 @@ import { styled } from "@mui/system";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createApplication } from "../../pages/home/homeActions";
+import { TO_BE_REVIEWED } from "../../utils";
 
 const JobCard = ({ job, index }) => {
   const [cardHeight, setCardHeight] = useState("auto");
@@ -37,7 +38,7 @@ const JobCard = ({ job, index }) => {
     let createApplicationPayload = {
       aspirantId: aspirantInfo[0]["_id"],
       jobId: job["_id"],
-      status: "TO_BE_REVIEWED",
+      status: TO_BE_REVIEWED,
       applicationDate: new Date().toJSON(),
     };
     console.log({ createApplicationPayload });
