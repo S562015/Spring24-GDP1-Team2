@@ -6,21 +6,21 @@ import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 // import userLogout from "../../auth/userLogout";
-import {useDispatch} from "react-redux";
-import {logoutUser} from "../../redux/actions";
-import {auth} from "../../firebase";
+import { useDispatch } from "react-redux";
+import { handleLoginTabIndex, logoutUser } from "../../redux/actions";
+import { auth } from "../../firebase";
+import { ASPIRANT } from "../../redux/actionType";
 
 export default function MenuSimple() {
   const navigate = useNavigate();
-  // const { error, logout } = userLogout();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleLogout = async () => {};
   const createHandleMenuClick = async (menuItem) => {
     if (menuItem !== "logout") {
       navigate(menuItem);
-    } else  {
-     // dispatch(logoutUser)
-      await  auth.signOut()
+    } else {
+      dispatch(handleLoginTabIndex(ASPIRANT));
+      await auth.signOut();
       navigate("/");
     }
   };
@@ -85,7 +85,7 @@ const Listbox = styled("ul")(
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
  
   z-index: 1;
-  `
+  `,
 );
 
 const MenuItem = styled(BaseMenuItem)(
@@ -106,7 +106,7 @@ const MenuItem = styled(BaseMenuItem)(
   &.${menuItemClasses.disabled} {
     color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
   }
-  `
+  `,
 );
 
 const MenuButton = styled(BaseMenuButton)(
@@ -130,5 +130,5 @@ const MenuButton = styled(BaseMenuButton)(
   &:active {
     background: ${theme.palette.mode === "dark" ? grey[700] : grey[100]};
   }
-  `
+  `,
 );

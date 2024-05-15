@@ -5,9 +5,8 @@ export const globalTheme = createTheme({
     fontFamily: "Arial, sans-serif",
   },
   palette: {
-    mode: "dark",
     primary: {
-      main: "#1976D2",
+      main: "#5319AC",
     },
     secondary: {
       main: "#FFC107",

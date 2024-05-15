@@ -59,3 +59,29 @@ export const getApplicationById = async (req, res) => {
       .json({ message: "Failed to fetch application", error: error.message });
   }
 };
+
+export const updateApplicationStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    const application = await ApplicationModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true },
+    );
+
+    if (!application) {
+      return res.status(404).json({ message: "Application not found" });
+    }
+
+    res.status(200).json(application);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: "Failed to update application status",
+        error: error.message,
+      });
+  }
+};

@@ -132,7 +132,7 @@ As an Aspirant, I would like to Track the Selected Application.
 1. Aspirants can see the Status posted by Employer if application gets shortlisted.
 
 **Output:**
-1. Aspirants can see the status of any application from all applied applications.
+1. Aspirants can see the applicationData of any application from all applied applications.
 
 ## UC10: Upload the Resume(Aspirant)
 **Goal:** 

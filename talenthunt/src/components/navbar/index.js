@@ -16,6 +16,7 @@ import CommonButton from "../CommonButton";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import MenuSimple from "../Menu/menu";
+import SearchIcon from "@mui/icons-material/Search";
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -28,22 +29,7 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 const navBarItems = (loggedIn) => {
-  let items = [
-    {
-      id: 1,
-      label: "Job",
-      route: "job",
-      color: "inherit",
-      sx: { display: { md: "inline-flex", xs: "none" } },
-    },
-    {
-      id: 2,
-      label: "Companies",
-      route: "Companies",
-      color: "inherit",
-      sx: { display: { md: "inline-flex", xs: "none" } },
-    },
-  ];
+  let items = [];
 
   return !loggedIn
     ? [

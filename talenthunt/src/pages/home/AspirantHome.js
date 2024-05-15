@@ -1,0 +1,118 @@
+import React, { useEffect } from "react";
+import {
+  Button,
+  Container,
+  Grid,
+  Typography,
+  Card,
+  CardContent,
+} from "@mui/material";
+import { styled } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../firebase";
+import signupReducer from "../signup/signupReducer";
+import { getAspirant } from "../signup/signupActions";
+import CardStepFunction from "./CardStepFunction";
+
+const useStyles = styled((theme) => ({
+  root: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(2),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  card: {
+    marginTop: theme.spacing(4),
+  },
+  button: {
+    marginTop: theme.spacing(4),
+  },
+}));
+
+const AspirantHome = () => {
+  const classes = useStyles();
+  const { aspirantInfo } = useSelector((state) => state.signupReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (aspirantInfo?.length === 0) {
+      dispatch(getAspirant(auth.currentUser.email));
+    }
+  }, []);
+
+  console.log({ aspirantInfo });
+  const recentlyAppliedJobs = [
+    {
+      id: 1,
+      title: "Software Engineer",
+      company: "Tech Co",
+      location: "Remote",
+    },
+    {
+      id: 2,
+      title: "UX Designer",
+      company: "Design Studio",
+      location: "New York",
+      status: "shortlisted",
+    },
+  ];
+
+  const recommendedJobs = [
+    {
+      id: 3,
+      title: "Data Scientist",
+      company: "Data Corp",
+      location: "San Francisco",
+    },
+    {
+      id: 4,
+      title: "Marketing Specialist",
+      company: "Marketing Agency",
+      location: "Los Angeles",
+    },
+  ];
+
+  return (
+    <div className={classes.root}>
+      <div className={classes.heroContent}>
+        <Container maxWidth="md">
+          <Typography
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
+            Welcome to Talent Hunt
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            paragraph
+          >
+            Connecting talented individuals with exciting job opportunities.
+          </Typography>
+
+          {/* Recently Applied Jobs */}
+          <Typography
+            variant="h4"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
+            Recently Applied Jobs
+          </Typography>
+          <Grid container spacing={2} justifyContent="center">
+            {recentlyAppliedJobs.map((job) => (
+              <CardStepFunction job={job} />
+            ))}
+          </Grid>
+        </Container>
+      </div>
+    </div>
+  );
+};
+
+export default AspirantHome;

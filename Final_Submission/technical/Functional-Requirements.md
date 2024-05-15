@@ -13,7 +13,7 @@
 1. Database for storing and organizing resumes of job seekers.
 2. Search functionality for employers to find suitable candidates.
 ## Application Tracking:
-1. Job seekers can track their application status.
+1. Job seekers can track their application applicationData.
 2. Employers can manage and track received applications.
 ## Customized Job Alerts:
 1. Job seekers can set preferences for job alerts based on criteria like location, industry, or

@@ -27,6 +27,12 @@ const jobSchema = new Schema({
   location: {
     type: String,
   },
+  companyName: {
+    type: String,
+  },
+  employerName: {
+    type: String,
+  },
 });
 
 const jobModel = mongoose.model("job", jobSchema);

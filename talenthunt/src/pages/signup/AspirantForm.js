@@ -1,13 +1,11 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { LinearProgress, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { InputField } from "../../components/textField";
-import BasicDatePicker from "../../components/DatePicker/DatePicker";
 import Button from "@mui/material/Button";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as React from "react";
 import { useState } from "react";
-import { cloneObject, handlePost } from "../../utils";
 import { createAspirant } from "./signupActions";
 import {
   SentimentVeryDissatisfied,
@@ -16,8 +14,8 @@ import {
   SentimentSatisfiedAlt,
   SentimentVerySatisfied,
 } from "@mui/icons-material";
-import {useDispatch} from "react-redux";
-import {signUp} from "../../redux/actions";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../redux/actions";
 
 const AspirantForm = ({ signupWithUsernameAndPassword }) => {
   const [aspirantInfo, setAspirantInfo] = useState({});
@@ -27,30 +25,35 @@ const AspirantForm = ({ signupWithUsernameAndPassword }) => {
   const [isTyping, setIsTyping] = useState(false);
   const navigate = useNavigate();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const calculateStrength = (password) => {
     const strength = Math.min(password.length / 10, 1) * 100;
     setStrength(strength);
   };
 
   const handleChange = (key, value) => {
-    let newValue = aspirantInfo
+    let newValue = aspirantInfo;
     if (key === "password") {
       validatePassword(value);
       calculateStrength(value);
       setIsTyping(true);
     }
-    newValue[key] = value;
+    newValue[key] = key === "email" ? value.toLowerCase() : value;
     setAspirantInfo(newValue);
   };
 
   const handleSubmit = async () => {
-    // const res = await createAspirant();
-    const {email, password, username} = aspirantInfo
-    // signupWithUsernameAndPassword();
-    console.log({aspirantInfo})
+    dispatch(createAspirant(aspirantInfo));
+    console.log({ aspirantInfo });
+    const { email, password, username } = aspirantInfo;
+
+    console.log({ aspirantInfo });
     // console.log(res);
-    dispatch(signUp(email, password, username, ()=>navigate("/home", { replace: true })))
+    dispatch(
+      signUp(email, password, username, () =>
+        navigate("/home", { replace: true }),
+      ),
+    );
   };
   const handleBlur = () => {
     setIsTyping(false);
@@ -117,95 +120,23 @@ const AspirantForm = ({ signupWithUsernameAndPassword }) => {
   return (
     <Box component="form" noValidate sx={{ mt: 2 }}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <InputField
-            margin="normal"
-            required
-            fullWidth
-            id="first"
-            label="First Name"
-            name="firstName"
-            autoFocus
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <InputField
-            margin="normal"
-            required
-            fullWidth
-            id="last-name"
-            label="Last Name"
-            name="lastName"
-            onChange={(e) => handleChange(e.target.name, e)}
-          />
-        </Grid>
-        <BasicDatePicker
-          label="Date of Birth"
-          onChange={(e) => handleChange("dateOfBirth", "14/19")}
-        />
         <InputField
           margin="normal"
           required
           fullWidth
-          id="qualification"
-          label="qualification"
-          name="qualification"
+          id="first"
+          label="First Name"
+          name="firstName"
+          autoFocus
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
           margin="normal"
           required
           fullWidth
-          id="orgisation-name"
-          label="Orgisation Name"
-          name="Orgisation Name"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="address-line1"
-          label="Address line 1"
-          name="line1"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="address-line2"
-          label="Address line 2"
-          name="line2"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="city"
-          label="City"
-          name="city"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="state"
-          label="State"
-          name="state"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="zipCode"
-          label="zipCode"
-          name="zip"
-          type={"number"}
+          id="last-name"
+          label="Last Name"
+          name="lastName"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
         <InputField
@@ -251,113 +182,8 @@ const AspirantForm = ({ signupWithUsernameAndPassword }) => {
           type={"password"}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="phone"
-          label="Phone Number"
-          name="phone"
-          type={"phone"}
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="schoolName"
-          label="School Name"
-          name="schoolName"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="degree"
-          label="Degree"
-          name="degree"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="major"
-          label="Major"
-          name="major"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="grade"
-          label="Grade"
-          name="grade"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <BasicDatePicker
-          label="From"
-          format="MMM-YYYY"
-          onChange={(e) => handleChange("from",e)}
-        />
-        <BasicDatePicker
-          label="To"
-          format="MMM-YYYY"
-          onChange={(e) => handleChange("to", e)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="skill"
-          label="Skill"
-          name="skill"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="skill-level"
-          label="Skill Level"
-          name="level"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="expectedSalary-minimum"
-          label="Expected Minimum Salary"
-          name="minimum"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="expectedSalary-maximum"
-          label="Expected Maximum Salary"
-          name="maximum"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
-        <InputField
-          margin="normal"
-          required
-          fullWidth
-          id="preferredOrganizations"
-          label="Preferred Organizations"
-          name="preferredOrganizations"
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
-        />
       </Grid>
-      <Button
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        onClick={handleSubmit}
-      >
+      <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleSubmit}>
         Register
       </Button>
       <Grid container>

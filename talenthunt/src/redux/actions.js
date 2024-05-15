@@ -1,15 +1,22 @@
 import {
   CURRENT_USER,
-  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGINTABIDX,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGINTABIDX,
+  SELECT_JOB_ID,
   SET_LOGIN_ERROR,
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
-  SIGNUP_SUCCESS
+  SIGNUP_SUCCESS,
 } from "./actionType";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
-import {auth} from "../firebase";
-import {toast} from "react-toastify";
-
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../firebase";
+import { toast } from "react-toastify";
 
 export const setCurrentUser = (data) => {
   return (dispatch) => {
@@ -43,28 +50,28 @@ export const signupFailure = (error) => ({
 });
 
 // Thunk action creator
-export const signUp = (email, password, displayName, callback) => async (dispatch) => {
-  dispatch(signupRequest());
-  try {
-    // Sign up with email and password
-    const res = await createUserWithEmailAndPassword(auth, email, password);
+export const signUp =
+  (email, password, displayName, callback) => async (dispatch) => {
+    dispatch(signupRequest());
+    try {
+      // Sign up with email and password
+      const res = await createUserWithEmailAndPassword(auth, email, password);
 
-    if (!res) {
-      throw new Error("Something went wrong, try again!");
+      if (!res) {
+        throw new Error("Something went wrong, try again!");
+      }
+
+      // Include the display name in the user profile
+      await updateProfile(res, { displayName: displayName });
+      callback();
+      dispatch(signupSuccess(res.user));
+      toast.success("Login Successful");
+    } catch (err) {
+      console.log({ es: err.message });
+      dispatch(signupFailure(err.message));
+      toast.error(err.message);
     }
-
-    // Include the display name in the user profile
-    await updateProfile(res, { displayName: displayName });
-    callback()
-    dispatch(signupSuccess(res.user));
-    toast.success('Success message');
-  } catch (err) {
-    console.log({es: err.message})
-    dispatch(signupFailure(err.message));
-    toast.error(err.message)
-  }
-
-};
+  };
 
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
@@ -80,16 +87,15 @@ export const loginFailure = (error) => ({
   payload: error,
 });
 
-
 export const login = (email, password, callback) => async (dispatch) => {
   dispatch(loginRequest());
   try {
     const res = await signInWithEmailAndPassword(auth, email, password);
     dispatch(loginSuccess(res.user));
-    callback()
+    callback();
     return res;
   } catch (err) {
-    toast.error(err.message)
+    toast.error(err.message);
     dispatch(loginFailure(err.message));
   }
 };
@@ -97,7 +103,7 @@ export const login = (email, password, callback) => async (dispatch) => {
 export const logoutUser = (email, password) => async (dispatch) => {
   // dispatch(loginRequest());
   try {
-    const res = await auth.signOut();;
+    const res = await auth.signOut();
     dispatch(loginSuccess(null));
     return res;
   } catch (err) {
@@ -105,11 +111,20 @@ export const logoutUser = (email, password) => async (dispatch) => {
   }
 };
 
-export const handleLoginTabIndex=(val)=> {
+export const handleLoginTabIndex = (val) => {
   return (dispatch) => {
     dispatch({
       type: LOGINTABIDX,
-      data:val,
+      data: val,
     });
   };
-}
+};
+
+export const selectedJobID = (val) => {
+  return (dispatch) => {
+    dispatch({
+      type: SELECT_JOB_ID,
+      data: val,
+    });
+  };
+};
