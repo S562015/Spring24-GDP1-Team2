@@ -10,6 +10,12 @@ import {
   StepLabel,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import {
+  IN_PROGRESS,
+  SCHEDULED_FOR_INTERVIEW,
+  SELECTED,
+  SHORTLISTED,
+} from "../../utils";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: theme.spacing(1),
@@ -25,13 +31,21 @@ const StyledStepper = styled(Stepper)(({ theme }) => ({
 }));
 
 const CustomCard = ({ job }) => {
-  const steps = ["To Be Reviewed", "In Progress", "Shortlisted", "Selected"];
+  const steps = [
+    "To Be Reviewed",
+    "In Progress",
+    "Shortlisted",
+    "Selected",
+    "Scheduled for Interview",
+  ];
   const activeStep =
-    job.status === "selected"
+    job.status === SCHEDULED_FOR_INTERVIEW
+      ? 4
+      : job.status === SELECTED
       ? 3
-      : job.status === "shortlisted"
+      : job.status === SHORTLISTED
       ? 2
-      : job.status === "inProgress"
+      : job.status === IN_PROGRESS
       ? 1
       : 0;
   console.log({ job });
