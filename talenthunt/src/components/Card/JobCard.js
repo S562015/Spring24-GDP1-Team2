@@ -70,7 +70,11 @@ const JobCard = ({ job, index }) => {
           <Typography variant="body2">{job.jobDescription}</Typography>
         </Box>
         <div className="text-center">
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleJobApplication}
+          >
             Apply
           </Button>
         </div>

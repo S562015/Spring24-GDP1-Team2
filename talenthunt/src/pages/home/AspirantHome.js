@@ -42,13 +42,16 @@ const AspirantHome = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    if (aspirantInfo?.length === 0) {
-      dispatch(getAspirant(auth.currentUser.email));
-    }
     // if (!applicationList) {
     dispatch(getApplications());
     // }
   }, []);
+
+  useEffect(() => {
+    if (aspirantInfo?.length === 0) {
+      dispatch(getAspirant(auth.currentUser.email));
+    }
+  }, [aspirantInfo]);
 
   useEffect(() => {
     if (applicationList?.length && aspirantInfo?.length) {
