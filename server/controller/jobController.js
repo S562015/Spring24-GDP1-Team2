@@ -1,5 +1,6 @@
 import JobModel from "../model/jobModel.js";
 import ApplicationModel from "../model/applicationModel.js";
+import AspirantModel from "../model/aspirantModel.js";
 
 export const getJobDetails = async (req, res) => {
   try {
@@ -38,5 +39,22 @@ export const getJobId = async (req, res) => {
     res.status(200).json(application);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getJobByIds = async (req, res) => {
+  const { emails } = req.query; // Retrieve the array of email IDs from query parameters
+  const idsArray = Array.isArray(emails) ? emails : [emails]; // Ensure that idsArray is always an array
+  console.log(idsArray);
+  try {
+    const applications = await JobModel.find({ _id: { $in: idsArray } });
+    if (!applications || applications.length === 0) {
+      return res.status(404).json({ message: "Jobs not found" });
+    }
+    res.status(200).json(applications);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch aspirants", error: error.message });
   }
 };

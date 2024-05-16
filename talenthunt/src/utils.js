@@ -38,7 +38,6 @@ export const handlePost = async (url, body) => {
 };
 export const handleGetBody = async (url, body) => {
   try {
-    console.log({ body });
     const queryString = body.map((id) => `emails=${id}`).join("&");
 
     // Append the query string to the URL
@@ -52,19 +51,6 @@ export const handleGetBody = async (url, body) => {
     return e;
   }
 };
-
-// const updateApplicationStatus = async (id, status) => {
-//   try {
-//     const response = await axios.post(
-//       `${BASE_URL}/applications/${id}/update-status`,
-//       { status },
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error updating application status:", error);
-//     throw error;
-//   }
-// };
 
 export const TO_BE_REVIEWED = "TO_BE_REVIEWED";
 export const IN_PROGRESS = "IN_PROGRESS";

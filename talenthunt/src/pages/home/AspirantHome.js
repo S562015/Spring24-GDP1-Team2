@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -13,6 +13,7 @@ import { auth } from "../../firebase";
 import signupReducer from "../signup/signupReducer";
 import { getAspirant } from "../signup/signupActions";
 import CardStepFunction from "./CardStepFunction";
+import { getAllJobs, getApplications } from "./homeActions";
 
 const useStyles = styled((theme) => ({
   root: {
@@ -32,47 +33,49 @@ const useStyles = styled((theme) => ({
 }));
 
 const AspirantHome = () => {
-  const classes = useStyles();
+  const [recentlyAppliedApplication, setRecentlyAppliedApplication] = useState(
+    [],
+  );
   const { aspirantInfo } = useSelector((state) => state.signupReducer);
+  const { applicationList } = useSelector((state) => state.homeReducer);
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   useEffect(() => {
     if (aspirantInfo?.length === 0) {
       dispatch(getAspirant(auth.currentUser.email));
     }
+    // if (!applicationList) {
+    dispatch(getApplications());
+    // }
   }, []);
 
-  console.log({ aspirantInfo });
-  const recentlyAppliedJobs = [
-    {
-      id: 1,
-      title: "Software Engineer",
-      company: "Tech Co",
-      location: "Remote",
-    },
-    {
-      id: 2,
-      title: "UX Designer",
-      company: "Design Studio",
-      location: "New York",
-      status: "shortlisted",
-    },
-  ];
-
-  const recommendedJobs = [
-    {
-      id: 3,
-      title: "Data Scientist",
-      company: "Data Corp",
-      location: "San Francisco",
-    },
-    {
-      id: 4,
-      title: "Marketing Specialist",
-      company: "Marketing Agency",
-      location: "Los Angeles",
-    },
-  ];
+  useEffect(() => {
+    if (applicationList?.length && aspirantInfo?.length) {
+      let newJobData = [];
+      const applications = applicationList.filter(
+        (list) => list.aspirantId === aspirantInfo[0]["_id"],
+      );
+      console.log({ applications });
+      const jobIds = applications.map((val) => val["jobId"]);
+      console.log(jobIds);
+      if (jobIds.length) {
+        dispatch(
+          getAllJobs(jobIds, (res) => {
+            console.log({ res, applications });
+            applications.forEach((application) =>
+              res.forEach((val) => {
+                if (val["_id"] === application.jobId)
+                  newJobData.push({ ...val, status: application.status });
+              }),
+            );
+            console.log(newJobData);
+            setRecentlyAppliedApplication(newJobData);
+          }),
+        );
+      }
+    }
+  }, [applicationList, aspirantInfo]);
 
   return (
     <div className={classes.root}>
@@ -105,7 +108,7 @@ const AspirantHome = () => {
             Recently Applied Jobs
           </Typography>
           <Grid container spacing={2} justifyContent="center">
-            {recentlyAppliedJobs.map((job) => (
+            {recentlyAppliedApplication?.map((job) => (
               <CardStepFunction job={job} />
             ))}
           </Grid>

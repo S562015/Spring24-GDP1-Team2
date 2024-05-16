@@ -66,6 +66,22 @@ export const getAllAspirant = (body, callback) => {
   };
 };
 
+export const getAllJobs = (body, callback) => {
+  return async (dispatch) => {
+    return handleGetBody("jobs/get/", body)
+      .then((response) => {
+        if (response.status === 200) {
+          if (callback) {
+            callback(response.data);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
 export const createJob = (data, callback) => async (dispatch) => {
   try {
     const res = await handlePost("jobs/create", data);
