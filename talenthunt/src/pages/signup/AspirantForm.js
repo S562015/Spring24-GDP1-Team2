@@ -51,8 +51,8 @@ const AspirantForm = ({ signupWithUsernameAndPassword }) => {
     // console.log(res);
     dispatch(
       signUp(email, password, username, () =>
-        navigate("/home", { replace: true }),
-      ),
+        navigate("/home", { replace: true })
+      )
     );
   };
   const handleBlur = () => {
@@ -76,7 +76,7 @@ const AspirantForm = ({ signupWithUsernameAndPassword }) => {
 
     if (!isValidPassword) {
       setErrorMessage(
-        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.",
+        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters."
       );
     } else {
       setErrorMessage("");
@@ -183,7 +183,12 @@ const AspirantForm = ({ signupWithUsernameAndPassword }) => {
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
       </Grid>
-      <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleSubmit}>
+      <Button
+        id="AspirantRegister"
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={handleSubmit}
+      >
         Register
       </Button>
       <Grid container>

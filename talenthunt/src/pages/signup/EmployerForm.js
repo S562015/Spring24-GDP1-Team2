@@ -51,8 +51,8 @@ const EmployerForm = ({ signupWithUsernameAndPassword }) => {
     dispatch(createEmployer(employerInfo));
     dispatch(
       signUp(email, password, username, () =>
-        navigate("/home", { replace: true }),
-      ),
+        navigate("/home", { replace: true })
+      )
     );
   };
   const handleBlur = () => {
@@ -78,7 +78,7 @@ const EmployerForm = ({ signupWithUsernameAndPassword }) => {
 
     if (!isValidPassword) {
       setErrorMessage(
-        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.",
+        "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters."
       );
     } else {
       setErrorMessage("");
@@ -218,6 +218,7 @@ const EmployerForm = ({ signupWithUsernameAndPassword }) => {
           />
         </Grid>
         <Button
+          id="EmployerRegister"
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           disabled={Object.keys(employerInfo).length !== 8}

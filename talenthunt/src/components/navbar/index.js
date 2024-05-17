@@ -72,6 +72,7 @@ const Navbar = () => {
         onClick={() => navigate(item.route)}
         color={item.color}
         sx={item.sx}
+        id={item.label}
       >
         {item.label}
       </CommonButton>
