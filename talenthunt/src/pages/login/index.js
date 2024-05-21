@@ -45,7 +45,7 @@ const Login = () => {
           dispatch(getEmployer(email));
         }
         navigate("/home", { replace: true });
-      }),
+      })
     );
   };
 
@@ -73,6 +73,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
+          id="login"
           type="submit"
           variant="contained"
           sx={{ mt: 3, mb: 2 }}

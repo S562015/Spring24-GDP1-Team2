@@ -13,7 +13,7 @@ const JobCard = ({ job, index }) => {
   useEffect(() => {
     // Dynamically calculate the height of the card based on the content
     const contentHeight = document.getElementById(
-      `card-content-${index}`,
+      `card-content-${index}`
     )?.offsetHeight;
     const cardHeight = Math.max(contentHeight, 100); // Minimum height
     setCardHeight(cardHeight + "px");
@@ -71,6 +71,7 @@ const JobCard = ({ job, index }) => {
         </Box>
         <div className="text-center">
           <Button
+            id="Apply"
             variant="contained"
             color="primary"
             onClick={handleJobApplication}

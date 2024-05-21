@@ -27,15 +27,15 @@ export default function MenuSimple() {
 
   return (
     <Dropdown>
-      <MenuButton>ACCOUNT DETAILS</MenuButton>
+      <MenuButton id="account">ACCOUNT DETAILS</MenuButton>
       <Menu slots={{ listbox: Listbox }}>
         <MenuItem onClick={() => createHandleMenuClick("profile")}>
           Profile
         </MenuItem>
-        <MenuItem onClick={() => createHandleMenuClick("search")}>
+        <MenuItem id="search" onClick={() => createHandleMenuClick("search")}>
           Search
         </MenuItem>
-        <MenuItem onClick={() => createHandleMenuClick("logout")}>
+        <MenuItem id="logout" onClick={() => createHandleMenuClick("logout")}>
           Log out
         </MenuItem>
       </Menu>
@@ -85,7 +85,7 @@ const Listbox = styled("ul")(
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
  
   z-index: 1;
-  `,
+  `
 );
 
 const MenuItem = styled(BaseMenuItem)(
@@ -106,7 +106,7 @@ const MenuItem = styled(BaseMenuItem)(
   &.${menuItemClasses.disabled} {
     color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
   }
-  `,
+  `
 );
 
 const MenuButton = styled(BaseMenuButton)(
@@ -130,5 +130,5 @@ const MenuButton = styled(BaseMenuButton)(
   &:active {
     background: ${theme.palette.mode === "dark" ? grey[700] : grey[100]};
   }
-  `,
+  `
 );

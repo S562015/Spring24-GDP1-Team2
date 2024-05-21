@@ -35,7 +35,7 @@ function EmployerHomePage() {
   useEffect(() => {
     if (jobList?.length && employerInfo) {
       let jobs = jobList.filter(
-        (val) => val["employerId"] === employerInfo[0]["_id"],
+        (val) => val["employerId"] === employerInfo[0]["_id"]
       );
       console.log("useEffect", jobs);
       setJobsPosted(jobs);
@@ -109,6 +109,7 @@ function EmployerHomePage() {
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
             <Button
+              id="Started"
               variant="contained"
               color="secondary"
               size="large"

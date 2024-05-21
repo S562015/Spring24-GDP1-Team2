@@ -55,7 +55,7 @@ const JobPostingPage = () => {
     };
     console.log({ jobPostPayload });
     dispatch(
-      createJob(jobPostPayload, () => navigate("/home", { replace: true })),
+      createJob(jobPostPayload, () => navigate("/home", { replace: true }))
     );
   };
 
@@ -67,6 +67,7 @@ const JobPostingPage = () => {
 
       <TextField
         fullWidth
+        id="Title"
         label="Job Title"
         variant="outlined"
         value={title}
@@ -76,6 +77,7 @@ const JobPostingPage = () => {
 
       <TextField
         fullWidth
+        id="Qualification"
         label="Qualification Required"
         variant="outlined"
         value={qualificationRequired}
@@ -85,6 +87,7 @@ const JobPostingPage = () => {
 
       <TextField
         fullWidth
+        id="description"
         label="Job Description"
         variant="outlined"
         value={jobDescription}
@@ -96,6 +99,7 @@ const JobPostingPage = () => {
 
       <TextField
         fullWidth
+        id="salary"
         label="Salary"
         variant="outlined"
         value={salary}
@@ -106,18 +110,26 @@ const JobPostingPage = () => {
       <FormControl fullWidth margin="normal">
         <InputLabel>Job Type</InputLabel>
         <Select
+          id="Type"
           value={jobType}
           label="Job Type"
           onChange={(e) => setJobType(e.target.value)}
         >
-          <MenuItem value="full-time">Full-time</MenuItem>
-          <MenuItem value="part-time">Part-time</MenuItem>
-          <MenuItem value="contract">Contract</MenuItem>
+          <MenuItem id="full" value="full-time">
+            Full-time
+          </MenuItem>
+          <MenuItem id="part" value="part-time">
+            Part-time
+          </MenuItem>
+          <MenuItem id="contract" value="contract">
+            Contract
+          </MenuItem>
         </Select>
       </FormControl>
 
       <TextField
         fullWidth
+        id="location"
         label="Location"
         variant="outlined"
         value={location}
@@ -128,6 +140,7 @@ const JobPostingPage = () => {
       {error && <Typography color="error">{error}</Typography>}
 
       <Button
+        id="jobpost"
         variant="contained"
         color="primary"
         onClick={handleSubmit}
