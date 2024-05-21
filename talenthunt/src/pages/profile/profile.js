@@ -13,6 +13,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { getAspirant } from "../signup/signupActions";
+import { convertToAspirantSchema, flattenAspirantData } from "../../utils";
 
 const CenteredBox = styled(Box)({
   display: "flex",
@@ -64,6 +65,9 @@ const Profile = () => {
   useEffect(() => {
     if (aspirantInfo?.length === 0) {
       dispatch(getAspirant(auth.currentUser.email));
+    } else if (aspirantInfo[0]["dateOfBirth"]) {
+      let data = flattenAspirantData(aspirantInfo[0]);
+      setFormData(data);
     }
   }, [aspirantInfo]);
   const handleChange = (name, value) => {
@@ -89,9 +93,21 @@ const Profile = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    let body = convertToAspirantSchema(formData);
+    body.email = aspirantInfo[0]["email"];
     console.log(formData);
-    // Here you can add your logic to update the profile information
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/aspirant/update-profile",
+        body,
+      );
+      console.log("Profile updated successfully:", response.data);
+      dispatch(getAspirant(aspirantInfo[0]["email"]));
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
   };
 
   return (
