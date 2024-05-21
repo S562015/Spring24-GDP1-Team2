@@ -43,7 +43,7 @@ function EmployerHomePage() {
   }, [employerInfo, jobList]);
 
   const renderJobPosted = () => {
-    return jobsPosted?.map((val) => (
+    return jobsPosted?.map((val, idx) => (
       <Grid item xs={12} sm={6} md={4}>
         <Card>
           <CardContent>
@@ -58,6 +58,7 @@ function EmployerHomePage() {
             <Button
               size="medium"
               startIcon={<HowToRegIcon />}
+              id={`open-button-${idx}`}
               onClick={() => {
                 dispatch(selectedJobID(val["_id"]));
                 navigate("/joblist", { replace: true });

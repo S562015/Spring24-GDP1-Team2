@@ -33,32 +33,8 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() =>
-    app.listen(PORT, () => console.log(`Server running on port :${PORT}`))
+    app.listen(PORT, () => console.log(`Server running on port :${PORT}`)),
   )
   .catch((error) => console.log(error));
 
 // const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./files");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + file.originalname);
-  },
-});
-
-const pdfschema = mongoose.model("aspirant");
-const upload = multer({ storage: storage });
-
-app.post("/upload-files", upload.single("file"), async (req, res) => {
-  console.log(req.file);
-  const fileName = req.file.filename;
-  try {
-    await pdfschema.create({ pdf: fileName });
-    res.send({ status: "ok" });
-  } catch (error) {
-    res.json({ status: error });
-  }
-});

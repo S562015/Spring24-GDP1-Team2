@@ -20,6 +20,7 @@ import {
 } from "../../utils";
 import { useDispatch } from "react-redux";
 import { updateApplication } from "../home/homeActions";
+import axios from "axios";
 
 const StyledCard = styled(Card)({
   maxWidth: 400,
@@ -46,9 +47,24 @@ const AspirantCard = ({ aspirant, applicationList, selectedJobID }) => {
   }, []);
 
   const handleDownloadResume = () => {
-    //TODO :
-    // Implement logic to download the resume
-    console.log("Downloading resume...");
+    console.log(aspirant);
+    axios({
+      url: `http://localhost:8000/aspirant/download/${aspirant["pdf"]}`,
+      method: "GET",
+      responseType: "blob", // Important for handling binary data
+    })
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", aspirant["pdf"]); // or any other extension
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((error) => {
+        console.error("There was an error downloading the file:", error);
+      });
   };
 
   const handleChangeStatus = (event) => {

@@ -14,7 +14,7 @@ const aspirantSchema = new Schema({
     type: Date,
   },
   qualification: {
-    type: Date,
+    type: String,
   },
   address: {
     line1: {
